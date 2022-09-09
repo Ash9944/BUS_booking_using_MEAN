@@ -11,3 +11,9 @@ exports.addNewCustomer = async (req, res) => {
     res.send(newCustomer);
   }
 };
+
+exports.getall = async(req,res)=>{
+  const getData = await Customer.find({});
+  //console.log("get data:", getData);
+  res.status(200).json({ data: getData }); 
+}
