@@ -6,4 +6,7 @@ router.post("/v1/api/customers", customerController.addNewCustomer);
 
 router.get("/v1/api/customers",customerController.getall)
 
+router.get("/v1/api/customers/:id",customerController.getOne)
+
+
 module.exports = router;

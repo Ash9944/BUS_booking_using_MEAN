@@ -13,7 +13,7 @@
                 controller: 'userCtrl',
             })
             .state('buses', {
-                url: "/bus",
+                url: "/bus/:id",
                 templateUrl: 'app/modules/bussearch.html',
                 controller: 'busctrl',
             })
@@ -43,15 +43,30 @@
                 var datslen = res.data.data.length
                 for(var i =0;i<=datslen;i++){
                     if(info.email == res.data.data[i].email){
-                       $state.go("buses")
+                        //console.log(info.email,res.data.data[i].email)
+                       $state.go("buses",{
+                        id:res.data.data[i]._id
+                       })
                     }
+
+                    
                 }
             }) 
         }
     }
     myApp.controller("busctrl",busctrl)
-    busctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout','$http']
-    function busctrl($scope, $rootScope, $state, $window, $filter, $timeout,$http) {
+    busctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout','$http','$stateParams']
+    function busctrl($scope, $rootScope, $state, $window, $filter, $timeout,$http,$stateParams) {
+        var request = {
+            url: `v1/api/customers/${$stateParams.id}`,
+            method: 'GET',
+            timeout: 2 * 60 * 1000,
+            headers: { 'Content-type': 'application/json' }
+        };
+        var dats = $http(request)
+        dats.then((res)=>{
+            $scope.Users = res.data
+        })
       $scope.give = (x,y)=>{
         $state.go("userbus",{
             departure :x,
@@ -72,6 +87,9 @@
         var dats = $http(request)
         dats.then((res)=>{
             $scope.users = res.data
+        })
+        .catch((err)=>{
+            alert(err)
         })
     }
     })();

@@ -79,23 +79,6 @@
                     </select>
                     <span>per page</span>
                 </div>
-                <div class="col-sm-8 text-right">
-                    <span class="d-none">1-2 of 2</span>
-                    <button class="arrow-btn " ng-disabled="!page.currentPage" ng-click="firstPage()">
-                        <i class="fas fa-angle-double-left"></i>
-                    </button>
-                    <button class="arrow-btn" ng-disabled="!page.currentPage" ng-click="previousPage()">
-                        <i class="fas fa-angle-left"></i>
-                    </button>
-                    <span class="span-box">{{currentPage+1}}</span>
-                    <span class="span-count">of {{numberOfPages()}}</span>
-                    <button class="arrow-btn" ng-disabled="page.currentPage >= getData().length/page.pageSize - 1" ng-click="nextPage()">
-                        <i class="fas fa-angle-right"></i>
-                    </button>
-                    <button class="arrow-btn" ng-disabled="page.currentPage == Math.ceil(getData().length/page.pageSize) - 1" ng-click="lastPage()">
-                        <i class="fas fa-angle-double-right"></i>
-                    </button>
-                </div>
             </div>
         </div>
     </div>
