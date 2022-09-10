@@ -43,6 +43,8 @@
                     <thead>
                         <tr>
                             <th>Bus Name</th>
+                            <th>Departure Point</th>
+                            <th>Arriving Point</th>
                             <th>Starting Time</th>
                             <th>Arriving Time</th>
                             <th>Cost</th>
@@ -51,9 +53,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="user in users | filter:page.searchBox && page.searchBox1">
+                        <tr ng-repeat="user in users | filter:page.searchBox |filter :page.searchBox1">
                           
                             <td data-title="Name">{{user.name}}</td>
+                            <td data-title="Name">{{user.dep_city}}</td>
+                            <td data-title="Name">{{user.arr_city}}</td>
                             <td data-title="deptime">{{user.departureTime}}</td>
                             <td data-title="arrtime">{{user.arrivalTime}}</td>
                             <td data-title="cost">{{user.cost}}</td>
