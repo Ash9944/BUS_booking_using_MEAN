@@ -42,23 +42,22 @@
                 <table class="table table-padded">
                     <thead>
                         <tr>
-                            <th class="sort ascending">Bus Id</th>
                             <th>Bus Name</th>
                             <th>Starting Time</th>
                             <th>Arriving Time</th>
-                            <th>Ratings</th>
+                            <th>Cost</th>
                             <th>Bus type</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="user in users | filter:page.searchBox && page.searchBox1 | startFrom: page.currentPage*page.pageSize | limitTo:page.pageSize">
-                            <td data-title="Employee Id">{{user.employeeId}}</td>
-                            <td data-title="Name">{{user.operatorName}}</td>
-                            <td data-title="Email ID">{{user.email}}</td>
-                            <td data-title="Mobile No">{{user.mobileNo}}</td>
-                            <td data-title="Name">{{user.operatorName}}</td>
-                            <td data-title="Type">{{user.busType}}</td>
+                        <tr ng-repeat="user in users | filter:page.searchBox && page.searchBox1">
+                          
+                            <td data-title="Name">{{user.name}}</td>
+                            <td data-title="deptime">{{user.departureTime}}</td>
+                            <td data-title="arrtime">{{user.arrivalTime}}</td>
+                            <td data-title="cost">{{user.cost}}</td>
+                            <td data-title="Type">{{user.type}}</td>
                             <td data-title="Action" class="action-btn px-0">
                                 <a class="btn btn-danger rounded-0 py-0" href="javascript:void(0)" ng-click="delete(user)">
                                     <i class="fas fa-trash-alt mr-1"></i> BOOK
