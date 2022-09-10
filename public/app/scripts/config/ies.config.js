@@ -14,9 +14,15 @@
             })
             .state('buses', {
                 url: "/bus",
+                templateUrl: 'app/modules/bussearch.html',
+                //controller: 'busctrl',
+            })
+            .state('userbus', {
+                url: "/user/:departure/:arrival",
                 templateUrl: 'app/modules/buses.html',
-                controller: 'busctrl',
-            });
+                //controller: 'busctrl',
+            })
+            
         }})();
 
 (function () {

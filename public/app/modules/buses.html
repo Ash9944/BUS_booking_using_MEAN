@@ -29,7 +29,7 @@
                             DESTINATION<input type="text" class="form-control" ng-model="page.searchBox1" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-gray-grad" type="button">
-                                    <i class="fas fa-search mr-0"></i>
+                                    <i class="fas fa-search mr-0">SEARCH</i>
                                 </button>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="user in users | filter:page.searchBox |filter :page.searchBox1">
+                        <tr ng-repeat="user in users | filter:page.searchBox && filter :page.searchBox1">
                           
                             <td data-title="Name">{{user.name}}</td>
                             <td data-title="Name">{{user.dep_city}}</td>

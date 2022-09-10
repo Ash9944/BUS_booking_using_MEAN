@@ -1,0 +1,32 @@
+<div class="page-wrapper bg-img-1 p-t-165 p-b-100">
+    <div class="wrapper wrapper--w720">
+        <div class="card card-3">
+            <div class="card-body">
+                    <div class="tab-pane" id="tab3">
+                        <form method="POST" action="#">
+                            <div class="input-group">
+                                <label class="label">origin</label>
+                                <i class="zmdi zmdi-pin input-group-symbol"></i>
+                                <input class="input--style-1" type="text" name="origin" placeholder="Origin City" required="required" ng-model="origin">
+                            </div>
+                            <div class="input-group">
+                                <label class="label">destination:</label>
+                                <i class="zmdi zmdi-pin input-group-symbol"></i>
+                                <input class="input--style-1" type="text" name="destination" placeholder="Destiation City" required="required" ng-model="dest">
+                            </div>
+                            <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Departing</label>
+                                        <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                                        <input class="input--style-1" type="text" name="check-in" placeholder="mm/dd/yyyy" id="input-start-2" ng-model="datedep">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-submit" type="submit" href="#/bus/origin/dest/datedep">search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
