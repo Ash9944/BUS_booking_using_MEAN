@@ -15,12 +15,12 @@
             .state('buses', {
                 url: "/bus",
                 templateUrl: 'app/modules/bussearch.html',
-                //controller: 'busctrl',
+                controller: 'busctrl',
             })
             .state('userbus', {
                 url: "/user/:departure/:arrival",
                 templateUrl: 'app/modules/buses.html',
-                //controller: 'busctrl',
+                controller: 'userctrl',
             })
             
         }})();
@@ -52,14 +52,26 @@
     myApp.controller("busctrl",busctrl)
     busctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout','$http']
     function busctrl($scope, $rootScope, $state, $window, $filter, $timeout,$http) {
+      $scope.give = (x,y)=>{
+        $state.go("userbus",{
+            departure :x,
+            arrival :y
+        })
+      }
+    }
+
+    myApp.controller("userctrl",userctrl)
+    userctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout','$http','$stateParams']
+    function userctrl($scope, $rootScope, $state, $window, $filter, $timeout,$http,$stateParams) {
         var request = {
-            url: "/v1/api/bus",
+            url: `v1/api/bus/${$stateParams.departure}/${$stateParams.arrival}`,
             method: 'GET',
             timeout: 2 * 60 * 1000,
             headers: { 'Content-type': 'application/json' }
-        }
-        $http(request).then((res)=>{
-            $scope.users = res.data.data
+        };
+        var dats = $http(request)
+        dats.then((res)=>{
+            $scope.users = res.data
         })
     }
     })();
