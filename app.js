@@ -59,5 +59,4 @@ mongoose.connection.once("open",()=>{
   console.log("Database Connected !")
 })
 
-
 module.exports = app;
