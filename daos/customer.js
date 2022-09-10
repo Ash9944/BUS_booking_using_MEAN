@@ -29,6 +29,11 @@ const customerSchema = new Schema({
     type: String,
     required: false,
   },
+  Bookings: {
+    type: Object,
+    required: false,
+  },
+
 });
 
 module.exports = mongoose.model("Customers", customerSchema);

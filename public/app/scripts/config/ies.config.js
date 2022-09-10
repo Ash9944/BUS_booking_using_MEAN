@@ -15,7 +15,7 @@
             .state('buses', {
                 url: "/bus",
                 templateUrl: 'app/modules/buses.html',
-                //controller: 'userCtrl',
+                controller: 'busctrl',
             });
         }})();
 
@@ -42,4 +42,18 @@
                 }
             }) 
         }
-    }})();
+    }
+    myApp.controller("busctrl",busctrl)
+    busctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout','$http']
+    function busctrl($scope, $rootScope, $state, $window, $filter, $timeout,$http) {
+        var request = {
+            url: "/v1/api/bus",
+            method: 'GET',
+            timeout: 2 * 60 * 1000,
+            headers: { 'Content-type': 'application/json' }
+        }
+        $http(request).then((res)=>{
+            $scope.users = res.data.data
+        })
+    }
+    })();
