@@ -52,7 +52,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="user in users | filter:page.searchBox | orderBy : '-departureTime'" >
+                        <tr ng-repeat="user in users | filter:page.searchBox | orderBy : 'departureTime'" >
                           
                             <td data-title="Name">{{user.name}}</td>
                             <td data-title="Name">{{user.dep_city}}</td>
