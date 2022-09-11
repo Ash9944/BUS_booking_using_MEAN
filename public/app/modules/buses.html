@@ -17,6 +17,10 @@
             {{successMsg}}
         </div>
     </div>
+    <div class="slidecontainer">
+        <p>Cost range slider:</p>
+        <input type="range" min="100" max="10000" value="500" ng-model="range">
+        {{range}}
     <div class="card mb-0 pb-0">
         <div class="standard-table-header">
             <div class="standard-table-filter border-bottom-0">
@@ -48,14 +52,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="user in users | filter:page.searchBox">
+                        <tr ng-repeat="user in users | filter:page.searchBox | orderBy : '-departureTime'" >
                           
                             <td data-title="Name">{{user.name}}</td>
                             <td data-title="Name">{{user.dep_city}}</td>
                             <td data-title="Name">{{user.arr_city}}</td>
-                            <td data-title="deptime">{{user.departureTime}}</td>
-                            <td data-title="arrtime">{{user.arrivalTime}}</td>
-                            <td data-title="cost">{{user.cost}}</td>
+                            <td data-title="deptime">{{user.departureTime | date :"short"}}</td>
+                            <td data-title="arrtime">{{user.arrivalTime | date:"short"}}</td>
+                            <td data-title="cost">{{user.cost | currency:"₹"}}</td>
                             <td data-title="Type">{{user.type}}</td>
                             <td data-title="Action" class="action-btn px-0">
                                 <a class="btn btn-danger rounded-0 py-0" href="javascript:void(0)" ng-click="delete(user)">
