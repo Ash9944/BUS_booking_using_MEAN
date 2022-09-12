@@ -30,6 +30,7 @@
     var myApp = angular.module('ies');
     myApp.controller('userCtrl', userCtrl);
     userCtrl.$inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout','$http'];
+    
     function userCtrl($scope, $rootScope, $state, $window, $filter, $timeout,$http) {
         var request = {
             url: "/v1/api/customers",
@@ -82,7 +83,7 @@
             url: `v1/api/bus/${$stateParams.departure}/${$stateParams.arrival}`,
             method: 'GET',
             timeout: 2 * 60 * 1000,
-            headers: { 'Content-type': 'application/json' }
+            headers: { 'Content-type': 'application/json' },
         };
         var dats = $http(request)
         dats.then((res)=>{
@@ -94,5 +95,29 @@
         $scope.book = (info)=>{
             console.log(info)
         }
-        } 
-    })();
+        $scope.filters = (info1)=>{
+            info1.dept = $stateParams.departure
+            info1.arr = $stateParams.arrival
+            console.log(info1)
+        }
+        // $scope.activeFilters = {};
+          
+        // $scope.filters = [{
+        //     name: "Bus type",
+        //     lists: $scope.users.type
+        //     },
+        //     // {
+        //     // name: "year",
+        //     // lists: [2012, 2014, 2015, 2016]
+        //     // }
+        // ];
+          
+        // $scope.toggleFilter = function(filterName, filterValue) {
+        //     if ($scope.activeFilters[filterName] === undefined) {
+        //         $scope.activeFilters[filterName] = filterValue;
+        //        } else {
+        //         delete $scope.activeFilters[filterName];
+        //       }
+        //     }
+          
+        }})();

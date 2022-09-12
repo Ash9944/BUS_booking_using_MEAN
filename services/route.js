@@ -46,3 +46,15 @@ exports.getOneRoute = async (req, res) => {
   }
   res.send({ route: route, matchedBuses: matchedBuses, busIdWithSeatsObj });
 };
+
+function filter(filter){
+var query = {};
+  if(filter.starttime){
+
+}
+
+
+
+};
+
+module.exports.filter = filter;

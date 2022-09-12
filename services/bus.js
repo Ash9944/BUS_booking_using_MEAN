@@ -1,3 +1,4 @@
+const { query } = require("express");
 const Bus = require("../daos/bus")
 
 
@@ -7,7 +8,7 @@ module.exports.getBus = async (req, res) => {
     res.status(200).json({ data: getData });
   };
 
-module.exports.getBusinroutes = exports.getBooking = async (req, res) => {
+module.exports.getBusinroutes = async (req, res) => {
   // code here
   let { departure } = req.params;
   let { arrival } = req.params;
@@ -17,3 +18,11 @@ module.exports.getBusinroutes = exports.getBooking = async (req, res) => {
   );
   res.send(filteredBookings);
 };
+ 
+module.exports.getByQuery = (query)=>{
+  return new Promise function(resolve,reject){
+  const bookings = await Bus.find().lean().exec()
+  let filteredBookings = bookings.filter(
+    (booking) => booking.arr_city.toString() == query.arr && booking.dep_city.toString() == query.dept)
+  resolve(filteredBookings)
+}}

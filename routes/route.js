@@ -8,3 +8,4 @@ router.get("/v1/api/routes", routeController.getAllRoutes);
 router.get("/v1/api/routes/:departure/:arrival/:date",routeController.getOneRoute);
 
 module.exports = router;
+

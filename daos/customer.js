@@ -30,7 +30,7 @@ const customerSchema = new Schema({
     required: false,
   },
   Bookings: {
-    type: Object,
+    type: Array,
     required: false,
   },
 

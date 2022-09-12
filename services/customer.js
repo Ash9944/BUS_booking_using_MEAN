@@ -23,3 +23,7 @@ exports.getOne =async(req,res)=>{
   //console.log("get data:", getData);
   res.status(200).json({ data: getData }); 
 }
+
+function filter(){
+  
+}
