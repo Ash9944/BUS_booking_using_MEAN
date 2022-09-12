@@ -91,24 +91,8 @@
         .catch((err)=>{
             alert(err)
         })
-        $scope.price_slider = {
-            start: [180, 1400],
-            connect: true,
-            step: 1,
-            range: {
-                min: 10,
-                max: 2500
-            }
+        $scope.book = (info)=>{
+            console.log(info)
         }
-        $scope.priceFiltering = function(){
-            $scope.minPrice = $scope.price_slider.start[0];
-            $scope.maxPrice = $scope.price_slider.start[1];
-        
-            $scope.pricefilter = function (product) {
-                if ((product <= $scope.maxPrice) && (product >= $scope.minPrice)){
-                    return product;
-                }
-            };
         } 
-    }
     })();

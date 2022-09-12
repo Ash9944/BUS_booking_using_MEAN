@@ -17,10 +17,6 @@
             {{successMsg}}
         </div>
     </div>
-    <div class="slidecontainer">
-        <p>Cost range slider:</p>
-        <input type="range" min="100" max="10000" value="500" ng-model="range">
-        {{range}}
     <div class="card mb-0 pb-0">
         <div class="standard-table-header">
             <div class="standard-table-filter border-bottom-0">
@@ -62,7 +58,7 @@
                             <td data-title="cost">{{user.cost | currency:"₹"}}</td>
                             <td data-title="Type">{{user.type}}</td>
                             <td data-title="Action" class="action-btn px-0">
-                                <a class="btn btn-danger rounded-0 py-0" href="javascript:void(0)" ng-click="delete(user)">
+                                <a class="btn btn-danger rounded-0 py-0" href="javascript:void(0)" ng-click="book(user)">
                                     <i class="fas fa-trash-alt mr-1"></i> BOOK
                                 </a>
                             </td>
