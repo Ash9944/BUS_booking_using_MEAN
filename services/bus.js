@@ -25,11 +25,18 @@ module.exports.getbyquery = async function(query){
   console.log(query)
   const bookings = await Bus.find().lean().exec();
   let filteredBookings = bookings.filter(
-    (booking) => booking.arr_city.toString() == query.arr && booking.dep_city.toString() == query.dept && booking.type.toString() == query.type
+    (booking) => booking.arr_city.toString() == query.arr && booking.dep_city.toString() == query.dept && booking.type.toString() == query.type && query.min < booking.cost < query.max
   );
-  let filters = filteredBookings.filter((books)=>query.min < books.cost <query.max)
-  
-  return Promise.resolve(filters);
+  for(let i=0;i<=filteredBookings.length-1;i++){
+    //console.log(filteredBookings[i].cost)
+    if(query.min < filteredBookings[i].cost && filteredBookings[i].cost<query.max){
+      return Promise.resolve(filteredBookings[i])
+      //console.log()
+    }
+    else{
+      return Promise.resolve("No data Found !")
+    }
+  }
 }
 
 
