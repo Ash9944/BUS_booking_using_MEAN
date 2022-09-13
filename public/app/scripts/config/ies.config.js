@@ -79,6 +79,8 @@
     myApp.controller("userctrl",userctrl)
     userctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout','$http','$stateParams']
     function userctrl($scope, $rootScope, $state, $window, $filter, $timeout,$http,$stateParams) {
+        $scope.success0 = true
+        $scope.success1 = false
         var request = {
             url: `v1/api/bus/${$stateParams.departure}/${$stateParams.arrival}`,
             method: 'GET',
@@ -96,6 +98,8 @@
             console.log(info)
         }
         $scope.filters = (info1)=>{
+            $scope.success0 = false
+            $scope.success1 = true
             console.log(info1)
             info1.dept = $stateParams.departure
             info1.arr = $stateParams.arrival
@@ -109,6 +113,14 @@
             var dats = $http(request)
             dats.then((res)=>{
                 console.log(res)
+                $scope.data = res.data
         }
 )}
-    }})();
+        
+    }
+    myApp.controller("custCtrl",custCtrl)
+    custCtrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout','$http','$stateParams']
+    function custCtrl($scope, $rootScope, $state, $window, $filter, $timeout,$http,$stateParams) {
+    
+    }
+})();

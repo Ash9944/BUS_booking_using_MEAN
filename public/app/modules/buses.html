@@ -17,7 +17,7 @@
             {{successMsg}}
         </div>
     </div>
-    <form class="form-inline">
+    <form class="form-inline" >
         <div class="form-group">
           <label >Min Cost:</label>
           <input type="text" class="form-control"  placeholder="Enter Max Budget" name="Min" ng-model="filter.min">
@@ -51,7 +51,10 @@
                 </div>
             </div>
         </div>
-        <div class="card-body-padded">
+
+
+
+        <div class="card-body-padded" ng-show="success0">
             <div class="table-container">
                 <table class="table table-padded">
                     <thead>
@@ -86,6 +89,44 @@
                 </table>
             </div>
         </div>
+
+
+        <div class="card-body-padded" ng-show="success1">
+            <div class="table-container">
+                <table class="table table-padded">
+                    <thead>
+                        <tr>
+                            <th>Bus Name</th>
+                            <th>Departure Point</th>
+                            <th>Arriving Point</th>
+                            <th>Starting Time</th>
+                            <th>Arriving Time</th>
+                            <th>Cost</th>
+                            <th>Bus type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="d in data">
+                            <td data-title="Name">{{data.name}}</td>
+                            <td data-title="Name">{{data.dep_city}}</td>
+                            <td data-title="Name">{{data.arr_city}}</td>
+                            <td data-title="deptime">{{data.departureTime | date :"short"}}</td>
+                            <td data-title="arrtime">{{data.arrivalTime | date:"short"}}</td>
+                            <td data-title="cost">{{data.cost | currency:"₹"}}</td>
+                            <td data-title="Type">{{data.type}}</td>
+                            <td data-title="Action" class="action-btn px-0">
+                                <a class="btn btn-danger rounded-0 py-0" href="javascript:void(0)" ng-click="book(data)">
+                                    <i class="fas fa-trash-alt mr-1"></i> BOOK
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
         <div ng-if="users" class="standard-table-footer">
             <div class="row">
                 <div class="col-sm-4">

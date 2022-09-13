@@ -29,7 +29,7 @@ module.exports.getbyquery = async function(query){
   );
   for(let i=0;i<=filteredBookings.length-1;i++){
     //console.log(filteredBookings[i].cost)
-    if(query.min < filteredBookings[i].cost && filteredBookings[i].cost<query.max){
+    if(query.min <= filteredBookings[i].cost && filteredBookings[i].cost <= query.max){
       return Promise.resolve(filteredBookings[i])
       //console.log()
     }
