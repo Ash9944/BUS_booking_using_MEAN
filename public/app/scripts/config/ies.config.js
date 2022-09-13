@@ -118,9 +118,5 @@
 )}
         
     }
-    myApp.controller("custCtrl",custCtrl)
-    custCtrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout','$http','$stateParams']
-    function custCtrl($scope, $rootScope, $state, $window, $filter, $timeout,$http,$stateParams) {
-    
-    }
+ 
 })();

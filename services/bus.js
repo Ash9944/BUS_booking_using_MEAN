@@ -21,7 +21,7 @@ module.exports.getBusinroutes = async (req, res) => {
  
 
 module.exports.getbyquery = async function(query){
-  //queries = {}
+  queries = {}
   console.log(query)
   const bookings = await Bus.find().lean().exec();
   let filteredBookings = bookings.filter(
@@ -29,14 +29,13 @@ module.exports.getbyquery = async function(query){
   );
   for(let i=0;i<=filteredBookings.length-1;i++){
     //console.log(filteredBookings[i].cost)
-    if(query.min <= filteredBookings[i].cost && filteredBookings[i].cost <= query.max){
-      return Promise.resolve(filteredBookings[i])
+    if(parseInt(query.min) <= parseInt(filteredBookings[i].cost) && parseInt(filteredBookings[i].cost) <= parseInt(query.max)){
+      queries[i] = filteredBookings[i]
       //console.log()
     }
-    else{
-      return Promise.resolve("No data Found !")
-    }
   }
+  console.log(queries)
+  return Promise.resolve(queries)
 }
 
 

@@ -107,16 +107,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td data-title="Name">{{data.name}}</td>
-                            <td data-title="Name">{{data.dep_city}}</td>
-                            <td data-title="Name">{{data.arr_city}}</td>
-                            <td data-title="deptime">{{data.departureTime | date :"short"}}</td>
-                            <td data-title="arrtime">{{data.arrivalTime | date:"short"}}</td>
-                            <td data-title="cost">{{data.cost | currency:"₹"}}</td>
-                            <td data-title="Type">{{data.type}}</td>
+                        <tr ng-repeat="dta in data">
+                            <td data-title="Name">{{dta.name}}</td>
+                            <td data-title="Name">{{dta.dep_city}}</td>
+                            <td data-title="Name">{{dta.arr_city}}</td>
+                            <td data-title="deptime">{{dta.departureTime | date :"short"}}</td>
+                            <td data-title="arrtime">{{dta.arrivalTime | date:"short"}}</td>
+                            <td data-title="cost">{{dta.cost | currency:"₹"}}</td>
+                            <td data-title="Type">{{dta.type}}</td>
                             <td data-title="Action" class="action-btn px-0">
-                                <a class="btn btn-danger rounded-0 py-0" href="javascript:void(0)" ng-click="book(data)">
+                                <a class="btn btn-danger rounded-0 py-0" href="javascript:void(0)" ng-click="book(dta)">
                                     <i class="fas fa-trash-alt mr-1"></i> BOOK
                                 </a>
                             </td>
