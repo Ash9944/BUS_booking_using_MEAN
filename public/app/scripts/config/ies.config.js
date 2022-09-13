@@ -100,24 +100,4 @@
             info1.arr = $stateParams.arrival
             console.log(info1)
         }
-        // $scope.activeFilters = {};
-          
-        // $scope.filters = [{
-        //     name: "Bus type",
-        //     lists: $scope.users.type
-        //     },
-        //     // {
-        //     // name: "year",
-        //     // lists: [2012, 2014, 2015, 2016]
-        //     // }
-        // ];
-          
-        // $scope.toggleFilter = function(filterName, filterValue) {
-        //     if ($scope.activeFilters[filterName] === undefined) {
-        //         $scope.activeFilters[filterName] = filterValue;
-        //        } else {
-        //         delete $scope.activeFilters[filterName];
-        //       }
-        //     }
-          
         }})();

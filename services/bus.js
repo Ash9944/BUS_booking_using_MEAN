@@ -19,10 +19,39 @@ module.exports.getBusinroutes = async (req, res) => {
   res.send(filteredBookings);
 };
  
-module.exports.getByQuery = (query)=>{
-  return new Promise function(resolve,reject){
-  const bookings = await Bus.find().lean().exec()
+
+module.exports.getbyquery = async function(query){
+  queries = {}
+  console.log(query)
+  const bookings = await Bus.find().lean().exec();
   let filteredBookings = bookings.filter(
-    (booking) => booking.arr_city.toString() == query.arr && booking.dep_city.toString() == query.dept)
-  resolve(filteredBookings)
-}}
+    (booking) => booking.arr_city.toString() == query.arr && booking.dep_city.toString() == query.dept && booking.type.toString() == query.type
+  );
+  let filters = filteredBookings.filter((books)=>query.min < books.cost <query.max)
+  
+  return Promise.resolve(filters);
+}
+
+
+
+// async function sample(a,b){
+//   try{
+//     if(!a || !b){
+//       throw new Error("error");
+//     }
+//     else{
+//       let x = await divide(a,b);
+//       return Promise.resolve(x);
+//     }
+//   }
+//   catch(e){
+//     return Promise.reject(e);
+//   }
+// }
+
+// function divide(a,b){
+//   // return (a/b);
+//   return new Promise((resolve,reject)=>{
+//     resolve(a/b);
+//   })
+// }
