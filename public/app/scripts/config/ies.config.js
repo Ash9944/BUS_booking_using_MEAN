@@ -96,8 +96,19 @@
             console.log(info)
         }
         $scope.filters = (info1)=>{
+            console.log(info1)
             info1.dept = $stateParams.departure
             info1.arr = $stateParams.arrival
-            console.log(info1)
+            var request = {
+                url: `v1/api/bus/`,
+                method: 'POST',
+                data : info1,
+                timeout: 2 * 60 * 1000,
+                headers: { 'Content-type': 'application/json' },
+            };
+            var dats = $http(request)
+            dats.then((res)=>{
+                console.log(res)
         }
-        }})();
+)}
+    }})();

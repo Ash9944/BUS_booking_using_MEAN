@@ -21,11 +21,11 @@ module.exports.getBusinroutes = async (req, res) => {
  
 
 module.exports.getbyquery = async function(query){
-  queries = {}
+  //queries = {}
   console.log(query)
   const bookings = await Bus.find().lean().exec();
   let filteredBookings = bookings.filter(
-    (booking) => booking.arr_city.toString() == query.arr && booking.dep_city.toString() == query.dept && booking.type.toString() == query.type && query.min < booking.cost < query.max
+    (booking) => booking.arr_city.toString() == query.arr && booking.dep_city.toString() == query.dept && booking.type.toString() == query.type 
   );
   for(let i=0;i<=filteredBookings.length-1;i++){
     //console.log(filteredBookings[i].cost)
