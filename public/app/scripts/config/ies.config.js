@@ -22,6 +22,11 @@
                 templateUrl: 'app/modules/buses.html',
                 controller: 'userctrl',
             })
+            .state('customer', {
+                url: "/admin",
+                templateUrl: 'app/modules/admin.html',
+                controller: 'custctrl',
+            })
             
         }})();
 
@@ -48,6 +53,9 @@
                        $state.go("buses",{
                         id:res.data.data[i]._id
                        })
+                    }
+                    if(info.email.toString() == "Admin@admin"){
+                        $state.go("customer")
                     }
 
                     
@@ -117,6 +125,168 @@
         }
 )}
         
+    }
+    myApp.controller("custctrl",custctrl)
+    custctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout','$http','$stateParams']
+    function custctrl($scope, $rootScope, $state, $window, $filter, $timeout,$http,$stateParams) {
+        $scope.Math = window.Math;
+        $scope.page = {};
+        $scope.page.currentPage = 0;
+        $scope.page.pageSize = 5;
+        $scope.page.searchBox = '';
+        $scope.hideErrors = function (id) {
+            $scope.incharge = {};
+            bootstrapError.hideErrors(id);
+        }
+        $scope.closeModal = function (model, form) {
+            $scope.hideErrors(form);
+            $('#' + model).modal('hide');
+        }
+        function getAlluser() {
+            var request = {
+                url: "/v1/api/bus",
+                method: 'GET',
+                timeout: 2 * 60 * 1000,
+                headers: { 'Content-type': 'application/json' }
+            };
+            var dats = $http(request)
+            dats.then((res)=>{
+                console.log(res)
+                $scope.users = res.data.data
+            })
+
+        }
+        getAlluser();
+        $scope.getData = function () {
+            var filterData = $filter('filter')($scope.users, $scope.page.q);
+            return filterData
+        }
+        $scope.numberOfPages = function () {
+            var data = $scope.getData();
+            return Math.ceil(data.length / $scope.page.pageSize);
+        }
+        $scope.$watch('page.searchBox', function (newValue, oldValue) {
+            if (oldValue != newValue) {
+                $scope.page.currentPage = 0;
+            }
+        }, true);
+
+        $scope.nextPage = function () {
+            $scope.page.currentPage = $scope.page.currentPage + 1;
+        }
+        $scope.previousPage = function () {
+            $scope.page.currentPage = $scope.page.currentPage - 1;
+        }
+        $scope.lastPage = function () {
+            $scope.page.currentPage = Math.ceil($scope.getData().length / $scope.page.pageSize) - 1;
+        }
+        $scope.firstPage = function () {
+            $scope.page.currentPage = 0;
+        }
+        $scope.loadInfo = function (info) {
+            $scope.edit = JSON.parse(JSON.stringify(info));
+            //$scope.employeeId = info.employeeId;
+        };
+        $scope.updateuser = function (info) {
+            delete info.$$hashKey;
+            delete info._id;
+            var form = document.getElementById('edituser');
+            var check = form.checkValidity();
+            if (check === true) {
+                info.employeeId = (info.employeeId).toUpperCase();
+                info.name = (info.name).toUpperCase();
+                info.email = (info.email).toLowerCase();
+                var query = { "employeeId": $scope.employeeId };
+                var details = { "query": query, "detailsToUpdate": info }
+                userServices.updateuser(details, function (err, res) {
+                    if (!err) {
+                        $('#edit_user').modal('hide');
+                        getAlluser();
+                        $("html").stop().animate({ scrollTop: 0 }, 200);
+                        $scope.success = true;
+                        $scope.successMsg = "Successfully updated the user infomation";
+                        $timeout(function () {
+                            $scope.success = false;
+                            $scope.successMsg = "";
+                        }, 2000);
+
+                    }
+                    else {
+                        $("html").stop().animate({ scrollTop: 0 }, 200);
+                        $scope.error = true;
+                        $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
+                        $timeout(function () {
+                            $scope.error = false;
+                            $scope.errorMsg = "";
+                        }, 2000);
+
+                    }
+                });
+            }
+            else {
+                bootstrapError.showErrors('edituser')
+            }
+
+        };
+        $scope.delete = function (info) {
+            userServices.deleteuser({ "employeeId": info.employeeId }, function (err, res) {
+                if (!err) {
+                    $("html").stop().animate({ scrollTop: 0 }, 200);
+                    var index = $scope.users.findIndex(function (obj) { return obj._id == info._id });
+                    $scope.users.splice(index, 1);
+                    $scope.success = true;
+                    $scope.successMsg = "Successfully deleted the user infomation";
+                    $timeout(function () {
+                        $scope.success = false;
+                        $scope.successMsg = "";
+                    }, 2000);
+                }
+                else {
+                    $("html").stop().animate({ scrollTop: 0 }, 200);
+                    $scope.error = true;
+                    $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
+                    $timeout(function () {
+                        $scope.error = false;
+                        $scope.errorMsg = "";
+                    }, 2000);
+                }
+            });
+        };
+
+        $scope.add = function () {
+            var form = document.getElementById('adduser');
+            var check = form.checkValidity();
+            if (check === true) {
+                $scope.incharge.employeeId = ($scope.incharge.employeeId).toUpperCase();
+                $scope.incharge.name = ($scope.incharge.name).toUpperCase();
+                $scope.incharge.email = ($scope.incharge.email).toLowerCase();
+                userServices.adduser($scope.incharge, function (err, res) {
+                    if (!err) {
+                        $("html").stop().animate({ scrollTop: 0 }, 200);
+                        $scope.success = true;
+                        $scope.successMsg = "Successfully added the user infomation";
+                        $scope.users.push($scope.incharge);
+                        $('#add_user').modal("hide");
+                        $timeout(function () {
+                            $scope.success = false;
+                            $scope.successMsg = "";
+                        }, 2000);
+                    }
+                    else {
+                        $("html").stop().animate({ scrollTop: 0 }, 200);
+                        $scope.error = true;
+                        $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
+                        $timeout(function () {
+                            $scope.error = false;
+                            $scope.errorMsg = "";
+                        }, 2000);
+                    }
+                });
+            }
+            else {
+                bootstrapError.showErrors('adduser')
+            }
+        };
     }
  
 })();
