@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 const busSchema = new Schema({
   operatorName: {
     type: String,
-    required: true,
+    //required: true,
   },
   busType: {
     type: String,
-    required: true,
+    //required: true,
   },
   departureTime: {
     type: String,
@@ -15,7 +15,7 @@ const busSchema = new Schema({
   },
   rating: {
     type: [Number],
-    required: true,
+    //required: true,
   },
   // fare is manual
   totalSeats: {
@@ -25,19 +25,19 @@ const busSchema = new Schema({
   routes: {
     type: Schema.Types.ObjectId,
     ref: "Routes",
-    required: true,
+    //required: true,
   },
   images: {
     type: String,
-    required: true,
+    //required: true,
   },
   liveTracking: {
     type: Number,
-    required: true,
+    //required: true,
   },
   reschedulable: {
     type: Number,
-    required: true,
+    //required: true,
   },
 });
 

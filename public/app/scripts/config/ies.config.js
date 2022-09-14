@@ -226,11 +226,23 @@
             if (check === true) {
                 var request = {
                     url: "user/getuserDetails",
-                    method: 'GET',
+                    method: 'POST',
+                    data : $scope.create,
                     timeout: 2 * 60 * 1000,
                     headers: { 'Content-type': 'application/json' }
                 };
                 var dats = $http(request)
+                dats.then((res)=>{
+                    $("html").stop().animate({ scrollTop: 0 }, 200);
+                    $scope.success = true;
+                    $scope.successMsg = "Successfully added the user infomation";
+                    $scope.users.push($scope.incharge);
+                    $('#add_user').modal("hide");
+                    $timeout(function () {
+                        $scope.success = false;
+                        $scope.successMsg = "";
+                    }, 2000);
+                })
             }
             
         };

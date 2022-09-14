@@ -37,3 +37,8 @@ module.exports.getbyquery = async function (query) {
   console.log(queries)
   return Promise.resolve(queries)
 }
+
+exports.addNewbus = async (req, res) => {
+    let newCustomer = await Bus.create(req.body);
+    res.send(newCustomer);
+};
