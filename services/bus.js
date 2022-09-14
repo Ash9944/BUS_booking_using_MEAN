@@ -3,10 +3,10 @@ const Bus = require("../daos/bus")
 
 
 module.exports.getBus = async (req, res) => {
-    const getData = await Bus.find({});
-    //console.log("get data:", getData);
-    res.status(200).json({ data: getData });
-  };
+  const getData = await Bus.find({});
+  //console.log("get data:", getData);
+  res.status(200).json({ data: getData });
+};
 
 module.exports.getBusinroutes = async (req, res) => {
   // code here
@@ -18,18 +18,18 @@ module.exports.getBusinroutes = async (req, res) => {
   );
   res.send(filteredBookings);
 };
- 
 
-module.exports.getbyquery = async function(query){
+
+module.exports.getbyquery = async function (query) {
   queries = {}
   console.log(query)
   const bookings = await Bus.find().lean().exec();
   let filteredBookings = bookings.filter(
-    (booking) => booking.arr_city.toString() == query.arr && booking.dep_city.toString() == query.dept && booking.type.toString() == query.type 
+    (booking) => booking.arr_city.toString() == query.arr && booking.dep_city.toString() == query.dept && booking.type.toString() == query.type
   );
-  for(let i=0;i<=filteredBookings.length-1;i++){
+  for (let i = 0; i <= filteredBookings.length - 1; i++) {
     //console.log(filteredBookings[i].cost)
-    if(parseInt(query.min) <= parseInt(filteredBookings[i].cost) && parseInt(filteredBookings[i].cost) <= parseInt(query.max)){
+    if (parseInt(query.min) <= parseInt(filteredBookings[i].cost) && parseInt(filteredBookings[i].cost) <= parseInt(query.max)) {
       queries[i] = filteredBookings[i]
       //console.log()
     }
@@ -37,27 +37,3 @@ module.exports.getbyquery = async function(query){
   console.log(queries)
   return Promise.resolve(queries)
 }
-
-
-
-// async function sample(a,b){
-//   try{
-//     if(!a || !b){
-//       throw new Error("error");
-//     }
-//     else{
-//       let x = await divide(a,b);
-//       return Promise.resolve(x);
-//     }
-//   }
-//   catch(e){
-//     return Promise.reject(e);
-//   }
-// }
-
-// function divide(a,b){
-//   // return (a/b);
-//   return new Promise((resolve,reject)=>{
-//     resolve(a/b);
-//   })
-// }

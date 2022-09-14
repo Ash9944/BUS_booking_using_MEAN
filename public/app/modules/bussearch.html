@@ -1,29 +1,28 @@
 <h1> Hi {{Users.data.name}} !</h1>
 <div class="page-wrapper bg-img-1 p-t-165 p-b-100">
     <div class="wrapper wrapper--w720">
-        
+
         <div class="card card-3">
             <div class="card-body">
-             
-                    <div class="tab-pane" id="tab3">
-                        <form method="POST" action="#">
-                            <div class="input-group">
-                                <label class="label">origin</label>
-                                <i class="zmdi zmdi-pin input-group-symbol"></i>
-                                <input class="input--style-1" type="text" name="origin" placeholder="Origin City" required="required" ng-model="origin">
-                            </div>
-                            <div class="input-group">
-                                <label class="label">destination:</label>
-                                <i class="zmdi zmdi-pin input-group-symbol"></i>
-                                <input class="input--style-1" type="text" name="destination" placeholder="Destiation City" required="required" ng-model="dest">
-                            </div>
-                                </div>
-                            </div>
-                            <button class="btn-submit" type="submit" ng_click="give(origin,dest)">Search</button>
-                        </form>
-                    </div>
+
+                <div class="tab-pane" id="tab3">
+                    <form method="POST" action="#">
+                        <div class="input-group">
+                            <label class="label">origin</label>
+                            <i class="zmdi zmdi-pin input-group-symbol"></i>
+                            <input class="input--style-1" type="text" name="origin" placeholder="Origin City"
+                                required="required" ng-model="origin">
+                        </div>
+                        <div class="input-group">
+                            <label class="label">destination:</label>
+                            <i class="zmdi zmdi-pin input-group-symbol"></i>
+                            <input class="input--style-1" type="text" name="destination" placeholder="Destiation City"
+                                required="required" ng-model="dest">
+                        </div>
                 </div>
             </div>
+            <button class="btn-submit" type="submit" ng_click="give(origin,dest)">Search</button>
+            </form>
         </div>
     </div>
 </div>
