@@ -17,25 +17,25 @@
             {{successMsg}}
         </div>
     </div>
-    <form class="form-inline" >
+    <form class="form-inline">
         <div class="form-group">
-          <label >Min Cost:</label>
-          <input type="text" class="form-control"  placeholder="Enter Max Budget" name="Min" ng-model="filter.min">
+            <label>Min Cost:</label>
+            <input type="text" class="form-control" placeholder="Enter Max Budget" name="Min" ng-model="filter.min">
         </div>
         <div class="form-group">
-          <label >Max Cost:</label>
-          <input type="text" class="form-control"  placeholder="Enter Min Budget" name="Max" ng-model="filter.max">
+            <label>Max Cost:</label>
+            <input type="text" class="form-control" placeholder="Enter Min Budget" name="Max" ng-model="filter.max">
         </div>
         <div class="form-group">
-            <label for="type" >Choose a bus type:</label>
+            <label for="type">Choose a bus type:</label>
 
             <select name="type" ng-model="filter.type">
-              <option value="AC">AC</option>
-              <option value="NON-AC">NON-AC</option>
+                <option value="AC">AC</option>
+                <option value="NON-AC">NON-AC</option>
             </select>
-          </div>
-        <button  class="btn btn-default" ng-click="filters(filter)">Submit</button>
-      </form>
+        </div>
+        <button class="btn btn-default" ng-click="filters(filter)">Submit</button>
+    </form>
     <div class="card mb-0 pb-0">
         <div class="standard-table-header">
             <div class="standard-table-filter border-bottom-0">
@@ -43,104 +43,84 @@
                     <div class="col-md-9"> </div>
                     <div class="col-md-3 mt-2 mt-md-0 text-right">
                         <div class="input-group input-group-sm">
-                            <input type="text" class="form-control" ng-model="page.searchBox" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
-            
-                            </div>
+                            <input type="text" class="form-control" ng-model="page.searchBox" placeholder="Search"
+                                aria-label="Search" aria-describedby="basic-addon2">
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="card-body-padded" ng-show="success0">
+        <div class="table-container">
+            <table class="table table-padded">
+                <thead>
+                    <tr>
+                        <th>Bus Name</th>
+                        <th>Departure Point</th>
+                        <th>Arriving Point</th>
+                        <th>Starting Time</th>
+                        <th>Arriving Time</th>
+                        <th>Cost</th>
+                        <th>Bus type</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in users | filter:page.searchBox | orderBy : 'departureTime'">
 
-        <div class="card-body-padded" ng-show="success0">
-            <div class="table-container">
-                <table class="table table-padded">
-                    <thead>
-                        <tr>
-                            <th>Bus Name</th>
-                            <th>Departure Point</th>
-                            <th>Arriving Point</th>
-                            <th>Starting Time</th>
-                            <th>Arriving Time</th>
-                            <th>Cost</th>
-                            <th>Bus type</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="user in users | filter:page.searchBox | orderBy : 'departureTime'" >
-                          
-                            <td data-title="Name">{{user.name}}</td>
-                            <td data-title="Name">{{user.dep_city}}</td>
-                            <td data-title="Name">{{user.arr_city}}</td>
-                            <td data-title="deptime">{{user.departureTime | date :"short"}}</td>
-                            <td data-title="arrtime">{{user.arrivalTime | date:"short"}}</td>
-                            <td data-title="cost">{{user.cost | currency:"₹"}}</td>
-                            <td data-title="Type">{{user.type}}</td>
-                            <td data-title="Action" class="action-btn px-0">
-                                <a class="btn btn-danger rounded-0 py-0" href="javascript:void(0)" ng-click="book(user)">
-                                    <i class="fas fa-trash-alt mr-1"></i> BOOK
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                        <td data-title="Name">{{user.name}}</td>
+                        <td data-title="Name">{{user.dep_city}}</td>
+                        <td data-title="Name">{{user.arr_city}}</td>
+                        <td data-title="deptime">{{user.departureTime | date :"short"}}</td>
+                        <td data-title="arrtime">{{user.arrivalTime | date:"short"}}</td>
+                        <td data-title="cost">{{user.cost | currency:"₹"}}</td>
+                        <td data-title="Type">{{user.type}}</td>
+                        <td data-title="Action" class="action-btn px-0">
+                            <a class="btn btn-danger rounded-0 py-0" href="javascript:void(0)" ng-click="book(user)">
+                                <i class="fas fa-trash-alt mr-1"></i> BOOK
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+    </div>
 
-
-
-        <div class="card-body-padded" ng-show="success1">
-            <div class="table-container">
-                <table class="table table-padded">
-                    <thead>
-                        <tr>
-                            <th>Bus Name</th>
-                            <th>Departure Point</th>
-                            <th>Arriving Point</th>
-                            <th>Starting Time</th>
-                            <th>Arriving Time</th>
-                            <th>Cost</th>
-                            <th>Bus type</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="dta in data">
-                            <td data-title="Name">{{dta.name}}</td>
-                            <td data-title="Name">{{dta.dep_city}}</td>
-                            <td data-title="Name">{{dta.arr_city}}</td>
-                            <td data-title="deptime">{{dta.departureTime | date :"short"}}</td>
-                            <td data-title="arrtime">{{dta.arrivalTime | date:"short"}}</td>
-                            <td data-title="cost">{{dta.cost | currency:"₹"}}</td>
-                            <td data-title="Type">{{dta.type}}</td>
-                            <td data-title="Action" class="action-btn px-0">
-                                <a class="btn btn-danger rounded-0 py-0" href="javascript:void(0)" ng-click="book(dta)">
-                                    <i class="fas fa-trash-alt mr-1"></i> BOOK
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-
-
-        <div ng-if="users" class="standard-table-footer">
-            <div class="row">
-                <div class="col-sm-4">
-                    <select class="per-page" ng-model="page.pageSize" ng-init="page.pageSize='5'" id="page.pageSize">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                    <span>per page</span>
-                </div>
-            </div>
+    <div class="card-body-padded" ng-show="success1">
+        <div class="table-container">
+            <table class="table table-padded">
+                <thead>
+                    <tr>
+                        <th>Bus Name</th>
+                        <th>Departure Point</th>
+                        <th>Arriving Point</th>
+                        <th>Starting Time</th>
+                        <th>Arriving Time</th>
+                        <th>Cost</th>
+                        <th>Bus type</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="dta in data">
+                        <td data-title="Name">{{dta.name}}</td>
+                        <td data-title="Name">{{dta.dep_city}}</td>
+                        <td data-title="Name">{{dta.arr_city}}</td>
+                        <td data-title="deptime">{{dta.departureTime | date :"short"}}</td>
+                        <td data-title="arrtime">{{dta.arrivalTime | date:"short"}}</td>
+                        <td data-title="cost">{{dta.cost | currency:"₹"}}</td>
+                        <td data-title="Type">{{dta.type}}</td>
+                        <td data-title="Action" class="action-btn px-0">
+                            <a class="btn btn-danger rounded-0 py-0" href="javascript:void(0)" ng-click="book(dta)">
+                                <i class="fas fa-trash-alt mr-1"></i> BOOK
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </section>

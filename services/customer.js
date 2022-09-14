@@ -12,18 +12,18 @@ exports.addNewCustomer = async (req, res) => {
   }
 };
 
-exports.getall = async(req,res)=>{
+exports.getall = async (req, res) => {
   const getData = await Customer.find({});
   //console.log("get data:", getData);
-  res.status(200).json({ data: getData }); 
+  res.status(200).json({ data: getData });
 }
 
-exports.getOne =async(req,res)=>{
-  const getData = await Customer.findOne({_id:req.params.id});
+exports.getOne = async (req, res) => {
+  const getData = await Customer.findOne({ _id: req.params.id });
   //console.log("get data:", getData);
-  res.status(200).json({ data: getData }); 
+  res.status(200).json({ data: getData });
 }
 
-function filter(){
-  
+function filter() {
+
 }
