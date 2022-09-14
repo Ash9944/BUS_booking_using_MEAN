@@ -157,35 +157,10 @@
 
         }
         getAlluser();
-        $scope.getData = function () {
-            var filterData = $filter('filter')($scope.users, $scope.page.q);
-            return filterData
-        }
-        $scope.numberOfPages = function () {
-            var data = $scope.getData();
-            return Math.ceil(data.length / $scope.page.pageSize);
-        }
-        $scope.$watch('page.searchBox', function (newValue, oldValue) {
-            if (oldValue != newValue) {
-                $scope.page.currentPage = 0;
-            }
-        }, true);
-
-        $scope.nextPage = function () {
-            $scope.page.currentPage = $scope.page.currentPage + 1;
-        }
-        $scope.previousPage = function () {
-            $scope.page.currentPage = $scope.page.currentPage - 1;
-        }
-        $scope.lastPage = function () {
-            $scope.page.currentPage = Math.ceil($scope.getData().length / $scope.page.pageSize) - 1;
-        }
-        $scope.firstPage = function () {
-            $scope.page.currentPage = 0;
-        }
         $scope.loadInfo = function (info) {
+            console.log(info)
             $scope.edit = JSON.parse(JSON.stringify(info));
-            //$scope.employeeId = info.employeeId;
+            $scope.employeeId = info._id;
         };
         $scope.updateuser = function (info) {
             delete info.$$hashKey;
