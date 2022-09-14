@@ -1,24 +1,10 @@
 const { query } = require("express");
-const Bus = require("../daos/bus")
+const Bus = require("../daos/bus_db")
 
 
-module.exports.getBus = async (req, res) => {
-  const getData = await Bus.find({});
-  //console.log("get data:", getData);
-  res.status(200).json({ data: getData });
-};
-
-module.exports.getBusinroutes = async (req, res) => {
-  // code here
-  let { departure } = req.params;
-  let { arrival } = req.params;
-  const bookings = await Bus.find().lean().exec();
-  let filteredBookings = bookings.filter(
-    (booking) => booking.arr_city.toString() == arrival && booking.dep_city.toString() == departure
-  );
-  res.send(filteredBookings);
-};
-
+module.exports.getBusinroutes = (query)=>{
+  return Bus.getByQuery(query)
+}
 
 module.exports.getbyquery = async function (query) {
   queries = {}

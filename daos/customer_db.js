@@ -2,8 +2,8 @@ var mongodb = require('./db_con');
 
 module.exports.create =(record) =>{
      mongodb.getDb().then((res)=>{
-        var db = res.db('Testdb')
-        var coll = db.collection("studentcruds");
+        var db = res.db('BUS_APP')
+        var coll = db.collection("customers");
         coll.insert(record)
     });
     
@@ -11,8 +11,8 @@ module.exports.create =(record) =>{
 
 module.exports.createMany = (records) =>{
         mongodb.getDb().then((res)=>{
-            var db = res.db("Testdb")
-            var coll = db.collection("studentcruds");
+            var db = res.db("BUS_APP")
+            var coll = db.collection("customers");
             coll.insertMany(records)
         })
         
@@ -21,8 +21,8 @@ module.exports.createMany = (records) =>{
 
 module.exports.getAll= ()=>{return new Promise((resolve,reject)=>{
     mongodb.getDb().then((res)=>{
-        var db = res.db("Testdb")
-        var coll = db.collection("studentcruds");
+        var db = res.db("BUS_APP")
+        var coll = db.collection("customers");
         coll.find({}).toArray(function (err, result) {
         if (!err) {
             resolve( result);
@@ -37,8 +37,8 @@ module.exports.getAll= ()=>{return new Promise((resolve,reject)=>{
 module.exports.getById = (id) =>{
     return new Promise((resolve,reject)=>{
         mongodb.getDb().then((res)=>{
-            var db = res.db("Testdb")
-            var coll = db.collection("studentcruds");
+            var db = res.db("BUS_APP")
+            var coll = db.collection("customers");
             coll.findOne({ _id: mongodb.ObjectID(id) }, function (err, result) {
                 if (!err) {
                     resolve(result);
@@ -57,8 +57,8 @@ module.exports.getByQuery = (query,projection) =>{
             projection = null;
         }
         mongodb.getDb().then((res)=>{
-            var db = res.db("Testdb")
-            var coll = db.collection("studentcruds");
+            var db = res.db("BUS_APP")
+            var coll = db.collection("customers");
             var cursor;
             if (projection) {
                 var projectionObj = {};
@@ -92,8 +92,8 @@ module.exports.getAndSortByQuery = (query, projection, sortCriteria) =>{
         sortCriteria = null;
     }
     mongodb.getDb().then((res)=>{
-        var db = res.db("Testdb")
-        var coll = db.collection("studentcruds");
+        var db = res.db("BUS_APP")
+        var coll = db.collection("customers");
         var cursor;
         if (projection) {
             var projectionObj = {};
@@ -125,8 +125,8 @@ module.exports.getAndSortByQuery = (query, projection, sortCriteria) =>{
 
 module.exports.update = (query, detailsToUpdate)=> {
          mongodb.getDb().then((res)=>{
-            var db = res.db("Testdb")
-            var coll = db.collection("studentcruds");
+            var db = res.db("BUS_APP")
+            var coll = db.collection("customers");
             coll.updateOne(query,{ $set: detailsToUpdate })
         })
         
@@ -134,8 +134,8 @@ module.exports.update = (query, detailsToUpdate)=> {
 
 module.exports.upsert = (query, detailsToUpdate)=>{
         mongodb.getDb().then((res)=>{
-            var db = res.db("Testdb")
-            var coll = db.collection("studentcruds");
+            var db = res.db("BUS_APP")
+            var coll = db.collection("customers");
             coll.update(query, { $set: detailsToUpdate }, { multi: false, upsert: true })
         });
         
@@ -144,8 +144,8 @@ module.exports.upsert = (query, detailsToUpdate)=>{
 
 module.exports.updateToUnset = (query, detailsToUpdate)=> {
         mongodb.getDb().then((res)=>{
-            var db = res.db("Testdb")
-            var coll = db.collection("studentcruds");
+            var db = res.db("BUS_APP")
+            var coll = db.collection("customers");
             coll.update(query, { $unset: detailsToUpdate }, { multi: false })
         });
         
@@ -155,8 +155,8 @@ module.exports.updateToUnset = (query, detailsToUpdate)=> {
 
 module.exports.updateArrayById = (id, elementsToPush)=>{
         mongodb.getDb().then((res)=>{
-            var db = res.db("Testdb")
-            var coll = db.collection("studentcruds");
+            var db = res.db("BUS_APP")
+            var coll = db.collection("customers");
             coll.update({ _id: mongodb.ObjectID(id) }, { $push: elementsToPush }, { multi: false })
         })
         
@@ -165,8 +165,8 @@ module.exports.updateArrayById = (id, elementsToPush)=>{
 
 module.exports.updateArrayByQuery = (query, elementsToPush)=>{
         mongodb.getDb().then((res)=>{
-            var db = res.db("Testdb")
-            var coll = db.collection("studentcruds");
+            var db = res.db("BUS_APP")
+            var coll = db.collection("customers");
             coll.update(query, { $push: elementsToPush }, { multi: false });
         })
         
@@ -174,16 +174,16 @@ module.exports.updateArrayByQuery = (query, elementsToPush)=>{
 
 module.exports.removeItemInArrayByQuery = (query, elementToDelete)=>{
          mongodb.getDb().then((res)=>{
-            var db = res.db("Testdb")
-            var coll = db.collection("studentcruds");
+            var db = res.db("BUS_APP")
+            var coll = db.collection("customers");
             coll.update(query, { $pull: elementToDelete }, { multi: false });
         })   
     }
 
 module.exports.updateById = (id, detailsToUpdate) => {
         mongodb.getDb().then((res)=>{
-            var db = res.db("Testdb")
-            var coll = db.collection("studentcruds");
+            var db = res.db("BUS_APP")
+            var coll = db.collection("customers");
             var deletedId;
             if (detailsToUpdate._id) {
                 deletedId = detailsToUpdate._id;
@@ -197,8 +197,8 @@ module.exports.updateById = (id, detailsToUpdate) => {
 
 module.exports.updateMany = (query, detailsToUpdate)=> {
         mongodb.getDb().then((res)=>{
-            var db = res.db("Testdb")
-            var coll = db.collection("studentcruds");
+            var db = res.db("BUS_APP")
+            var coll = db.collection("customers");
             coll.updateMany(query, { $set: detailsToUpdate });
         })
         
@@ -212,8 +212,8 @@ module.exports.distinctByQuery = (field, query)=>{
             query = null;
         }
         mongodb.getDb().then((res)=>{
-            var db = res.db("Testdb")
-            var coll = db.collection("studentcruds");
+            var db = res.db("BUS_APP")
+            var coll = db.collection("customers");
             if(!query){
                 query = {};
                 coll.distinct(field, query)
@@ -225,8 +225,8 @@ module.exports.distinctByQuery = (field, query)=>{
 
 module.exports.remove = (id)=>{
         mongodb.getDb().then((res)=>{
-            var db = res.db("Testdb")
-            var coll = db.collection("studentcruds");
+            var db = res.db("BUS_APP")
+            var coll = db.collection("customers");
             coll.remove({ _id: mongodb.ObjectID(id) });
         })
         
@@ -235,8 +235,8 @@ module.exports.remove = (id)=>{
 
 module.exports.removeByQuery = (query)=>{
         mongodb.getDb().then((res)=>{
-            var db = res.db("Testdb")
-            var coll = db.collection("studentcruds");
+            var db = res.db("BUS_APP")
+            var coll = db.collection("customers");
             coll.remove(query);
         })
         
@@ -248,8 +248,8 @@ module.exports.getIdFilter = (entity)=>{
 
 module.exports.removeItemInArrayById = (id, elementToDelete)=>{
         mongodb.getDb().then((res)=>{
-            var db = res.db("Testdb")
-            var coll = db.collection("studentcruds");
+            var db = res.db("BUS_APP")
+            var coll = db.collection("customers");
             coll.update({ _id: mongodb.ObjectID(id) }, { $pull: elementToDelete }, { multi: false });
         })
         
@@ -261,8 +261,8 @@ module.exports.getMongoDb = ()=>{
 
 module.exports.bulkWrite = (bulk)=>{
         mongodb.getDb().then((res)=>{
-            var db = res.db("Testdb")
-            var coll = db.collection("studentcruds");
+            var db = res.db("BUS_APP")
+            var coll = db.collection("customers");
             coll.bulkWrite(bulk);
         })
         

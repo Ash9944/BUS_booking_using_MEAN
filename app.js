@@ -47,16 +47,6 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-mongoose.connect("mongodb://localhost:27017/BUS_APP",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
 
-
-mongoose.connection.once("open", () => {
-  console.log("Database Connected !")
-})
 
 module.exports = app;
