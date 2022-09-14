@@ -64,7 +64,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="user in users | filter:page.searchBox | orderBy : 'id'">
+                        <tr ng-repeat="user in users | filter:page.searchBox | orderBy : parseInt('id')">
 
                             <td data-title="Name">{{user.name}}</td>
                             <td data-title="Name">{{user.dep_city}}</td>
