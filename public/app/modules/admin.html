@@ -102,42 +102,69 @@
             </div>
             <div class="modal-body">
                 <form id="adduser">
+                    {{create}}
                     <div class="row">
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Faculty Id</label>
-                            <input class="form-control" type="text" style="text-transform:uppercase"
-                                ng-model="incharge.employeeId" required>
+                            <label>Bus Id</label>
+                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="create.id" required>
                             <div class="invalid-feedback">
-                                please enter Faculty Id
+                                please enter Bus Id
                             </div>
                         </div>
-
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Name</label>
-                            <input class="form-control" type="text" style="text-transform:uppercase"
-                                ng-model="incharge.name" required>
+                            <label>Bus Name</label>
+                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="create.name" required>
                             <div class="invalid-feedback">
                                 please enter your Bus Name
                             </div>
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Mobile No</label>
-                            <input class="form-control" type="nember" ng-model="incharge.mobileNo" required>
+                            <label>Bus starting Point</label>
+                            <input class="form-control" type="text"  style="text-transform:uppercase" ng-model="create.dep_city" required>
                             <div class="invalid-feedback">
-                                please enter Mobile No
+                                please enter starting Point
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Email ID</label>
-                            <input class="form-control" type="text" style="text-transform:lowercase"
-                                ng-model="incharge.email" required>
+                            <label>Bus Ending Point</label>
+                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="create.arr_city" required>
                             <div class="invalid-feedback">
-                                please enter Email Id
+                                please enter Ending Point
                             </div>
                         </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>Bus Departure Time</label>
+                            <input class="form-control" type="text" style="text-transform: short" ng-model="create.departureTime" required>
+                            <div class="invalid-feedback">
+                                please enter Departure Time
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>Bus Arrival Time</label>
+                            <input class="form-control" type="text" style="text-transform:lowercase" ng-model="create.arrivalTime" required>
+                            <div class="invalid-feedback">
+                                please enter Arrival Time
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                                <label>Bus Ticket Cost</label>
+                                <input class="form-control" type="text" style="text-transform:lowercase" ng-model="create.cost" required>
+                                <div class="invalid-feedback">
+                                    please enter Cost of Ticket
+                                </div>
+                            </div>
+                        <div class="form-group col-sm-6 mb-2">
+                                <label for="type">Choose a bus type:</label>
+            
+                                <select name="type" ng-model="create.type">
+                                    <option value="AC">AC</option>
+                                    <option value="NON-AC">NON-AC</option>
+                                </select>
+            
+                            </div>
+                        
                     </div>
                 </form>
             </div>
@@ -196,7 +223,7 @@
                         </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label>Bus Departure Time</label>
-                            <input class="form-control" type="text" style="text-transform:lowercase" ng-model="edit.departureTime" required>
+                            <input class="form-control" type="text" style="text-transform: short" ng-model="edit.departureTime" required>
                             <div class="invalid-feedback">
                                 please enter Departure Time
                             </div>
@@ -216,11 +243,12 @@
                                 </div>
                             </div>
                         <div class="form-group col-sm-6 mb-2">
-                                <label>Bus Type</label>
-                                <input class="form-control" type="text" style="text-transform:uppercase" ng-model="edit.type" required>
-                                <div class="invalid-feedback">
-                                    please enter Bus Type
-                                </div>
+                            <label for="type">Choose a bus type:</label>
+            
+                            <select name="type" ng-model="edit.type">
+                                <option value="AC">AC</option>
+                                <option value="NON-AC">NON-AC</option>
+                            </select>
                             </div>
                         
                     </div>

@@ -224,35 +224,15 @@
             var form = document.getElementById('adduser');
             var check = form.checkValidity();
             if (check === true) {
-                $scope.incharge.employeeId = ($scope.incharge.employeeId).toUpperCase();
-                $scope.incharge.name = ($scope.incharge.name).toUpperCase();
-                $scope.incharge.email = ($scope.incharge.email).toLowerCase();
-                userServices.adduser($scope.incharge, function (err, res) {
-                    if (!err) {
-                        $("html").stop().animate({ scrollTop: 0 }, 200);
-                        $scope.success = true;
-                        $scope.successMsg = "Successfully added the user infomation";
-                        $scope.users.push($scope.incharge);
-                        $('#add_user').modal("hide");
-                        $timeout(function () {
-                            $scope.success = false;
-                            $scope.successMsg = "";
-                        }, 2000);
-                    }
-                    else {
-                        $("html").stop().animate({ scrollTop: 0 }, 200);
-                        $scope.error = true;
-                        $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
-                        $timeout(function () {
-                            $scope.error = false;
-                            $scope.errorMsg = "";
-                        }, 2000);
-                    }
-                });
+                var request = {
+                    url: "user/getuserDetails",
+                    method: 'GET',
+                    timeout: 2 * 60 * 1000,
+                    headers: { 'Content-type': 'application/json' }
+                };
+                var dats = $http(request)
             }
-            else {
-                bootstrapError.showErrors('adduser')
-            }
+            
         };
     }
 
