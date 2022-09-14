@@ -129,19 +129,6 @@
     myApp.controller("custctrl",custctrl)
     custctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout','$http','$stateParams']
     function custctrl($scope, $rootScope, $state, $window, $filter, $timeout,$http,$stateParams) {
-        $scope.Math = window.Math;
-        $scope.page = {};
-        $scope.page.currentPage = 0;
-        $scope.page.pageSize = 5;
-        $scope.page.searchBox = '';
-        $scope.hideErrors = function (id) {
-            $scope.incharge = {};
-            bootstrapError.hideErrors(id);
-        }
-        $scope.closeModal = function (model, form) {
-            $scope.hideErrors(form);
-            $('#' + model).modal('hide');
-        }
         function getAlluser() {
             var request = {
                 url: "/v1/api/bus",

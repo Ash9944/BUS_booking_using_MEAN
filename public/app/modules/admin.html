@@ -146,7 +146,7 @@
                             <label>Name</label>
                             <input class="form-control" type="text" style="text-transform:uppercase" ng-model="incharge.name" required>
                             <div class="invalid-feedback">
-                                please enter Name
+                                please enter your Bus Name
                             </div>
                         </div>
 
@@ -192,35 +192,64 @@
                 <form id="edituser">
                     <div class="row">
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Faculty Id</label>
-                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="edit.employeeId" required>
+                            <label>Bus Id</label>
+                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="edit.id" required>
                             <div class="invalid-feedback">
-                                please enter Faculty Id
+                                please enter Bus Id
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Name</label>
+                            <label>Bus Name</label>
                             <input class="form-control" type="text" style="text-transform:uppercase" ng-model="edit.name" required>
                             <div class="invalid-feedback">
-                                please enter Name
+                                please enter your Bus Name
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Mobile No</label>
-                            <input class="form-control" type="text" ng-model="edit.mobileNo" required>
+                            <label>Bus starting Point</label>
+                            <input class="form-control" type="text"  style="text-transform:uppercase" ng-model="edit.dep_city" required>
                             <div class="invalid-feedback">
-                                please enter Mobile no
+                                please enter starting Point
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Email ID</label>
-                            <input class="form-control" type="text" style="text-transform:lowercase" ng-model="edit.email" required>
+                            <label>Bus Ending Point</label>
+                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="edit.arr_city" required>
                             <div class="invalid-feedback">
-                                please enter Email Id
+                                please enter Ending Point
                             </div>
                         </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>Bus Departure Time</label>
+                            <input class="form-control" type="text" style="text-transform:lowercase" ng-model="edit.departureTime" required>
+                            <div class="invalid-feedback">
+                                please enter Departure Time
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>Bus Arrival Time</label>
+                            <input class="form-control" type="text" style="text-transform:lowercase" ng-model="edit.arrivalTime" required>
+                            <div class="invalid-feedback">
+                                please enter Arrival Time
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                                <label>Bus Ticket Cost</label>
+                                <input class="form-control" type="text" style="text-transform:lowercase" ng-model="edit.cost" required>
+                                <div class="invalid-feedback">
+                                    please enter Cost of Ticket
+                                </div>
+                            </div>
+                        <div class="form-group col-sm-6 mb-2">
+                                <label>Bus Type</label>
+                                <input class="form-control" type="text" style="text-transform:uppercase" ng-model="edit.type" required>
+                                <div class="invalid-feedback">
+                                    please enter Bus Type
+                                </div>
+                            </div>
+                        
                     </div>
                 </form>
             </div>
