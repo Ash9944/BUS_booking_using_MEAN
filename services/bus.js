@@ -6,25 +6,14 @@ module.exports.getBusinroutes = (query)=>{
   return Bus.getByQuery(query)
 }
 
-module.exports.getbyquery = async function (query) {
-  queries = {}
-  console.log(query)
-  const bookings = await Bus.find().lean().exec();
-  let filteredBookings = bookings.filter(
-    (booking) => booking.arr_city.toString() == query.arr && booking.dep_city.toString() == query.dept && booking.type.toString() == query.type
-  );
-  for (let i = 0; i <= filteredBookings.length - 1; i++) {
-    //console.log(filteredBookings[i].cost)
-    if (parseInt(query.min) <= parseInt(filteredBookings[i].cost) && parseInt(filteredBookings[i].cost) <= parseInt(query.max)) {
-      queries[i] = filteredBookings[i]
-      //console.log()
-    }
-  }
-  console.log(queries)
-  return Promise.resolve(queries)
+module.exports.getAllUserDetails = function(){
+  return Bus.getAll()
 }
 
-exports.addNewbus = async (req, res) => {
-    let newCustomer = await Bus.create(req.body);
-    res.send(newCustomer);
-};
+module.exports.updBus = function(id,detailstoupdate){
+   return Bus.updateById(id,detailstoupdate)
+}
+
+module.exports.addBus = function(detailstoadd){
+  return Bus.create(detailstoadd)
+}

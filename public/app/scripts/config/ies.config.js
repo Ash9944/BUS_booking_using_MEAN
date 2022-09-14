@@ -115,7 +115,7 @@
             info1.dept = $stateParams.departure
             info1.arr = $stateParams.arrival
             var request = {
-                url: `v1/api/bus/`,
+                url: `v1/api/bus`,
                 method: 'POST',
                 data: info1,
                 timeout: 2 * 60 * 1000,
@@ -135,10 +135,10 @@
     function custctrl($scope, $rootScope, $state, $window, $filter, $timeout,$http,$stateParams) {
         function getAlluser() {
             var request = {
-                url: "/v1/api/bus",
-                method: 'GET',
+                url: "/v1/api/allbus",
+                method: 'POST',
                 timeout: 2 * 60 * 1000,
-                headers: { 'Content-type': 'application/json' }
+                headers: {'Content-type': 'application/json' }
             };
             var dats = $http(request)
             dats.then((res) => {
@@ -157,28 +157,32 @@
 
         $scope.updateuser = function (info) {
             delete info.$$hashKey;
-            delete info._id;
             var form = document.getElementById('edituser');
             var check = form.checkValidity();
             if (check === true) {
-                info.employeeId = (info.employeeId).toUpperCase();
-                info.name = (info.name).toUpperCase();
-                info.email = (info.email).toLowerCase();
-                var query = { "employeeId": $scope.employeeId };
-                var details = { "query": query, "detailsToUpdate": info }
-                userServices.updateuser(details, function (err, res) {
-                    if (!err) {
+                //var query = { "_id": $scope.employeeId };
+                var details = { "query": $scope.employeeId , "detailsToUpdate": info }
+                //console.log(details)
+                var request = {
+                    url: "/v1/api/updbus",
+                    method: 'POST',
+                    data : details,
+                    timeout: 2 * 60 * 1000,
+                    headers: {'Content-type': 'application/json' }
+                };
+                var dats = $http(request)
+                dats.then((res) =>{
                         $('#edit_user').modal('hide');
                         getAlluser();
                         $("html").stop().animate({ scrollTop: 0 }, 200);
                         $scope.success = true;
-                        $scope.successMsg = "Successfully updated the user infomation";
+                        $scope.successMsg = "Successfully updated the user infomation" ;
                         $timeout(function () {
                             $scope.success = false;
                             $scope.successMsg = "";
                         }, 2000);
-                    }
-                    else {
+                    })
+                    .catch((err)=>{
                         $("html").stop().animate({ scrollTop: 0 }, 200);
                         $scope.error = true;
                         $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
@@ -188,7 +192,7 @@
                         }, 2000);
 
                     }
-                });
+                );
             }
             else {
                 bootstrapError.showErrors('edituser')
@@ -223,9 +227,9 @@
         $scope.add = function () {
             var form = document.getElementById('adduser');
             var check = form.checkValidity();
-            if (check === true) {
+            console.log($scope.create)
                 var request = {
-                    url: "user/getuserDetails",
+                    url: "/v1/api/adddbus",
                     method: 'POST',
                     data : $scope.create,
                     timeout: 2 * 60 * 1000,
@@ -243,9 +247,18 @@
                         $scope.successMsg = "";
                     }, 2000);
                 })
+                .catch((err)=>{
+                    $("html").stop().animate({ scrollTop: 0 }, 200);
+                    $scope.error = true;
+                    $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
+                    $timeout(function () {
+                        $scope.error = false;
+                        $scope.errorMsg = "";
+                    }, 2000);
+                })
             }
             
         };
     }
 
-})();
+)();
