@@ -7,3 +7,5 @@ module.exports.getAllUserDetails = function(){
 module.exports.getuser = (id)=>{
   return Customer.getById(id)
 }
+
+module

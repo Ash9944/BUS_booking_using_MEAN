@@ -31,7 +31,7 @@
     <form class="form-inline">
         <div class="form-group">
             <label>Min age:</label>
-            <input type="text" class="form-control" placeholder="Enter Max Budget" name="Min" ng-model="filter.min">
+            <input type="text" class="form-control" placeholder="Enter Max age" name="Min" ng-model="filter.min">
         </div>
         <div class="form-group">
             <label>Max age:</label>
@@ -75,26 +75,26 @@
                 <table class="table table-padded">
                     <thead>
                         <tr>
-                            <th>Bus Name</th>
-                            <th>Departure Point</th>
-                            <th>Arriving Point</th>
-                            <th>Starting Time</th>
-                            <th>Arriving Time</th>
-                            <th>Cost</th>
-                            <th>Bus type</th>
+                            <th>Name</th>
+                            <th>Google ID</th>
+                            <th>age</th>
+                            <th>gender</th>
+                            <th>email</th>
+                            <th>Date Of Birth</th>
+                            <th>Total Bookings</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="user in users | filter:page.searchBox | orderBy : parseInt('id')">
+                        <tr ng-repeat="user in users | filter:page.searchBox | orderBy : 'name'">
 
                             <td data-title="Name">{{user.name}}</td>
-                            <td data-title="Name">{{user.dep_city}}</td>
-                            <td data-title="Name">{{user.arr_city}}</td>
-                            <td data-title="deptime">{{user.departureTime | date :"short"}}</td>
-                            <td data-title="arrtime">{{user.arrivalTime | date:"short"}}</td>
-                            <td data-title="cost">{{user.cost | currency:"₹"}}</td>
-                            <td data-title="Type">{{user.type}}</td>
+                            <td data-title="Name">{{user.googleId}}</td>
+                            <td data-title="Name">{{user.age}}</td>
+                            <td data-title="deptime">{{user.gender}}</td>
+                            <td data-title="arrtime">{{user.email}}</td>
+                            <td data-title="cost">{{user.dateOfBirth}}</td>
+                            <td data-title="Type">{{user.Bookings.length}}</td>
                             <td data-title="Action" class="action-btn px-0">
                                 <a class="btn btn-primary-2 rounded-0 py-0" href="javascript:void(0)"
                                     data-toggle="modal" data-target="#edit_user" ng-click="loadInfo(user)">
@@ -117,26 +117,26 @@
                 <table class="table table-padded">
                     <thead>
                         <tr>
-                            <th>Bus Name</th>
-                            <th>Departure Point</th>
-                            <th>Arriving Point</th>
-                            <th>Starting Time</th>
-                            <th>Arriving Time</th>
-                            <th>Cost</th>
-                            <th>Bus type</th>
+                            <th>Name</th>
+                            <th>Google ID</th>
+                            <th>age</th>
+                            <th>gender</th>
+                            <th>email</th>
+                            <th>Date Of Birth</th>
+                            <th>Total Bookings</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="dta in data ">
+                        <tr ng-repeat="dta in data">
 
                             <td data-title="Name">{{dta.name}}</td>
-                            <td data-title="Name">{{dta.dep_city}}</td>
-                            <td data-title="Name">{{dta.arr_city}}</td>
-                            <td data-title="deptime">{{dta.departureTime | date :"short"}}</td>
-                            <td data-title="arrtime">{{dta.arrivalTime | date:"short"}}</td>
-                            <td data-title="cost">{{dta.cost | currency:"₹"}}</td>
-                            <td data-title="Type">{{dta.type}}</td>
+                            <td data-title="Name">{{dta.googleId}}</td>
+                            <td data-title="Name">{{dta.age}}</td>
+                            <td data-title="deptime">{{dta.gender}}</td>
+                            <td data-title="arrtime">{{dta.email}}</td>
+                            <td data-title="cost">{{dta.dateOfBirth}}</td>
+                            <td data-title="Type">{{dta.Bookings.length}}</td>
                             <td data-title="Action" class="action-btn px-0">
                                 <a class="btn btn-primary-2 rounded-0 py-0" href="javascript:void(0)"
                                     data-toggle="modal" data-target="#edit_user" ng-click="loadInfo(dta)">
