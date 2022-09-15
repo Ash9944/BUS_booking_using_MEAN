@@ -111,7 +111,8 @@
                 alert(err)
             })
         $scope.book = (info) => {
-            console.log(info)
+            var date = new Date("2022-08-17T13:38:00.000Z")
+            console.log(info,date)
         }
         $scope.filters = (info1) => {
             $scope.success0 = false
@@ -140,6 +141,7 @@
     function custctrl($scope, $rootScope, $state, $window, $filter, $timeout,$http,$stateParams) {
         $scope.success0 = true
         $scope.success1 = false
+        $scope.value =new Date();
         function getAlluser() {
             var request = {
                 url: "/v1/api/allbus",

@@ -209,7 +209,8 @@
                         </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label>Bus Departure Time</label>
-                            <input class="form-control" type="text" style="text-transform: short" ng-model="create.departureTime" >
+                            <input ng-flatpickr
+                            name="fromDate" id="fromDate" validation="required">
                             <div class="invalid-feedback">
                                 please enter Departure Time
                             </div>
@@ -237,6 +238,8 @@
                                 </select>
             
                             </div>
+
+
                         
                     </div>
                 </form>

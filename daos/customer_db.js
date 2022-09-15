@@ -124,6 +124,7 @@ module.exports.getAndSortByQuery = (query, projection, sortCriteria) =>{
 )}
 
 module.exports.update = (query, detailsToUpdate)=> {
+    
          mongodb.getDb().then((res)=>{
             var db = res.db("BUS_APP")
             var coll = db.collection("customers");
