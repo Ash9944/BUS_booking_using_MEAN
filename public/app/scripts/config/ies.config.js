@@ -1,6 +1,6 @@
 (function () {
     'use strict'
-    var myApp = angular.module("ies", ['ui.router'])
+    var myApp = angular.module("ies", ['ui.router', 'angular-flatpickr'])
     myApp.config(configuration)
     configuration.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider']
     function configuration($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -208,6 +208,28 @@
                 bootstrapError.showErrors('edituser')
             }
         };
+
+        $scope.dateOpts = {
+            dateFormat: 'Y-m-d',
+            placeholder: 'Change date..', // Default: 'Select Date..'
+            defaultDate: '2016-03-01 03:30:00 -0300',
+            onChange: function (selectedDates, dateStr, instance) {
+                // Do stuff on change
+            }
+        };
+
+        $scope.fromDate = {
+            dateFormat: 'd-m-Y',
+            defaultDate: new Date(),
+            maxDate: 'today',
+            allowInput: true,
+            onChange: function (selectedDates, dateStr, instance) {
+                
+                // new flatpickr('#toDate', $scope.toDate);
+            }
+        };
+
+        new flatpickr('#fromDate', $scope.fromDate);
 
         $scope.delete = function (info) {
             var details = { "employeeId": info._id }
