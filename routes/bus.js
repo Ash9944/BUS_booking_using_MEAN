@@ -24,7 +24,6 @@ router.post("/v1/api/bus",function(req, res){
 })
 
 router.post("/v1/api/adddbus",function(req, res){
-    console.log()
     busController.addBus(req.body).then((resp)=>{
         res.send("sucess !")
     })
