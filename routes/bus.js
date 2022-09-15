@@ -12,7 +12,7 @@ router.get("/v1/api/bus/:departure/:arrival",function(req, res){
     })
 })
 router.post("/v1/api/bus",function(req, res){
-    busController.getBusinroutes({arr_city:req.body.arr,dep_city:req.body.dept,type:req.body.type,cost:{$gt:parseInt(req.body.min), $lt:parseInt(req.body.max) }}).then((resp)=>{
+    busController.getBusinroutes({arr_city:req.body.arr,dep_city:req.body.dept,type:req.body.type,cost:{$gt:parseInt(req.body.min), $lt:parseInt(req.body.max)}}).then((resp)=>{
         res.json(resp)
     }
  )})

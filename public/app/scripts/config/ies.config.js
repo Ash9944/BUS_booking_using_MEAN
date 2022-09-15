@@ -24,8 +24,13 @@
             })
             .state('customer', {
                 url: "/admin",
-                templateUrl: 'app/modules/admin.html',
+                templateUrl: 'app/modules/busdbadmin.html',
                 controller: 'custctrl',
+            })
+            .state('customeradmin', {
+                url: "/custadmin",
+                templateUrl: 'app/modules/custdbadmin.html',
+                controller: 'adminctrl',
             })
 
     }

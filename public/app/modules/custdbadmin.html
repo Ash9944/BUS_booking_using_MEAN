@@ -1,0 +1,332 @@
+<ol class="breadcrumb border-bottom">
+    <li class="module_name flex-grow-1">Hi Admin !</li>
+</ol>
+<section class="content">
+    <div class="element-wrapper">
+        <h1 class="element-title">Add Customer</h1>
+        <div class="element-actions">
+            <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#add_user">
+                <i class="fas fa-plus mr-1"></i>Add Customers</button>
+        </div>
+    </div>
+    <div ng-if="error" id="error" class="alert alert-danger alert-white rounded">
+        <div class="icon">
+            <i class="fa fa-times-circle"></i>
+        </div>
+        <strong>Error</strong>
+        <div>
+            {{errorMsg}}
+        </div>
+    </div>
+    <div ng-if="success" id="success" class="alert alert-success alert-white rounded">
+        <div class="icon">
+            <i class="fa fa-check-circle"></i>
+        </div>
+        <strong>Success</strong>
+        <div>
+            {{successMsg}}
+        </div>
+    </div>
+
+    <form class="form-inline">
+        <div class="form-group">
+            <label>Min age:</label>
+            <input type="text" class="form-control" placeholder="Enter Max Budget" name="Min" ng-model="filter.min">
+        </div>
+        <div class="form-group">
+            <label>Max age:</label>
+            <input type="text" class="form-control" placeholder="Enter Min Budget" name="Max" ng-model="filter.max">
+        </div>
+        <div class="form-group">
+            <label for="type">Gender:</label>
+
+            <select name="type" ng-model="filter.gend">
+                <option value="AC">MALE</option>
+                <option value="NON-AC">FEMALE</option>
+            </select>
+        </div>
+        <button class="btn btn-default" ng-click="filters(filter)">Submit</button>
+    </form>
+
+
+
+    <div class="card mb-0 pb-0">
+        <div class="standard-table-header">
+            <div class="standard-table-filter border-bottom-0">
+                <div class="row">
+                    <div class="col-md-9"> </div>
+                    <div class="col-md-3 mt-2 mt-md-0 text-right">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control" ng-model="page.searchBox" placeholder="Search"
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-gray-grad" type="button">
+                                    <i class="fas fa-search mr-0"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body-padded" ng-show="success0">
+            <div class="table-container">
+                <table class="table table-padded">
+                    <thead>
+                        <tr>
+                            <th>Bus Name</th>
+                            <th>Departure Point</th>
+                            <th>Arriving Point</th>
+                            <th>Starting Time</th>
+                            <th>Arriving Time</th>
+                            <th>Cost</th>
+                            <th>Bus type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in users | filter:page.searchBox | orderBy : parseInt('id')">
+
+                            <td data-title="Name">{{user.name}}</td>
+                            <td data-title="Name">{{user.dep_city}}</td>
+                            <td data-title="Name">{{user.arr_city}}</td>
+                            <td data-title="deptime">{{user.departureTime | date :"short"}}</td>
+                            <td data-title="arrtime">{{user.arrivalTime | date:"short"}}</td>
+                            <td data-title="cost">{{user.cost | currency:"₹"}}</td>
+                            <td data-title="Type">{{user.type}}</td>
+                            <td data-title="Action" class="action-btn px-0">
+                                <a class="btn btn-primary-2 rounded-0 py-0" href="javascript:void(0)"
+                                    data-toggle="modal" data-target="#edit_user" ng-click="loadInfo(user)">
+                                    <i class="fas fa-edit mr-1"></i> Edit
+                                </a>
+                                <a class="btn btn-danger rounded-0 py-0" href="javascript:void(0)"
+                                    ng-click="delete(user)">
+                                    <i class="fas fa-trash-alt mr-1"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="card-body-padded" ng-show="success1">
+            <div class="table-container">
+                <table class="table table-padded">
+                    <thead>
+                        <tr>
+                            <th>Bus Name</th>
+                            <th>Departure Point</th>
+                            <th>Arriving Point</th>
+                            <th>Starting Time</th>
+                            <th>Arriving Time</th>
+                            <th>Cost</th>
+                            <th>Bus type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="dta in data ">
+
+                            <td data-title="Name">{{dta.name}}</td>
+                            <td data-title="Name">{{dta.dep_city}}</td>
+                            <td data-title="Name">{{dta.arr_city}}</td>
+                            <td data-title="deptime">{{dta.departureTime | date :"short"}}</td>
+                            <td data-title="arrtime">{{dta.arrivalTime | date:"short"}}</td>
+                            <td data-title="cost">{{dta.cost | currency:"₹"}}</td>
+                            <td data-title="Type">{{dta.type}}</td>
+                            <td data-title="Action" class="action-btn px-0">
+                                <a class="btn btn-primary-2 rounded-0 py-0" href="javascript:void(0)"
+                                    data-toggle="modal" data-target="#edit_user" ng-click="loadInfo(dta)">
+                                    <i class="fas fa-edit mr-1"></i> Edit
+                                </a>
+                                <a class="btn btn-danger rounded-0 py-0" href="javascript:void(0)"
+                                    ng-click="delete(dta)">
+                                    <i class="fas fa-trash-alt mr-1"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- Modal -->
+<div class="modal fade" id="add_user" tabindex="-1" role="dialog" aria-labelledby="add_user_modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="add_user_modal">Add user Person</h6>
+                <button type="button" class="close" aria-label="Close" ng-click="closeModal('add_user','adduser')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="adduser">
+                    {{create}}
+                    <div class="row">
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>Bus Id</label>
+                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="create.id" required>
+                            <div class="invalid-feedback">
+                                please enter Bus Id
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>Bus Name</label>
+                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="create.name" required>
+                            <div class="invalid-feedback">
+                                please enter your Bus Name
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>Bus starting Point</label>
+                            <input class="form-control" type="text"  style="text-transform:uppercase" ng-model="create.dep_city" required>
+                            <div class="invalid-feedback">
+                                please enter starting Point
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>Bus Ending Point</label>
+                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="create.arr_city" required>
+                            <div class="invalid-feedback">
+                                please enter Ending Point
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>Bus Departure Time</label>
+                            <input class="form-control" type="text" style="text-transform: short" ng-model="create.departureTime" >
+                            <div class="invalid-feedback">
+                                please enter Departure Time
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>Bus Arrival Time</label>
+                            <input class="form-control" type="text" style="text-transform:lowercase" ng-model="create.arrivalTime" >
+                            <div class="invalid-feedback">
+                                please enter Arrival Time
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                                <label>Bus Ticket Cost</label>
+                                <input class="form-control" type="text" style="text-transform:lowercase" ng-model="create.cost" required>
+                                <div class="invalid-feedback">
+                                    please enter Cost of Ticket
+                                </div>
+                            </div>
+                        <div class="form-group col-sm-6 mb-2">
+                                <label for="type">Choose a bus type:</label>
+            
+                                <select name="type" ng-model="create.type">
+                                    <option value="AC">AC</option>
+                                    <option value="NON-AC">NON-AC</option>
+                                </select>
+            
+                            </div>
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                    ng-click="closeModal('add_user','adduser')">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="add()">
+                    <i class="fas fa-save mr-2"></i>Add
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--EDIT MODEL-->
+<div class="modal fade" id="edit_user" tabindex="-1" role="dialog" aria-labelledby="edit_user_modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="edit_user_modal">Edit user Information</h6>
+                <button type="button" class="close" ng-click="closeModal('edit_user','edituser')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="edituser">
+                    <div class="row">
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>Bus Id</label>
+                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="edit.id" required>
+                            <div class="invalid-feedback">
+                                please enter Bus Id
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>Bus Name</label>
+                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="edit.name" required>
+                            <div class="invalid-feedback">
+                                please enter your Bus Name
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>Bus starting Point</label>
+                            <input class="form-control" type="text"  style="text-transform:uppercase" ng-model="edit.dep_city" required>
+                            <div class="invalid-feedback">
+                                please enter starting Point
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>Bus Ending Point</label>
+                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="edit.arr_city" required>
+                            <div class="invalid-feedback">
+                                please enter Ending Point
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>Bus Departure Time</label>
+                            <input class="form-control" type="text" style="text-transform: short" ng-model="edit.departureTime" required>
+                            <div class="invalid-feedback">
+                                please enter Departure Time
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>Bus Arrival Time</label>
+                            <input class="form-control" type="text" style="text-transform:lowercase" ng-model="edit.arrivalTime" required>
+                            <div class="invalid-feedback">
+                                please enter Arrival Time
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                                <label>Bus Ticket Cost</label>
+                                <input class="form-control" type="text" style="text-transform:lowercase" ng-model="edit.cost" required>
+                                <div class="invalid-feedback">
+                                    please enter Cost of Ticket
+                                </div>
+                            </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label for="type">Choose a bus type:</label>
+            
+                            <select name="type" ng-model="edit.type">
+                                <option value="AC">AC</option>
+                                <option value="NON-AC">NON-AC</option>
+                            </select>
+                            </div>
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                    ng-click="closeModal('edit_user','edituser')">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="updateuser(edit)">
+                    <i class="fas fa-save mr-2"></i>Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
