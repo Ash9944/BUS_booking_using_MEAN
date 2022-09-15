@@ -228,11 +228,13 @@ module.exports.distinctByQuery = (field, query)=>{
 }
 
 module.exports.remove = (id)=>{
+    return new Promise((resolve,reject)=>{ 
         mongodb.getDb().then((res)=>{
-            var db = res.db("BUS_APP")
-            var coll = db.collection("buses");
-            coll.remove({ _id: mongodb.ObjectID(id) });
-        })
+        var db = res.db("BUS_APP")
+        var coll = db.collection("buses");
+        resolve(coll.remove({ _id: mongodb.ObjectID(id) }))
+    })})
+       
         
     }
 

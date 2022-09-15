@@ -17,3 +17,7 @@ module.exports.updBus = function(id,detailstoupdate){
 module.exports.addBus = function(detailstoadd){
   return Bus.create(detailstoadd)
 }
+
+module.exports.deleteBus = (id)=>{
+  return Bus.remove(id)
+}

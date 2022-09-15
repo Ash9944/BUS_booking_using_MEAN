@@ -133,6 +133,8 @@
     myApp.controller("custctrl",custctrl)
     custctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout','$http','$stateParams']
     function custctrl($scope, $rootScope, $state, $window, $filter, $timeout,$http,$stateParams) {
+        $scope.success0 = true
+        $scope.success1 = false
         function getAlluser() {
             var request = {
                 url: "/v1/api/allbus",
@@ -200,9 +202,19 @@
         };
 
         $scope.delete = function (info) {
-            userServices.deleteuser({ "employeeId": info.employeeId }, function (err, res) {
-                if (!err) {
+            var details = { "employeeId": info._id }
+            console.log(details)
+            var request = {
+                url: "/v1/api/delbus",
+                method: 'DELETE',
+                data : details,
+                timeout: 2 * 60 * 1000,
+                headers: {'Content-type': 'application/json' }
+            };
+            var dats = $http(request)
+            dats.then((res)=>{
                     $("html").stop().animate({ scrollTop: 0 }, 200);
+                    getAlluser();
                     var index = $scope.users.findIndex(function (obj) { return obj._id == info._id });
                     $scope.users.splice(index, 1);
                     $scope.success = true;
@@ -211,8 +223,8 @@
                         $scope.success = false;
                         $scope.successMsg = "";
                     }, 2000);
-                }
-                else {
+                })
+                .catch((err)=> {
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     $scope.error = true;
                     $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
@@ -220,9 +232,8 @@
                         $scope.error = false;
                         $scope.errorMsg = "";
                     }, 2000);
-                }
-            });
-        };
+                })
+            }
 
         $scope.add = function () {
             var form = document.getElementById('adduser');
@@ -238,6 +249,7 @@
                 var dats = $http(request)
                 dats.then((res)=>{
                     $("html").stop().animate({ scrollTop: 0 }, 200);
+                    getAlluser();
                     $scope.success = true;
                     $scope.successMsg = "Successfully added the user infomation";
                     $scope.users.push($scope.incharge);
@@ -256,6 +268,25 @@
                         $scope.errorMsg = "";
                     }, 2000);
                 })
+        
+            }
+            $scope.filters = (info1) => {
+                $scope.success0 = false
+                $scope.success1 = true
+                console.log(info1)
+                var request = {
+                    url: `v1/api/bus`,
+                    method: 'POST',
+                    data: info1,
+                    timeout: 2 * 60 * 1000,
+                    headers: { 'Content-type': 'application/json' },
+                };
+                var dats = $http(request)
+                dats.then((res) => {
+                    console.log(res.data)
+                    $scope.data = res.data
+                }
+                )
             }
             
         };

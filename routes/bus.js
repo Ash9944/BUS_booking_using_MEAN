@@ -12,7 +12,7 @@ router.get("/v1/api/bus/:departure/:arrival",function(req, res){
     })
 })
 router.post("/v1/api/bus",function(req, res){
-    busController.getBusinroutes({arr_city:req.body.arr,dep_city:req.body.dept,type:req.body.type,cost:{$gt:req.body.min , $lt:req.body.max }}).then((resp)=>{
+    busController.getBusinroutes({arr_city:req.body.arr,dep_city:req.body.dept,type:req.body.type,cost:{$gt:parseInt(req.body.min), $lt:parseInt(req.body.max) }}).then((resp)=>{
         res.json(resp)
     }
  )})
@@ -26,6 +26,13 @@ router.post("/v1/api/bus",function(req, res){
 router.post("/v1/api/adddbus",function(req, res){
     console.log()
     busController.addBus(req.body).then((resp)=>{
+        res.send("sucess !")
+    })
+})
+
+router.delete("/v1/api/delbus",function(req,res){
+    console.log(req.body)
+    busController.deleteBus(req.body.employeeId).then((resp)=>{
         res.send("sucess !")
     })
 })
