@@ -12,13 +12,8 @@ router.get("/v1/api/bus/:departure/:arrival", function (req, res) {
         res.json(resp)
     })
 })
-<<<<<<< HEAD
 router.post("/v1/api/bus",function(req, res){
     busController.getBusinroutes({arr_city:req.body.arr,dep_city:req.body.dept,type:req.body.type,cost:{$gt:parseInt(req.body.min), $lt:parseInt(req.body.max)}}).then((resp)=>{
-=======
-router.post("/v1/api/bus", function (req, res) {
-    busController.getBusinroutes({ arr_city: req.body.arr, dep_city: req.body.dept, type: req.body.type, cost: { $gt: req.body.min, $lt: req.body.max } }).then((resp) => {
->>>>>>> 89baa3379fd22ba6333c11109f12fd15d9393ae6
         res.json(resp)
     }
     )
