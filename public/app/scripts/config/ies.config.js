@@ -159,13 +159,16 @@
         getAlluser();
 
         $scope.loadInfo = function (info) {
-            console.log(info)
+            // console.log(info)
             $scope.edit = JSON.parse(JSON.stringify(info));
             $scope.employeeId = info._id;
         };
 
         $scope.updateuser = function (info) {
             delete info.$$hashKey;
+           info.departureTime = new Date($scope.timed)
+           info.arrivalTime = new Date($scope.timed2)
+            console.log(info)
             var form = document.getElementById('edituser');
             var check = form.checkValidity();
             info.cost = parseInt(info.cost)

@@ -209,15 +209,14 @@
                         </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label>Bus Departure Time</label>
-                            <input class="form-control form-control-sm" ng-flatpickr ng-model="create.fromDate" fp-opts="fromDate"
-                            name="fromDate" id="fromDate" validation="required">
+                            <input type="datetime-local" ng-model="create.departureTime">
                             <div class="invalid-feedback">
                                 please enter Departure Time
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label>Bus Arrival Time</label>
-                            <input class="form-control" type="text" style="text-transform:lowercase" ng-model="create.arrivalTime" >
+                            <input type="datetime-local" ng-model="create.arrivalTime">
                             <div class="invalid-feedback">
                                 please enter Arrival Time
                             </div>
@@ -299,14 +298,14 @@
                         </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label>Bus Departure Time</label>
-                            <input class="form-control" type="text" style="text-transform: short" ng-model="edit.departureTime" required>
+                            <input type="datetime-local" value={{timed.slice(0,19)}} ng-model="timed">
                             <div class="invalid-feedback">
                                 please enter Departure Time
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label>Bus Arrival Time</label>
-                            <input class="form-control" type="text" style="text-transform:lowercase" ng-model="edit.arrivalTime" required>
+                            <input type="datetime-local"  value={{timed2.slice(0,19)}} ng-model="timed2">
                             <div class="invalid-feedback">
                                 please enter Arrival Time
                             </div>
