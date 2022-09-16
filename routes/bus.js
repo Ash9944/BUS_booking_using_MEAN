@@ -20,6 +20,8 @@ router.post("/v1/api/bus",function(req, res){
 })
 
 router.post("/v1/api/updbus", function (req, res) {
+    // req.body.detailsToUpdate.departureTime = new Date(req.body.detailsToUpdate.departureTime)
+    // req.body.detailsToUpdate.arrivalTime = new Date(req.body.detailsToUpdate.arrivalTime)
     busController.updBus(req.body.query, req.body.detailsToUpdate).then((resp) => {
         res.send("sucess !")
     })

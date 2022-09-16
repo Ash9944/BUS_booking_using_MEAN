@@ -159,13 +159,15 @@
         getAlluser();
 
         $scope.loadInfo = function (info) {
-            // console.log(info)
             $scope.edit = JSON.parse(JSON.stringify(info));
+            console.log($scope.edit)
             $scope.employeeId = info._id;
+
         };
 
         $scope.updateuser = function (info) {
             delete info.$$hashKey;
+           //$scope.arrt = $scope.edit.departureTime
            info.departureTime = new Date($scope.timed)
            info.arrivalTime = new Date($scope.timed2)
             console.log(info)

@@ -298,14 +298,15 @@
                         </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label>Bus Departure Time</label>
-                            <input type="datetime-local" value={{timed.slice(0,19)}} ng-model="timed">
+                            <input type="datetime-local" value={{edit.departureTime}} ng-model="timed">
                             <div class="invalid-feedback">
                                 please enter Departure Time
+                                {{arrt}}
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label>Bus Arrival Time</label>
-                            <input type="datetime-local"  value={{timed2.slice(0,19)}} ng-model="timed2">
+                            <input type="datetime-local"  value={{edit.arrivalTime}} ng-model="timed2">
                             <div class="invalid-feedback">
                                 please enter Arrival Time
                             </div>
