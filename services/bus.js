@@ -196,6 +196,20 @@ module.exports.getBusinroutes = (query)=>{
     console.log(filter)
     return Bus.getByQuery(filter)
   }
+
+  if(query.arr && query.dep && query.time && size==3){
+    filter.arr_city = query.arr
+    filter.dep_city = query.dep
+    filter.departureTime = {'$gt':query.time}
+    console.log(filter)
+    return Bus.getByQuery(filter)
+  }
+
+  if(query.time && size==1){
+    filter.departureTime = {'$gt':new Date(query.time)}
+    console.log(filter)
+    return Bus.getByQuery(filter)
+  }
   
 }
 

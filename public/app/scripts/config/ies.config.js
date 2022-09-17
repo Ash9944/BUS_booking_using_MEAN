@@ -256,6 +256,8 @@
         $scope.add = function () {
             var form = document.getElementById('adduser');
             var check = form.checkValidity();
+            // $scope.create.departureTime =$scope.create.departureTime)
+            // $scope.create.arrivalTime = new ISODate($scope.create.arrivalTime)
             $scope.create.cost = parseInt($scope.create.cost)
             console.log($scope.create)
                 var request = {
