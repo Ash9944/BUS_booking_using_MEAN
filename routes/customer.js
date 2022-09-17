@@ -16,6 +16,12 @@ router.get("/v1/api/customers/:id",(req,res)=>{
     })
 })
 
+router.post("/v1/api/addcustomers",(req,res)=>{
+    customerController.addBooking(req.body).then((resp)=>{
+        res.send(resp)
+    })
+})
+
 
 
 module.exports = router;

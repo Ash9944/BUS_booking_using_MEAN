@@ -155,11 +155,14 @@ module.exports.updateToUnset = (query, detailsToUpdate)=> {
 }
 
 module.exports.updateArrayById = (id, elementsToPush)=>{
+    return new Promise((resolve,reject)=>{
         mongodb.getDb().then((res)=>{
             var db = res.db("BUS_APP")
             var coll = db.collection("customers");
-            coll.update({ _id: mongodb.ObjectID(id) }, { $push: elementsToPush }, { multi: false })
+            resolve(coll.update({ _id: mongodb.ObjectID(id) }, { $push: elementsToPush }, { multi: false }))
         })
+    })
+        
         
     }
 

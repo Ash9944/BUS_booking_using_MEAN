@@ -18,7 +18,7 @@
                 controller: 'busctrl',
             })
             .state('userbus', {
-                url: "/user/:departure/:arrival",
+                url: "/user/:custid/:departure/:arrival",
                 templateUrl: 'app/modules/buses.html',
                 controller: 'userctrl',
             })
@@ -86,6 +86,7 @@
         })
         $scope.give = (x, y) => {
             $state.go("userbus", {
+                custid : $stateParams.id,
                 departure: x,
                 arrival: y
             })
@@ -115,7 +116,24 @@
                 alert(err)
             })
         $scope.book = (info) => {
-            console.log(info,date)
+            info.time_of_booking = new Date().toString()
+            var datas = {id:$stateParams.custid ,query:info}
+            var request = {
+                url: `/v1/api/addcustomers`,
+                method: 'POST',
+                data : datas,
+                timeout: 2 * 60 * 1000,
+                headers: { 'Content-type': 'application/json' ,'data': time.toISOString()},
+            };
+            var dats = $http(request)
+            dats.then((res)=>{
+                $scope.success = true;
+                $scope.successMsg = "Successfully Booked Your Bus";
+                $timeout(function () {
+                    $scope.success = false;
+                    $scope.successMsg = "";
+                }, 2000);
+            })
         }
         $scope.filters = (info1) => {
             $scope.success0 = false
