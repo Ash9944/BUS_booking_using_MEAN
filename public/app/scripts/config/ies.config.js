@@ -117,9 +117,14 @@
         $scope.filters = (info1) => {
             $scope.success0 = false
             $scope.success1 = true
-            console.log(info1)
-            info1.dept = $stateParams.departure
+            //console.log(info1)
+            info1.dep = $stateParams.departure
             info1.arr = $stateParams.arrival
+            Object.keys(info1).forEach(key => {
+                if (info1[key] === null || info1[key]=="") {
+                  delete info1[key];
+            }})
+            console.log(info1)
             var request = {
                 url: `v1/api/bus`,
                 method: 'POST',
@@ -159,13 +164,18 @@
         getAlluser();
 
         $scope.loadInfo = function (info) {
-            console.log(info)
             $scope.edit = JSON.parse(JSON.stringify(info));
+            console.log($scope.edit)
             $scope.employeeId = info._id;
+
         };
 
         $scope.updateuser = function (info) {
             delete info.$$hashKey;
+           //$scope.arrt = $scope.edit.departureTime
+           info.departureTime = new Date($scope.timed)
+           info.arrivalTime = new Date($scope.timed2)
+            console.log(info)
             var form = document.getElementById('edituser');
             var check = form.checkValidity();
             info.cost = parseInt(info.cost)
@@ -282,6 +292,10 @@
             $scope.filters = (info1) => {
                 $scope.success0 = false
                 $scope.success1 = true
+                Object.keys(info1).forEach(key => {
+                    if (info1[key] === null || info1[key]=="") {
+                      delete info1[key];
+                }})
                 console.log(info1)
                 var request = {
                     url: `v1/api/bus`,

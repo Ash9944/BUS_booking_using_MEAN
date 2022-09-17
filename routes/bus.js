@@ -13,13 +13,15 @@ router.get("/v1/api/bus/:departure/:arrival", function (req, res) {
     })
 })
 router.post("/v1/api/bus",function(req, res){
-    busController.getBusinroutes({arr_city:req.body.arr,dep_city:req.body.dept,type:req.body.type,cost:{$gt:parseInt(req.body.min), $lt:parseInt(req.body.max)}}).then((resp)=>{
+    busController.getBusinroutes(req.body).then((resp)=>{
         res.json(resp)
     }
     )
 })
 
 router.post("/v1/api/updbus", function (req, res) {
+    // req.body.detailsToUpdate.departureTime = new Date(req.body.detailsToUpdate.departureTime)
+    // req.body.detailsToUpdate.arrivalTime = new Date(req.body.detailsToUpdate.arrivalTime)
     busController.updBus(req.body.query, req.body.detailsToUpdate).then((resp) => {
         res.send("sucess !")
     })

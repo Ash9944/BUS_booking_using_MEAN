@@ -237,7 +237,17 @@ module.exports.remove = (id)=>{
        
         
     }
-
+    
+module.exports.getbyPipeline = (query)=>{
+        return new Promise((resolve,reject)=>{ 
+            mongodb.getDb().then((res)=>{
+            var db = res.db("BUS_APP")
+            var coll = db.collection("buses");
+            resolve(coll.aggregate(query))
+        })})
+           
+            
+        }
 
 module.exports.removeByQuery = (query)=>{
         mongodb.getDb().then((res)=>{
