@@ -97,11 +97,15 @@
     function userctrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams) {
         $scope.success0 = true
         $scope.success1 = false
+        var time = new Date()
+        //var dates = {timed : time}
+       // console.log(dates)
+        $scope.time1 =`${time.getFullYear()}-0${(time.getMonth())+1}-${time.getDate()}T${time.getHours()}${time.getHours()}:${time.getMinutes()}`
         var request = {
             url: `v1/api/bus/${$stateParams.departure}/${$stateParams.arrival}`,
             method: 'GET',
             timeout: 2 * 60 * 1000,
-            headers: { 'Content-type': 'application/json' },
+            headers: { 'Content-type': 'application/json' ,'data': time.toISOString()},
         };
         var dats = $http(request)
         dats.then((res) => {
@@ -111,7 +115,6 @@
                 alert(err)
             })
         $scope.book = (info) => {
-            var date = new Date("2022-08-17T13:38:00.000Z")
             console.log(info,date)
         }
         $scope.filters = (info1) => {
