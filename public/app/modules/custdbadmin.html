@@ -1,6 +1,8 @@
 <ol class="breadcrumb border-bottom">
     <li class="module_name flex-grow-1">Hi Admin !</li>
 </ol>
+<button class="btn btn-sm btn-success" data-ui-sref="adminhome">
+    <i class="fas fa-plus mr-1"></i>GO BACK !</button>
 <section class="content">
     <div class="element-wrapper">
         <h1 class="element-title">Add Customer</h1>
@@ -41,8 +43,8 @@
             <label for="type">Gender:</label>
 
             <select name="type" ng-model="filter.gend">
-                <option value="AC">MALE</option>
-                <option value="NON-AC">FEMALE</option>
+                <option value="MALE">MALE</option>
+                <option value="FEMALE">FEMALE</option>
             </select>
         </div>
         <button class="btn btn-default" ng-click="filters(filter)">Submit</button>
@@ -170,66 +172,50 @@
                     {{create}}
                     <div class="row">
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Id</label>
-                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="create.id" required>
+                            <label>Name</label>
+                            <input class="form-control" type="text" ng-model="create.name" required>
                             <div class="invalid-feedback">
-                                please enter Bus Id
+                                please enter your Name
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Name</label>
-                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="create.name" required>
+                            <label>Google ID</label>
+                            <input class="form-control" type="text"  ng-model="create.googleId" required>
                             <div class="invalid-feedback">
-                                please enter your Bus Name
+                                please enter your Google ID
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus starting Point</label>
-                            <input class="form-control" type="text"  style="text-transform:uppercase" ng-model="create.dep_city" required>
+                            <label>Age</label>
+                            <input class="form-control" type="text" ng-model="create.age" required>
                             <div class="invalid-feedback">
-                                please enter starting Point
+                                please enterYour Age
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Ending Point</label>
-                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="create.arr_city" required>
-                            <div class="invalid-feedback">
-                                please enter Ending Point
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Departure Time</label>
-                            <input class="form-control" type="text" style="text-transform: short" ng-model="create.departureTime" >
-                            <div class="invalid-feedback">
-                                please enter Departure Time
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Arrival Time</label>
-                            <input class="form-control" type="text" style="text-transform:lowercase" ng-model="create.arrivalTime" >
-                            <div class="invalid-feedback">
-                                please enter Arrival Time
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-6 mb-2">
-                                <label>Bus Ticket Cost</label>
-                                <input class="form-control" type="text" style="text-transform:lowercase" ng-model="create.cost" required>
-                                <div class="invalid-feedback">
-                                    please enter Cost of Ticket
-                                </div>
-                            </div>
-                        <div class="form-group col-sm-6 mb-2">
-                                <label for="type">Choose a bus type:</label>
+                            <label for="type">Gender</label>
             
-                                <select name="type" ng-model="create.type">
-                                    <option value="AC">AC</option>
-                                    <option value="NON-AC">NON-AC</option>
-                                </select>
-            
+                            <select name="type" ng-model="create.gender">
+                                <option value="MALE">MALE</option>
+                                <option value="FEMALE">FEMALE</option>
+                            </select>
                             </div>
-                        
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>E-mail</label>
+                            <input class="form-control" type="text"  ng-model="create.email" required>
+                            <div class="invalid-feedback">
+                                please enter yor E-mail
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>enter date Of Birth</label>
+                            <input class="form-control" type="date"  ng-model="create.dateOfBirth" required>
+                            <div class="invalid-feedback">
+                                please enter your Date of Birth
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -257,66 +243,79 @@
                 <form id="edituser">
                     <div class="row">
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Id</label>
-                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="edit.id" required>
+                            <label>Name</label>
+                            <input class="form-control" type="text" ng-model="edit.name" >
                             <div class="invalid-feedback">
-                                please enter Bus Id
+                                please enter your Name
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Name</label>
-                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="edit.name" required>
+                            <label>Google ID</label>
+                            <input class="form-control" type="text"  ng-model="edit.googleId">
                             <div class="invalid-feedback">
-                                please enter your Bus Name
+                                please enter your Google ID
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus starting Point</label>
-                            <input class="form-control" type="text"  style="text-transform:uppercase" ng-model="edit.dep_city" required>
+                            <label>Age</label>
+                            <input class="form-control" type="text" ng-model="edit.age" >
                             <div class="invalid-feedback">
-                                please enter starting Point
+                                please enterYour Age
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Ending Point</label>
-                            <input class="form-control" type="text" style="text-transform:uppercase" ng-model="edit.arr_city" required>
-                            <div class="invalid-feedback">
-                                please enter Ending Point
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Departure Time</label>
-                            <input class="form-control" type="text" style="text-transform: short" ng-model="edit.departureTime" required>
-                            <div class="invalid-feedback">
-                                please enter Departure Time
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Arrival Time</label>
-                            <input class="form-control" type="text" style="text-transform:lowercase" ng-model="edit.arrivalTime" required>
-                            <div class="invalid-feedback">
-                                please enter Arrival Time
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-6 mb-2">
-                                <label>Bus Ticket Cost</label>
-                                <input class="form-control" type="text" style="text-transform:lowercase" ng-model="edit.cost" required>
-                                <div class="invalid-feedback">
-                                    please enter Cost of Ticket
-                                </div>
-                            </div>
-                        <div class="form-group col-sm-6 mb-2">
-                            <label for="type">Choose a bus type:</label>
+                            <label for="type">Gender</label>
             
-                            <select name="type" ng-model="edit.type">
-                                <option value="AC">AC</option>
-                                <option value="NON-AC">NON-AC</option>
+                            <select name="type" ng-model="edit.gender">
+                                <option value="MALE">MALE</option>
+                                <option value="FEMALE">FEMALE</option>
                             </select>
                             </div>
-                        
-                    </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>E-mail</label>
+                            <input class="form-control" type="text"  ng-model="edit.email">
+                            <div class="invalid-feedback">
+                                please enter yor E-mail
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label>enter date Of Birth</label>
+                            <input class="form-control" type="date"  ng-model="date" >
+                            <div class="invalid-feedback">
+                                please enter your Date of Birth {{edit.dateOfBirth}}
+                            </div>
+                        </div>
+                        <table class="table table-padded">
+                            <thead>
+                                <tr>
+                                    <th>Bus Name</th>
+                                    <th>Departure Point</th>
+                                    <th>Arriving Point</th>
+                                    <th>Starting Time</th>
+                                    <th>Arriving Time</th>
+                                    <th>Cost</th>
+                                    <th>Bus type</th>
+                                    <th>Time Booked</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="user in edit.Bookings ">
+        
+                                    <td data-title="Name">{{user.name}}</td>
+                                    <td data-title="Name">{{user.dep_city}}</td>
+                                    <td data-title="Name">{{user.arr_city}}</td>
+                                    <td data-title="deptime">{{user.departureTime | date :"short"}}</td>
+                                    <td data-title="arrtime">{{user.arrivalTime | date:"short"}}</td>
+                                    <td data-title="cost">{{user.cost | currency:"₹"}}</td>
+                                    <td data-title="Type">{{user.type}}</td>
+                                    <td data-title="Type">{{user.time_of_booking | date :"short"}}</td>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                 </form>
             </div>
             <div class="modal-footer">

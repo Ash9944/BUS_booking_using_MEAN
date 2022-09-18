@@ -16,4 +16,16 @@ module.exports.addBooking = (query)=>{
   return Customer.updateArrayById(query.id,filter)
 }
 
-module
+module.exports.addCustomer = (info)=>{
+  info.Bookings = []
+  return Customer.create(info)
+}
+
+module.exports.deletecustomer=(id)=>{
+  return Customer.remove(id)
+}
+
+module.exports.updateCustomer = (query) =>{
+  console.log(query)
+  return Customer.updateById(query.query,query.detailsToUpdate)
+}

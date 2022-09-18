@@ -22,6 +22,11 @@
                 templateUrl: 'app/modules/buses.html',
                 controller: 'userctrl',
             })
+            .state('adminhome', {
+                url: "/adminhome",
+                templateUrl: 'app/modules/adminhomepage.html',
+                //controller: 'custctrl',
+            })
             .state('customer', {
                 url: "/admin",
                 templateUrl: 'app/modules/busdbadmin.html',
@@ -62,7 +67,7 @@
                         })
                     }
                     if (info.email.toString() == "Admin@admin") {
-                        $state.go("customer")
+                        $state.go("adminhome")
                     }
 
 
@@ -101,7 +106,7 @@
         var time = new Date()
         //var dates = {timed : time}
        // console.log(dates)
-        $scope.time1 =`${time.getFullYear()}-0${(time.getMonth())+1}-${time.getDate()}T${time.getHours()}${time.getHours()}:${time.getMinutes()}`
+        $scope.dates = new Date().toISOString()
         var request = {
             url: `v1/api/bus/${$stateParams.departure}/${$stateParams.arrival}`,
             method: 'GET',
@@ -367,13 +372,15 @@
             delete info.$$hashKey;
             var form = document.getElementById('edituser');
             var check = form.checkValidity();
-            info.cost = parseInt(info.cost)
+            info.age = parseInt(info.age)
+            info.dateOfBirth = new Date($scope.date)
+            
             if (check === true) {
                 //var query = { "_id": $scope.employeeId };
                 var details = { "query": $scope.employeeId , "detailsToUpdate": info }
                 //console.log(details)
                 var request = {
-                    url: "/v1/api/updbus",
+                    url: "/v1/api/updcust",
                     method: 'POST',
                     data : details,
                     timeout: 2 * 60 * 1000,
@@ -412,7 +419,7 @@
             var details = { "employeeId": info._id }
             console.log(details)
             var request = {
-                url: "/v1/api/delbus",
+                url: "/v1/api/delcust",
                 method: 'DELETE',
                 data : details,
                 timeout: 2 * 60 * 1000,
@@ -445,10 +452,10 @@
         $scope.add = function () {
             var form = document.getElementById('adduser');
             var check = form.checkValidity();
-            $scope.create.cost = parseInt($scope.create.cost)
+            $scope.create.age = parseInt($scope.create.age)
             console.log($scope.create)
                 var request = {
-                    url: "/v1/api/adddbus",
+                    url: "/v1/api/insertcustomers",
                     method: 'POST',
                     data : $scope.create,
                     timeout: 2 * 60 * 1000,

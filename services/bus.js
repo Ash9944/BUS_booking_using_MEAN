@@ -192,7 +192,7 @@ module.exports.getBusinroutes = (query)=>{
     filter.dep_city = query.dep
     filter.type = query.type
     filter.cost = {'$gt':parseInt(query.min),'$lt':parseInt(query.max)}
-    filter.departureTime = {'$gt':new Date(query.time)}
+    filter.departureTime = {'$gt':query.time}
     console.log(filter)
     return Bus.getByQuery(filter)
   }
@@ -206,11 +206,69 @@ module.exports.getBusinroutes = (query)=>{
   }
 
   if(query.time && size==1){
-    filter.departureTime = {'$gt':new Date(query.time)}
+    filter.departureTime = {'$gt':query.time}
     console.log(filter)
     return Bus.getByQuery(filter)
   }
   
+  if(query.arr && query.dep && query.time && query.type && size==4){
+    filter.arr_city = query.arr
+    filter.dep_city = query.dep
+    filter.type = query.type
+    filter.departureTime = {'$gt':query.time}
+    console.log(filter)
+    return Bus.getByQuery(filter)
+  }
+
+  if(query.arr && query.dep && query.type && query.min  && query.time && size==5){
+    filter.arr_city = query.arr
+    filter.dep_city = query.dep
+    filter.type = query.type
+    filter.cost = {'$gt':parseInt(query.min)}
+    filter.departureTime = {'$gt':query.time}
+    console.log(filter)
+    return Bus.getByQuery(filter)
+  }
+  
+
+  if(query.arr && query.dep && query.type&& query.max && query.time && size==5){
+    filter.arr_city = query.arr
+    filter.dep_city = query.dep
+    filter.type = query.type
+    filter.cost = {'$lt':parseInt(query.max)}
+    filter.departureTime = {'$gt':query.time}
+    console.log(filter)
+    return Bus.getByQuery(filter)
+  }
+
+  if(query.arr && query.dep && query.min && query.max && query.time && size==5){
+    filter.arr_city = query.arr
+    filter.dep_city = query.dep
+    filter.cost = {'$gt':parseInt(query.min),'$lt':parseInt(query.max)}
+    filter.departureTime = {'$gt':query.time}
+    console.log(filter)
+    return Bus.getByQuery(filter)
+  }
+
+  if(query.arr && query.dep && query.max && query.time && size==4){
+    filter.arr_city = query.arr
+    filter.dep_city = query.dep
+    filter.cost = {'$lt':parseInt(query.max)}
+    filter.departureTime = {'$gt':query.time}
+    console.log(filter)
+    return Bus.getByQuery(filter)
+  }
+
+  if(query.arr && query.dep && query.min && query.time && size==4){
+    filter.arr_city = query.arr
+    filter.dep_city = query.dep
+    filter.cost = {'$gt':parseInt(query.min)}
+    filter.departureTime = {'$gt':query.time}
+    console.log(filter)
+    return Bus.getByQuery(filter)
+  }
+
+
 }
 
 module.exports.getAllUserDetails = function(){

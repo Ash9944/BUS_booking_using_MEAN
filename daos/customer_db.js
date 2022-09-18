@@ -1,10 +1,13 @@
 var mongodb = require('./db_con');
 
 module.exports.create =(record) =>{
-     mongodb.getDb().then((res)=>{
-        var db = res.db('BUS_APP')
-        var coll = db.collection("customers");
-        coll.insert(record)
+    return new Promise((resolve, reject)=>{
+        mongodb.getDb().then((res)=>{
+            var db = res.db('BUS_APP')
+            var coll = db.collection("customers");
+            resolve(coll.insert(record))
+    })
+     
     });
     
 }
@@ -185,6 +188,7 @@ module.exports.removeItemInArrayByQuery = (query, elementToDelete)=>{
     }
 
 module.exports.updateById = (id, detailsToUpdate) => {
+    return new Promise((resolve,reject)=>{
         mongodb.getDb().then((res)=>{
             var db = res.db("BUS_APP")
             var coll = db.collection("customers");
@@ -194,7 +198,9 @@ module.exports.updateById = (id, detailsToUpdate) => {
                 delete detailsToUpdate._id;
             }
 
-            coll.update({ _id: mongodb.ObjectID(id) }, { $set: detailsToUpdate }, { multi: false });
+            resolve(coll.update({ _id: mongodb.ObjectID(id) }, { $set: detailsToUpdate }, { multi: false }))
+    })
+        
 })}
 
 
@@ -228,11 +234,14 @@ module.exports.distinctByQuery = (field, query)=>{
 }
 
 module.exports.remove = (id)=>{
+    return new Promise((resolve,reject)=>{
         mongodb.getDb().then((res)=>{
             var db = res.db("BUS_APP")
             var coll = db.collection("customers");
-            coll.remove({ _id: mongodb.ObjectID(id) });
+            resolve(coll.remove({ _id: mongodb.ObjectID(id) }))
         })
+        
+    })
         
     }
 
