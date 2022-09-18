@@ -121,7 +121,7 @@
                 alert(err)
             })
         $scope.book = (info) => {
-            info.time_of_booking = new Date().toString()
+            info.time_of_booking = new Date()
             var datas = {id:$stateParams.custid ,query:info}
             var request = {
                 url: `/v1/api/addcustomers`,
