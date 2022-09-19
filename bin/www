@@ -12,7 +12,7 @@ var mongoose = require('mongoose');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '4000');
 app.set('port', port);
 
 /**
@@ -26,11 +26,11 @@ var server = http.createServer(app);
  */
 
 
-server.listen(port,(err,data)=>{
-    if(!err){
-      console.log("Server Running !")
-    }
-  });
+server.listen(port, (err, data) => {
+  if (!err) {
+    console.log("Server Running !")
+  }
+});
 
 
 
