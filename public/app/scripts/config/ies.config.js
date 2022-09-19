@@ -199,8 +199,8 @@
         $scope.updateuser = function (info) {
             delete info.$$hashKey;
            //$scope.arrt = $scope.edit.departureTime
-           info.departureTime = new Date($scope.timed)
-           info.arrivalTime = new Date($scope.timed2)
+           info.departureTime = new Date (info.departureTime)
+           info.arrivalTime = new Date( info.arrivalTime)
             console.log(info)
             var form = document.getElementById('edituser');
             var check = form.checkValidity();
@@ -373,7 +373,7 @@
             var form = document.getElementById('edituser');
             var check = form.checkValidity();
             info.age = parseInt(info.age)
-            info.dateOfBirth = new Date($scope.date)
+            info.dateOfBirth = new Date(info.dateOfBirth)
             
             if (check === true) {
                 //var query = { "_id": $scope.employeeId };
