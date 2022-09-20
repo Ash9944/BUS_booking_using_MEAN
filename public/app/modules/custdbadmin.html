@@ -50,8 +50,6 @@
         <button class="btn btn-default" ng-click="filters(filter)">Submit</button>
     </form>
 
-
-
     <div class="card mb-0 pb-0">
         <div class="standard-table-header">
             <div class="standard-table-filter border-bottom-0">
@@ -113,7 +111,6 @@
             </div>
         </div>
 
-
         <div class="card-body-padded" ng-show="success1">
             <div class="table-container">
                 <table class="table table-padded">
@@ -154,7 +151,6 @@
                 </table>
             </div>
         </div>
-
     </div>
 </section>
 <!-- Modal -->
@@ -180,7 +176,7 @@
                         </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label>Google ID</label>
-                            <input class="form-control" type="text"  ng-model="create.googleId" required>
+                            <input class="form-control" type="text" ng-model="create.googleId" required>
                             <div class="invalid-feedback">
                                 please enter your Google ID
                             </div>
@@ -196,22 +192,22 @@
                         </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label for="type">Gender</label>
-            
+
                             <select name="type" ng-model="create.gender">
                                 <option value="MALE">MALE</option>
                                 <option value="FEMALE">FEMALE</option>
                             </select>
-                            </div>
+                        </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label>E-mail</label>
-                            <input class="form-control" type="text"  ng-model="create.email" required>
+                            <input class="form-control" type="text" ng-model="create.email" required>
                             <div class="invalid-feedback">
                                 please enter yor E-mail
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label>enter date Of Birth</label>
-                            <input class="form-control" type="date"  ng-model="create.dateOfBirth" required>
+                            <input class="form-control" type="date" ng-model="create.dateOfBirth" required>
                             <div class="invalid-feedback">
                                 please enter your Date of Birth
                             </div>
@@ -244,14 +240,14 @@
                     <div class="row">
                         <div class="form-group col-sm-6 mb-2">
                             <label>Name</label>
-                            <input class="form-control" type="text" ng-model="edit.name" >
+                            <input class="form-control" type="text" ng-model="edit.name">
                             <div class="invalid-feedback">
                                 please enter your Name
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label>Google ID</label>
-                            <input class="form-control" type="text"  ng-model="edit.googleId">
+                            <input class="form-control" type="text" ng-model="edit.googleId">
                             <div class="invalid-feedback">
                                 please enter your Google ID
                             </div>
@@ -260,62 +256,62 @@
                     <div class="row">
                         <div class="form-group col-sm-6 mb-2">
                             <label>Age</label>
-                            <input class="form-control" type="text" ng-model="edit.age" >
+                            <input class="form-control" type="text" ng-model="edit.age">
                             <div class="invalid-feedback">
                                 please enterYour Age
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label for="type">Gender</label>
-            
+
                             <select name="type" ng-model="edit.gender">
                                 <option value="MALE">MALE</option>
                                 <option value="FEMALE">FEMALE</option>
                             </select>
-                            </div>
                         </div>
-                        <div class="form-group col-sm-6 mb-2">
-                            <label>E-mail</label>
-                            <input class="form-control" type="text"  ng-model="edit.email">
-                            <div class="invalid-feedback">
-                                please enter yor E-mail
-                            </div>
+                    </div>
+                    <div class="form-group col-sm-6 mb-2">
+                        <label>E-mail</label>
+                        <input class="form-control" type="text" ng-model="edit.email">
+                        <div class="invalid-feedback">
+                            please enter yor E-mail
                         </div>
-                        <div class="form-group col-sm-6 mb-2">
-                            <label>enter date Of Birth</label>
-                            <input class="form-control" type="date" ng-model="edit.dateOfBirth" >
-                            <div class="invalid-feedback">
-                                Your Date of Birth : {{edit.dateOfBirth | date:'longDate'}}
-                            </div>
+                    </div>
+                    <div class="form-group col-sm-6 mb-2">
+                        <label>enter date Of Birth</label>
+                        <input class="form-control" type="date" ng-model="edit.dateOfBirth">
+                        <div class="invalid-feedback">
+                            Your Date of Birth : {{edit.dateOfBirth | date:'longDate'}}
                         </div>
-                        <table class="table table-padded">
-                            <thead>
-                                <tr>
-                                    <th>Bus Name</th>
-                                    <th>Departure Point</th>
-                                    <th>Arriving Point</th>
-                                    <th>Starting Time</th>
-                                    <th>Arriving Time</th>
-                                    <th>Cost</th>
-                                    <th>Bus type</th>
-                                    <th>Time Booked</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="user in edit.Bookings | orderBy : '-time_of_booking'">
-        
-                                    <td data-title="Name">{{user.name}}</td>
-                                    <td data-title="Name">{{user.dep_city}}</td>
-                                    <td data-title="Name">{{user.arr_city}}</td>
-                                    <td data-title="deptime">{{user.departureTime | date :"short"}}</td>
-                                    <td data-title="arrtime">{{user.arrivalTime | date:"short"}}</td>
-                                    <td data-title="cost">{{user.cost | currency:"₹"}}</td> 
-                                    <td data-title="Type">{{user.type}}</td>
-                                    <td data-title="Type">{{user.time_of_booking | date :"short"}}</td>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    </div>
+                    <table class="table table-padded">
+                        <thead>
+                            <tr>
+                                <th>Bus Name</th>
+                                <th>Departure Point</th>
+                                <th>Arriving Point</th>
+                                <th>Starting Time</th>
+                                <th>Arriving Time</th>
+                                <th>Cost</th>
+                                <th>Bus type</th>
+                                <th>Time Booked</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="user in edit.Bookings | orderBy : '-time_of_booking'">
+
+                                <td data-title="Name">{{user.name}}</td>
+                                <td data-title="Name">{{user.dep_city}}</td>
+                                <td data-title="Name">{{user.arr_city}}</td>
+                                <td data-title="deptime">{{user.departureTime | date :"short"}}</td>
+                                <td data-title="arrtime">{{user.arrivalTime | date:"short"}}</td>
+                                <td data-title="cost">{{user.cost | currency:"₹"}}</td>
+                                <td data-title="Type">{{user.type}}</td>
+                                <td data-title="Type">{{user.time_of_booking | date :"short"}}</td>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </form>
             </div>
             <div class="modal-footer">

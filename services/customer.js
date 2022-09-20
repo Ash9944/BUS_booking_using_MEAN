@@ -1,31 +1,30 @@
 const Customer = require("../daos/customer_db");
 
-module.exports.getAllUserDetails = function(){
+module.exports.getAllUserDetails = function () {
   return Customer.getAll()
 }
 
-module.exports.getuser = (id)=>{
+module.exports.getuser = (id) => {
   return Customer.getById(id)
 }
 
-
-module.exports.addBooking = (query)=>{
+module.exports.addBooking = (query) => {
   var filter = {}
   filter.Bookings = query.query
   console.log(filter)
-  return Customer.updateArrayById(query.id,filter)
+  return Customer.updateArrayById(query.id, filter)
 }
 
-module.exports.addCustomer = (info)=>{
+module.exports.addCustomer = (info) => {
   info.Bookings = []
   return Customer.create(info)
 }
 
-module.exports.deletecustomer=(id)=>{
+module.exports.deletecustomer = (id) => {
   return Customer.remove(id)
 }
 
-module.exports.updateCustomer = (query) =>{
+module.exports.updateCustomer = (query) => {
   console.log(query)
-  return Customer.updateById(query.query,query.detailsToUpdate)
+  return Customer.updateById(query.query, query.detailsToUpdate)
 }

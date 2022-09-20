@@ -36,8 +36,7 @@
         </div>
         <div class="form-group">
             <label for="meeting-time">Choose a time and date to see buses available at that time:</label>
-            <input type="datetime-local" min ="{{dates.slice(0,16)}}"  ng-model="filter.time" >
-            
+            <input type="datetime-local" min="{{dates.slice(0,16)}}" ng-model="filter.time">
         </div>
         <button class="btn btn-default" ng-click="filters(filter)">Submit</button>
     </form>
@@ -55,7 +54,7 @@
                     </div>
                 </div>
             </div>
-           
+
         </div>
     </div>
 
@@ -76,7 +75,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="user in users | filter:page.searchBox | orderBy : 'departureTime'">
-                        
+
                         <td data-title="Name">{{user.name}}</td>
                         <td data-title="Name">{{user.dep_city}}</td>
                         <td data-title="Name">{{user.arr_city}}</td>

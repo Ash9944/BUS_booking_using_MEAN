@@ -1,11 +1,9 @@
 const mongodb = require('mongodb');
-
 const mongoclient = mongodb.MongoClient;
 
-
-const url  = 'mongodb://localhost:27017/BUS_APP'
+const url = 'mongodb://localhost:27017/BUS_APP'
 var dbCache = {}
-function connection(){
+function connection() {
     console.log("Database connected !")
     const mong = mongoclient.connect(url)
     dbCache.db = mong
@@ -13,14 +11,12 @@ function connection(){
 
 connection()
 
-
-module.exports.getDb = function() {
+module.exports.getDb = function () {
     return dbCache.db;
 }
 
-module.exports.getMongodb = function() {
-    return mongodb;    
+module.exports.getMongodb = function () {
+    return mongodb;
 }
-
 
 module.exports.ObjectID = mongodb.ObjectID;

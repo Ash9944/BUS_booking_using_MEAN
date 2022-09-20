@@ -8,7 +8,6 @@ var mongoose = require('mongoose')
 var busRouter = require('./routes/bus');
 var customerRouter = require('./routes/customer');
 
-
 var app = express();
 
 // view engine setup
@@ -21,8 +20,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(busRouter);
-app.use(customerRouter);
+app.use("/v1/api", busRouter);
+app.use("/v1/api", customerRouter);
 // catch 404 and forward to error handler
 
 app.use(function (req, res, next) {
