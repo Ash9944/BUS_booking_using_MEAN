@@ -2,40 +2,26 @@
     'use strict';
     var myApp = angular.module('ies')
     myApp.controller("userctrl",userctrl)
-    function userctrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams) {
+    userctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams','userctrlservice']
+    function userctrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams,userctrlservice) {
         $scope.success0 = true
         $scope.success1 = false
-        var time = new Date()
+       
         //var dates = {timed : time}
         // console.log(dates)
         $scope.dates = new Date().toISOString()
-        var request = {
-            url: `v1/api/bus/${$stateParams.departure}/${$stateParams.arrival}`,
-            method: 'GET',
-            timeout: 2 * 60 * 1000,
-            headers: { 'Content-type': 'application/json', 'data': time.toISOString() },
-        };
-        var dats = $http(request)
-        dats.then((res) => {
+        userctrlservice.busfind().then((res) => {
             $scope.users = res.data
         })
-            .catch((err) => {
+        .catch((err) => {
                 alert(err)
             })
         $scope.book = (info) => {
             info.time_of_booking = new Date()
             var datas = { id: $stateParams.custid, query: info }
-            var request = {
-                url: `/v1/api/addcustomers`,
-                method: 'POST',
-                data: datas,
-                timeout: 2 * 60 * 1000,
-                headers: { 'Content-type': 'application/json', 'data': time.toISOString() },
-            };
-            var dats = $http(request)
-            dats.then((res) => {
+            userctrlservice.addbooking(datas).then((res) => {
                 $scope.success = true;
-                $scope.successMsg = "Successfully Booked Your Bus";
+                $scope.successMsg = "Successfully Booked Your Bus"
                 $timeout(function () {
                     $scope.success = false;
                     $scope.successMsg = "";
@@ -54,15 +40,7 @@
                 }
             })
             console.log(info1)
-            var request = {
-                url: `v1/api/bus`,
-                method: 'POST',
-                data: info1,
-                timeout: 2 * 60 * 1000,
-                headers: { 'Content-type': 'application/json' },
-            };
-            var dats = $http(request)
-            dats.then((res) => {
+            userctrlservice.filters(info1).then((res) => {
                 console.log(res)
                 $scope.data = res.data
             }
@@ -70,4 +48,38 @@
         }
 
     }
+    myApp.service("userctrlservice",userctrlservice)
+    userctrlservice.$inject = ['$http','$stateParams']
+    function userctrlservice($http,$stateParams){
+        var time = new Date()
+        this.busfind = function(){
+            var request = {
+                url: `v1/api/bus/${$stateParams.departure}/${$stateParams.arrival}`,
+                method: 'GET',
+                timeout: 2 * 60 * 1000,
+                headers: { 'Content-type': 'application/json', 'data': time.toISOString() },
+            };
+                return $http(request)
+        }
+        this.addbooking = function(datas){
+            var request = {
+                url: `/v1/api/addcustomers`,
+                method: 'POST',
+                data: datas,
+                timeout: 2 * 60 * 1000,
+                headers: { 'Content-type': 'application/json', 'data': time.toISOString() },
+            };
+                return $http(request)
+        }
+        this.filters = function(datas){
+            var request = {
+                url: `v1/api/bus`,
+                method: 'POST',
+                data: datas,
+                timeout: 2 * 60 * 1000,
+                headers: { 'Content-type': 'application/json' },
+            };
+                return $http(request)
+        }
+}
 })();

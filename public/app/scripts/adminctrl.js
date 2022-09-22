@@ -2,19 +2,12 @@
     'use strict';
     var myApp = angular.module('ies')
     myApp.controller("adminctrl", adminctrl)
-    adminctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams']
-    function adminctrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams) {
+    adminctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams','adminctrlservice']
+    function adminctrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams,adminctrlservice) {
         $scope.success0 = true
         $scope.success1 = false
         function getAlluser() {
-            var request = {
-                url: "/v1/api/customers",
-                method: 'GET',
-                timeout: 2 * 60 * 1000,
-                headers: { 'Content-type': 'application/json' }
-            };
-            var dats = $http(request)
-            dats.then((res) => {
+            adminctrlservice.allcustfind().then((res) => {
                 console.log(res)
                 $scope.users = res.data.data
             })
@@ -39,15 +32,8 @@
                 //var query = { "_id": $scope.employeeId };
                 var details = { "query": $scope.employeeId, "detailsToUpdate": info }
                 //console.log(details)
-                var request = {
-                    url: "/v1/api/updcust",
-                    method: 'POST',
-                    data: details,
-                    timeout: 2 * 60 * 1000,
-                    headers: { 'Content-type': 'application/json' }
-                };
-                var dats = $http(request)
-                dats.then((res) => {
+               
+                adminctrlservice.updatecust(details).then((res) => {
                     $('#edit_user').modal('hide');
                     getAlluser();
                     $("html").stop().animate({ scrollTop: 0 }, 200);
@@ -78,15 +64,9 @@
         $scope.delete = function (info) {
             var details = { "employeeId": info._id }
             console.log(details)
-            var request = {
-                url: "/v1/api/delcust",
-                method: 'DELETE',
-                data: details,
-                timeout: 2 * 60 * 1000,
-                headers: { 'Content-type': 'application/json' }
-            };
-            var dats = $http(request)
-            dats.then((res) => {
+           
+            
+            adminctrlservice.deletecust(details).then((res) => {
                 $("html").stop().animate({ scrollTop: 0 }, 200);
                 getAlluser();
                 var index = $scope.users.findIndex(function (obj) { return obj._id == info._id });
@@ -114,15 +94,9 @@
             var check = form.checkValidity();
             $scope.create.age = parseInt($scope.create.age)
             console.log($scope.create)
-            var request = {
-                url: "/v1/api/insertcustomers",
-                method: 'POST',
-                data: $scope.create,
-                timeout: 2 * 60 * 1000,
-                headers: { 'Content-type': 'application/json' }
-            };
-            var dats = $http(request)
-            dats.then((res) => {
+        
+            
+            adminctrlservice.addcust($scope.create).then((res) => {
                 $("html").stop().animate({ scrollTop: 0 }, 200);
                 getAlluser();
                 $scope.success = true;
@@ -164,6 +138,59 @@
             )
         }
     }
+    myApp.service("adminctrlservice",adminctrlservice)
+    adminctrlservice.$inject = ['$http','$stateParams']
+    function adminctrlservice($http,$stateParams){
+        this.allcustfind = function(){
+            var request = {
+                url: "/v1/api/customers",
+                method: 'GET',
+                timeout: 2 * 60 * 1000,
+                headers: { 'Content-type': 'application/json' }
+            };
+                return $http(request)
+        }
+        this.updatecust = function(datas){
+            var request = {
+                url: "/v1/api/updcust",
+                method: 'POST',
+                data: datas,
+                timeout: 2 * 60 * 1000,
+                headers: { 'Content-type': 'application/json' }
+            };
+                return $http(request)
+        }
+        this.deletecust = function(datas){
+            var request = {
+                url: "/v1/api/delcust",
+                method: 'DELETE',
+                data: datas,
+                timeout: 2 * 60 * 1000,
+                headers: { 'Content-type': 'application/json' }
+            };
+                return $http(request)
+        }
+        this.addcust = function(datas){
+            var request = {
+                url: "/v1/api/insertcustomers",
+                method: 'POST',
+                data: datas,
+                timeout: 2 * 60 * 1000,
+                headers: { 'Content-type': 'application/json' }
+            };
+                return $http(request)
+        }
+        // this.filters = function(datas){
+        //     var request = {
+        //         url: `v1/api/bus`,
+        //         method: 'POST',
+        //         data: datas,
+        //         timeout: 2 * 60 * 1000,
+        //         headers: { 'Content-type': 'application/json' },
+        //     };
+        //         return $http(request)
+        // }
+}
 
 }
 

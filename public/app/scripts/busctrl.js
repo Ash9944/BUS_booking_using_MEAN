@@ -2,16 +2,10 @@
     'use strict';
     var myApp = angular.module('ies');
     myApp.controller("busctrl", busctrl)
-    busctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams']
-    function busctrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams) {
-        var request = {
-            url: `v1/api/customers/${$stateParams.id}`,
-            method: 'GET',
-            timeout: 2 * 60 * 1000,
-            headers: { 'Content-type': 'application/json' }
-        };
-        var dats = $http(request)
-        dats.then((res) => {
+    busctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams','busctrlservice']
+    function busctrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams,busctrlservice) {
+        busctrlservice.busroutesfind().then((res) => {
+            //console.log(res.data)
             $scope.Users = res.data
         })
         $scope.give = (x, y) => {
@@ -21,4 +15,19 @@
                 arrival: y
             })
         }
-    }})();
+    }
+    myApp.service("busctrlservice",busctrlservice)
+    busctrlservice.$inject = ['$http','$stateParams']
+    function busctrlservice($http,$stateParams){
+        this.busroutesfind = function(){
+                var request = {
+                    url: `v1/api/customers/${$stateParams.id}`,
+                    method: 'GET',
+                    timeout: 2 * 60 * 1000,
+                    headers: { 'Content-type': 'application/json' }
+                };
+                return $http(request)
+        }
+}
+}
+)();
