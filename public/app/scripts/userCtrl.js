@@ -3,18 +3,12 @@
     var myApp = angular.module('ies');
 
     myApp.controller('userCtrl', userCtrl);
-    userCtrl.$inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http'];
+    userCtrl.$inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http','userCtrlservice'];
 
-    function userCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http) {
-        var request = {
-            url: "/v1/api/customers",
-            method: 'GET',
-            timeout: 2 * 60 * 1000,
-            headers: { 'Content-type': 'application/json' }
-        };
-        var dats = $http(request)
+    function userCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http,userCtrlservice) {
+       
         $scope.check = (info) => {
-            dats.then((res) => {
+            userCtrlservice.usercheck().then((res) => {
                 var datslen = res.data.data.length
                 for (var i = 0; i <= datslen; i++) {
                     if (info.email == res.data.data[i].email) {
@@ -31,5 +25,25 @@
                 }
             })
         }
+    }
+
+    myApp.service("userCtrlservice",userCtrlservice)
+    userCtrlservice.$inject = ['$http']
+    function userCtrlservice($http){
+        this.usercheck = function(){
+            return new Promise((resolve,reject) =>{
+                var request = {
+                    url: "/v1/api/customers",
+                    method: 'GET',
+                    timeout: 2 * 60 * 1000,
+                    headers: { 'Content-type': 'application/json' }
+                };
+                $http(request).then((resp) =>{
+                    resolve(resp)
+                })
+            })
+        }
+      
+        
     }
 })();
