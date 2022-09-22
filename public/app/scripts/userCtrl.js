@@ -31,17 +31,14 @@
     userCtrlservice.$inject = ['$http']
     function userCtrlservice($http){
         this.usercheck = function(){
-            return new Promise((resolve,reject) =>{
+           
                 var request = {
                     url: "/v1/api/customers",
                     method: 'GET',
                     timeout: 2 * 60 * 1000,
                     headers: { 'Content-type': 'application/json' }
                 };
-                $http(request).then((resp) =>{
-                    resolve(resp)
-                })
-            })
+                return $http(request)
         }
       
         
