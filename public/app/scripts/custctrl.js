@@ -14,7 +14,7 @@
             })
 
         }
-        getAll();
+        getAllbus();
         $scope.loadInfo = function (info) {
             $scope.edit = JSON.parse(JSON.stringify(info));
             console.log($scope.edit)
@@ -34,10 +34,10 @@
             if (check === true) {
                 //var query = { "_id": $scope.employeeId };
                 var details = { "query": $scope.employeeId, "detailsToUpdate": info }
-                //console.log(details)
+                console.log(details)
                 custctrlservice.updatebus(details).then((res) => {
                     $('#edit_user').modal('hide');
-                    getAlluser();
+                    getAllbus();
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     $scope.success = true;
                     $scope.successMsg = "Successfully updated the user infomation";
@@ -68,7 +68,7 @@
             console.log(details)
             custctrlservice.deletebus(details).then((res) => {
                 $("html").stop().animate({ scrollTop: 0 }, 200);
-                getAlluser();
+                getAllbus();
                 var index = $scope.users.findIndex(function (obj) { return obj._id == info._id });
                 $scope.users.splice(index, 1);
                 $scope.success = true;
@@ -98,7 +98,7 @@
             console.log($scope.create)
             custctrlservice.addbus($scope.create).then((res) => {
                 $("html").stop().animate({ scrollTop: 0 }, 200);
-                getAlluser();
+                getAllbus();
                 $scope.success = true;
                 $scope.successMsg = "Successfully added the user infomation";
                 $scope.users.push($scope.incharge);
