@@ -123,15 +123,7 @@
             $scope.success0 = false
             $scope.success1 = true
             console.log(info1)
-            var request = {
-                url: `v1/api/bus`,
-                method: 'POST',
-                data: info1,
-                timeout: 2 * 60 * 1000,
-                headers: { 'Content-type': 'application/json' },
-            };
-            var dats = $http(request)
-            dats.then((res) => {
+            adminctrlservice.filters(info1).then((res) => {
                 console.log(res.data)
                 $scope.data = res.data
             }
@@ -180,16 +172,16 @@
             };
                 return $http(request)
         }
-        // this.filters = function(datas){
-        //     var request = {
-        //         url: `v1/api/bus`,
-        //         method: 'POST',
-        //         data: datas,
-        //         timeout: 2 * 60 * 1000,
-        //         headers: { 'Content-type': 'application/json' },
-        //     };
-        //         return $http(request)
-        // }
+        this.filters = function(datas){
+            var request = {
+                url: `v1/api/findcust`,
+                method: 'POST',
+                data: datas,
+                timeout: 2 * 60 * 1000,
+                headers: { 'Content-type': 'application/json' },
+            };
+                return $http(request)
+        }
 }
 
 }

@@ -28,3 +28,13 @@ module.exports.updateCustomer = (query) => {
   console.log(query)
   return Customer.updateById(query.query, query.detailsToUpdate)
 }
+
+module.exports.getcustbyquery = (query) => {
+  console.log(query)
+  filter = {}
+  if (query.gend){
+    filter.gender = query.gend
+  }
+  console.log(filter)
+  return Customer.getByQuery(filter)
+}
