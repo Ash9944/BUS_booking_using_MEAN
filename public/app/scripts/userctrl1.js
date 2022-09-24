@@ -1,33 +1,37 @@
 (function () {
     'use strict';
     var myApp = angular.module('ies')
-    myApp.controller("userctrl",userctrl)
-    userctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams','userctrlservice']
-    function userctrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams,userctrlservice) {
+    myApp.controller("userctrl", userctrl)
+    userctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams', 'userctrlservice']
+    function userctrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams, userctrlservice) {
         $scope.success0 = true
         $scope.success1 = false
-       
+
         //var dates = {timed : time}
         // console.log(dates)
         $scope.dates = new Date().toISOString()
-        userctrlservice.busfind().then((res) => {
-            $scope.users = res.data
-        })
-        .catch((err) => {
+        userctrlservice.busfind()
+            .then((res) => {
+                $scope.users = res.data
+            })
+            .catch((err) => {
                 alert(err)
             })
+
         $scope.book = (info) => {
             info.time_of_booking = new Date()
             var datas = { id: $stateParams.custid, query: info }
-            userctrlservice.addbooking(datas).then((res) => {
-                $scope.success = true;
-                $scope.successMsg = "Successfully Booked Your Bus"
-                $timeout(function () {
-                    $scope.success = false;
-                    $scope.successMsg = "";
-                }, 2000);
-            })
+            userctrlservice.addbooking(datas)
+                .then((res) => {
+                    $scope.success = true;
+                    $scope.successMsg = "Successfully Booked Your Bus"
+                    $timeout(function () {
+                        $scope.success = false;
+                        $scope.successMsg = "";
+                    }, 2000);
+                })
         }
+
         $scope.filters = (info1) => {
             $scope.success0 = false
             $scope.success1 = true
@@ -40,28 +44,29 @@
                 }
             })
             console.log(info1)
-            userctrlservice.filters(info1).then((res) => {
-                console.log(res)
-                $scope.data = res.data
-            }
-            )
+            userctrlservice.filters(info1)
+                .then((res) => {
+                    console.log(res)
+                    $scope.data = res.data
+                }
+                )
         }
-
     }
-    myApp.service("userctrlservice",userctrlservice)
-    userctrlservice.$inject = ['$http','$stateParams']
-    function userctrlservice($http,$stateParams){
+
+    myApp.service("userctrlservice", userctrlservice)
+    userctrlservice.$inject = ['$http', '$stateParams']
+    function userctrlservice($http, $stateParams) {
         var time = new Date()
-        this.busfind = function(){
+        this.busfind = function () {
             var request = {
                 url: `v1/api/bus/${$stateParams.departure}/${$stateParams.arrival}`,
                 method: 'GET',
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json', 'data': time.toISOString() },
             };
-                return $http(request)
+            return $http(request)
         }
-        this.addbooking = function(datas){
+        this.addbooking = function (datas) {
             var request = {
                 url: `/v1/api/addcustomers`,
                 method: 'POST',
@@ -69,9 +74,9 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json', 'data': time.toISOString() },
             };
-                return $http(request)
+            return $http(request)
         }
-        this.filters = function(datas){
+        this.filters = function (datas) {
             var request = {
                 url: `v1/api/bus`,
                 method: 'POST',
@@ -79,7 +84,7 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' },
             };
-                return $http(request)
+            return $http(request)
         }
-}
+    }
 })();

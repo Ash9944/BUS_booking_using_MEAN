@@ -32,7 +32,7 @@ module.exports.updateCustomer = (query) => {
 module.exports.getcustbyquery = (query) => {
   console.log(query)
   filter = {}
-  if (query.gend){
+  if (query.gend) {
     filter.gender = query.gend
   }
   console.log(filter)

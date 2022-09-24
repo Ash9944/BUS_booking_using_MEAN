@@ -2,8 +2,8 @@
     'use strict';
     var myApp = angular.module('ies')
     myApp.controller("custctrl", custctrl)
-    custctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams','custctrlservice']
-    function custctrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams,custctrlservice) {
+    custctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams', 'custctrlservice']
+    function custctrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams, custctrlservice) {
         $scope.success0 = true
         $scope.success1 = false
         $scope.value = new Date();
@@ -15,6 +15,7 @@
 
         }
         getAllbus();
+
         $scope.loadInfo = function (info) {
             $scope.edit = JSON.parse(JSON.stringify(info));
             console.log($scope.edit)
@@ -117,8 +118,8 @@
                         $scope.errorMsg = "";
                     }, 2000);
                 })
-
         }
+
         $scope.filters = (info1) => {
             $scope.success0 = false
             $scope.success1 = true
@@ -134,21 +135,21 @@
             }
             )
         }
-
     }
-    myApp.service("custctrlservice",custctrlservice)
-    custctrlservice.$inject = ['$http','$stateParams']
-    function custctrlservice($http,$stateParams){
-        this.allbusfind = function(){
+
+    myApp.service("custctrlservice", custctrlservice)
+    custctrlservice.$inject = ['$http', '$stateParams']
+    function custctrlservice($http, $stateParams) {
+        this.allbusfind = function () {
             var request = {
                 url: "/v1/api/allbus",
                 method: 'POST',
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-                return $http(request)
+            return $http(request)
         }
-        this.updatebus = function(datas){
+        this.updatebus = function (datas) {
             var request = {
                 url: "/v1/api/updbus",
                 method: 'POST',
@@ -156,9 +157,9 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-                return $http(request)
+            return $http(request)
         }
-        this.deletebus = function(datas){
+        this.deletebus = function (datas) {
             var request = {
                 url: "/v1/api/delbus",
                 method: 'DELETE',
@@ -166,9 +167,9 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-                return $http(request)
+            return $http(request)
         }
-        this.addbus = function(datas){
+        this.addbus = function (datas) {
             var request = {
                 url: "/v1/api/adddbus",
                 method: 'POST',
@@ -176,9 +177,9 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-                return $http(request)
+            return $http(request)
         }
-        this.filters = function(datas){
+        this.filters = function (datas) {
             var request = {
                 url: `v1/api/bus`,
                 method: 'POST',
@@ -186,7 +187,7 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' },
             };
-                return $http(request)
+            return $http(request)
         }
-}
+    }
 })();

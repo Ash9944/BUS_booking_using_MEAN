@@ -40,8 +40,8 @@ router.post("/updcust", (req, res) => {
     })
 })
 
-router.post("/findcust",(req,res) =>{
-    customerController.getcustbyquery(req.body).then((resp)=>{
+router.post("/findcust", (req, res) => {
+    customerController.getcustbyquery(req.body).then((resp) => {
         res.send(resp)
     })
 })

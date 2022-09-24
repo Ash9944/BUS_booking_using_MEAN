@@ -13,7 +13,7 @@ module.exports = function (grunt) {
         sourceMap: false
       },
       dist: {
-        src: [ 'public/app/scripts/config/ies.config.js','public/app/scripts/**/*.js'],
+        src: ['public/app/scripts/config/ies.config.js', 'public/app/scripts/**/*.js'],
         dest: 'public/dist/<%= pkg.name%>.js'
       }
     },
@@ -45,4 +45,4 @@ module.exports = function (grunt) {
   // Default task(s).
   grunt.registerTask('default', ['concat', 'uglify']);
 
-}; 
+};
