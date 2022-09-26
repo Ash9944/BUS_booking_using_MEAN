@@ -93,6 +93,8 @@
         $scope.add = function () {
             var form = document.getElementById('adduser');
             var check = form.checkValidity();
+            $scope.create.dep_city = $scope.create.dep_city.toLowerCase()
+            $scope.create.arr_city =  $scope.create.arr_city.toLowerCase()
             // $scope.create.departureTime =$scope.create.departureTime)
             // $scope.create.arrivalTime = new ISODate($scope.create.arrivalTime)
             $scope.create.cost = parseInt($scope.create.cost)
