@@ -7,14 +7,14 @@ module.exports = {
 
     // First application
     {
-      name: 'ies-project',
+      name: 'bus-booking',
       script: 'bin/www',
       env: {
-        "NODE_ENV": 'prod',
+        "NODE_ENV": 'production',
         "PORT": 8080
       },
       env_production: {
-        NODE_ENV: 'prod'
+        NODE_ENV: 'production'
       }
     }
 
@@ -41,7 +41,7 @@ module.exports = {
       path: '/var/www/development',
       'post-deploy': 'pm2 startOrRestart ecosystem.config.js --env developement',
       env: {
-        NODE_ENV: 'dev'
+        NODE_ENV: 'developement'
       }
     }
   }

@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    var myApp = angular.module('ies')
+    var myApp = angular.module('bus-booking')
     myApp.controller("userctrl", userctrl)
     userctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams', 'userctrlservice']
     function userctrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams, userctrlservice) {
