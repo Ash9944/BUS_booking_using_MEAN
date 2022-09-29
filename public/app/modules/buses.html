@@ -84,6 +84,11 @@
                         <td data-title="cost">{{user.cost | currency:"₹"}}</td>
                         <td data-title="Type">{{user.type}}</td>
                         <td data-title="Action" class="action-btn px-0">
+                            <a class="btn btn-primary-2 rounded-0 py-0" href="javascript:void(0)"
+                                data-toggle="modal" data-target="#show_ameneties" ng-click="loadInfo(user)">
+                                <i class="fas fa-edit mr-1"></i> SHOW AMENETIES
+                            </a>
+                        <td data-title="Action" class="action-btn px-0">
                             <a class="btn btn-danger rounded-0 py-0" href="javascript:void(0)" ng-click="book(user)">
                                 <i class="fas fa-trash-alt mr-1"></i> BOOK
                             </a>
@@ -97,6 +102,7 @@
     <div class="card-body-padded" ng-show="success1">
         <div class="table-container">
             <table class="table table-padded">
+
                 <thead>
                     <tr>
                         <th>Bus Name</th>
@@ -119,6 +125,11 @@
                         <td data-title="cost">{{dta.cost | currency:"₹"}}</td>
                         <td data-title="Type">{{dta.type}}</td>
                         <td data-title="Action" class="action-btn px-0">
+                            <a class="btn btn-primary-2 rounded-0 py-0" href="javascript:void(0)"
+                                data-toggle="modal" data-target="#show_ameneties" ng-click="loadInfo(dta)">
+                                <i class="fas fa-edit mr-1"></i> SHOW AMENETIES
+                            </a>
+                        <td data-title="Action" class="action-btn px-0">
                             <a class="btn btn-danger rounded-0 py-0" href="javascript:void(0)" ng-click="book(dta)">
                                 <i class="fas fa-trash-alt mr-1"></i> BOOK
                             </a>
@@ -129,3 +140,41 @@
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="show_ameneties" tabindex="-1" role="dialog" aria-labelledby="edit_user_modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="edit_user_modal">Bus Amenities</h6>
+                <button type="button" class="close" ng-click="closeModal('edit_user','edituser')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <table class="table table-padded">
+                        <thead>
+                            <tr>
+                                <th>Bus Amenities</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="use in edit.Amenities| orderBy : '-time_of_booking'">
+
+                                <td data-title="Name">{{use}}</td>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                    ng-click="closeModal('edit_user','edituser')">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="updateuser(edit)">
+                    <i class="fas fa-save mr-2"></i>Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->

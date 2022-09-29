@@ -17,8 +17,13 @@
             .catch((err) => {
                 alert(err)
             })
-
+        $scope.loadInfo = (info)=>{
+            //console.log(info)
+            $scope.edit = JSON.parse(JSON.stringify(info));
+            console.log($scope.edit);
+        }
         $scope.book = (info) => {
+            console.log(info)
             info.time_of_booking = new Date()
             var datas = { id: $stateParams.custid, query: info }
             userctrlservice.addbooking(datas)
