@@ -8,10 +8,12 @@
         $scope.success1 = false
         $scope.value = new Date();
         function getAllbus() {
-            custctrlservice.allbusfind().then((res) => {
-                console.log(res)
-                $scope.users = res.data.data
-            })
+            custctrlservice.allbusfind()
+                .then((res) => {
+                    console.log(res)
+                    $scope.users = res.data.data
+                })
+                .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
 
         }
         getAllbus();
@@ -36,17 +38,18 @@
                 //var query = { "_id": $scope.employeeId };
                 var details = { "query": $scope.employeeId, "detailsToUpdate": info }
                 console.log(details)
-                custctrlservice.updatebus(details).then((res) => {
-                    $('#edit_user').modal('hide');
-                    getAllbus();
-                    $("html").stop().animate({ scrollTop: 0 }, 200);
-                    $scope.success = true;
-                    $scope.successMsg = "Successfully updated the user infomation";
-                    $timeout(function () {
-                        $scope.success = false;
-                        $scope.successMsg = "";
-                    }, 2000);
-                })
+                custctrlservice.updatebus(details)
+                    .then((res) => {
+                        $('#edit_user').modal('hide');
+                        getAllbus();
+                        $("html").stop().animate({ scrollTop: 0 }, 200);
+                        $scope.success = true;
+                        $scope.successMsg = "Successfully updated the user infomation";
+                        $timeout(function () {
+                            $scope.success = false;
+                            $scope.successMsg = "";
+                        }, 2000);
+                    })
                     .catch((err) => {
                         $("html").stop().animate({ scrollTop: 0 }, 200);
                         $scope.error = true;
@@ -67,18 +70,19 @@
         $scope.delete = function (info) {
             var details = { "employeeId": info._id }
             console.log(details)
-            custctrlservice.deletebus(details).then((res) => {
-                $("html").stop().animate({ scrollTop: 0 }, 200);
-                getAllbus();
-                var index = $scope.users.findIndex(function (obj) { return obj._id == info._id });
-                $scope.users.splice(index, 1);
-                $scope.success = true;
-                $scope.successMsg = "Successfully deleted the user infomation";
-                $timeout(function () {
-                    $scope.success = false;
-                    $scope.successMsg = "";
-                }, 2000);
-            })
+            custctrlservice.deletebus(details)
+                .then((res) => {
+                    $("html").stop().animate({ scrollTop: 0 }, 200);
+                    getAllbus();
+                    var index = $scope.users.findIndex(function (obj) { return obj._id == info._id });
+                    $scope.users.splice(index, 1);
+                    $scope.success = true;
+                    $scope.successMsg = "Successfully deleted the user infomation";
+                    $timeout(function () {
+                        $scope.success = false;
+                        $scope.successMsg = "";
+                    }, 2000);
+                })
                 .catch((err) => {
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     $scope.error = true;
@@ -99,18 +103,19 @@
             // $scope.create.arrivalTime = new ISODate($scope.create.arrivalTime)
             $scope.create.cost = parseInt($scope.create.cost)
             console.log($scope.create)
-            custctrlservice.addbus($scope.create).then((res) => {
-                $("html").stop().animate({ scrollTop: 0 }, 200);
-                getAllbus();
-                $scope.success = true;
-                $scope.successMsg = "Successfully added the user infomation";
-                $scope.users.push($scope.incharge);
-                $('#add_user').modal("hide");
-                $timeout(function () {
-                    $scope.success = false;
-                    $scope.successMsg = "";
-                }, 2000);
-            })
+            custctrlservice.addbus($scope.create)
+                .then((res) => {
+                    $("html").stop().animate({ scrollTop: 0 }, 200);
+                    getAllbus();
+                    $scope.success = true;
+                    $scope.successMsg = "Successfully added the user infomation";
+                    $scope.users.push($scope.incharge);
+                    $('#add_user').modal("hide");
+                    $timeout(function () {
+                        $scope.success = false;
+                        $scope.successMsg = "";
+                    }, 2000);
+                })
                 .catch((err) => {
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     $scope.error = true;

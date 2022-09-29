@@ -4,10 +4,12 @@
     myApp.controller("busctrl", busctrl)
     busctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams', 'busctrlservice']
     function busctrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams, busctrlservice) {
-        busctrlservice.busroutesfind().then((res) => {
-            //console.log(res.data)
-            $scope.Users = res.data
-        })
+        busctrlservice.busroutesfind()
+            .then((res) => {
+                //console.log(res.data)
+                $scope.Users = res.data
+            })
+            .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
         $scope.give = (x, y) => {
             $state.go("userbus", {
                 custid: $stateParams.id,

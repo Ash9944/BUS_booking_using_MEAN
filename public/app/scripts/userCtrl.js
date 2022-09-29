@@ -8,20 +8,22 @@
     function userCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, userCtrlservice) {
 
         $scope.check = (info) => {
-            userCtrlservice.usercheck().then((res) => {
-                var datslen = res.data.data.length
-                for (var i = 0; i <= datslen; i++) {
-                    if (info.email == res.data.data[i].email) {
-                        //console.log(info.email,res.data.data[i].email)
-                        $state.go("buses", {
-                            id: res.data.data[i]._id
-                        })
+            userCtrlservice.usercheck()
+                .then((res) => {
+                    var datslen = res.data.data.length
+                    for (var i = 0; i <= datslen; i++) {
+                        if (info.email == res.data.data[i].email) {
+                            //console.log(info.email,res.data.data[i].email)
+                            $state.go("buses", {
+                                id: res.data.data[i]._id
+                            })
+                        }
+                        if (info.email.toString() == "Admin@admin") {
+                            $state.go("adminhome")
+                        }
                     }
-                    if (info.email.toString() == "Admin@admin") {
-                        $state.go("adminhome")
-                    }
-                }
-            })
+                })
+                .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
         }
     }
 

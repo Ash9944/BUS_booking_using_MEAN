@@ -11,13 +11,9 @@
         // console.log(dates)
         $scope.dates = new Date().toISOString()
         userctrlservice.busfind()
-            .then((res) => {
-                $scope.users = res.data
-            })
-            .catch((err) => {
-                alert(err)
-            })
-        $scope.loadInfo = (info)=>{
+            .then((res) => $scope.users = res.data)
+            .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
+        $scope.loadInfo = (info) => {
             //console.log(info)
             $scope.edit = JSON.parse(JSON.stringify(info));
             console.log($scope.edit);
@@ -35,6 +31,7 @@
                         $scope.successMsg = "";
                     }, 2000);
                 })
+                .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
         }
 
         $scope.filters = (info1) => {
@@ -53,8 +50,8 @@
                 .then((res) => {
                     console.log(res)
                     $scope.data = res.data
-                }
-                )
+                })
+                .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
         }
     }
 

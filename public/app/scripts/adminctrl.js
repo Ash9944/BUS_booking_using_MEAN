@@ -7,10 +7,12 @@
         $scope.success0 = true
         $scope.success1 = false
         function getAlluser() {
-            adminctrlservice.allcustfind().then((res) => {
-                console.log(res)
-                $scope.users = res.data.data
-            })
+            adminctrlservice.allcustfind()
+                .then((res) => {
+                    console.log(res)
+                    $scope.users = res.data.data
+                })
+                .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
         }
         getAlluser();
 
@@ -32,17 +34,18 @@
                 var details = { "query": $scope.employeeId, "detailsToUpdate": info }
                 //console.log(details)
 
-                adminctrlservice.updatecust(details).then((res) => {
-                    $('#edit_user').modal('hide');
-                    getAlluser();
-                    $("html").stop().animate({ scrollTop: 0 }, 200);
-                    $scope.success = true;
-                    $scope.successMsg = "Successfully updated the user infomation";
-                    $timeout(function () {
-                        $scope.success = false;
-                        $scope.successMsg = "";
-                    }, 2000);
-                })
+                adminctrlservice.updatecust(details)
+                    .then((res) => {
+                        $('#edit_user').modal('hide');
+                        getAlluser();
+                        $("html").stop().animate({ scrollTop: 0 }, 200);
+                        $scope.success = true;
+                        $scope.successMsg = "Successfully updated the user infomation";
+                        $timeout(function () {
+                            $scope.success = false;
+                            $scope.successMsg = "";
+                        }, 2000);
+                    })
                     .catch((err) => {
                         $("html").stop().animate({ scrollTop: 0 }, 200);
                         $scope.error = true;
@@ -121,11 +124,12 @@
             $scope.success0 = false
             $scope.success1 = true
             console.log(info1)
-            adminctrlservice.filters(info1).then((res) => {
-                console.log(res.data)
-                $scope.data = res.data
-            }
-            )
+            adminctrlservice.filters(info1)
+                .then((res) => {
+                    console.log(res.data)
+                    $scope.data = res.data
+                })
+                .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
         }
     }
 
