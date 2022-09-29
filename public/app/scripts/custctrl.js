@@ -27,7 +27,6 @@
 
         $scope.updateuser = function (info) {
             delete info.$$hashKey;
-            //$scope.arrt = $scope.edit.departureTime
             info.departureTime = new Date(info.departureTime)
             info.arrivalTime = new Date(info.arrivalTime)
             console.log(info)
@@ -35,7 +34,6 @@
             var check = form.checkValidity();
             info.cost = parseInt(info.cost)
             if (check === true) {
-                //var query = { "_id": $scope.employeeId };
                 var details = { "query": $scope.employeeId, "detailsToUpdate": info }
                 console.log(details)
                 custctrlservice.updatebus(details)
@@ -99,8 +97,6 @@
             var check = form.checkValidity();
             $scope.create.dep_city = $scope.create.dep_city.toLowerCase()
             $scope.create.arr_city = $scope.create.arr_city.toLowerCase()
-            // $scope.create.departureTime =$scope.create.departureTime)
-            // $scope.create.arrivalTime = new ISODate($scope.create.arrivalTime)
             $scope.create.cost = parseInt($scope.create.cost)
             console.log($scope.create)
             custctrlservice.addbus($scope.create)

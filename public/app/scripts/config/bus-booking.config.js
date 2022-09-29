@@ -24,8 +24,7 @@
             })
             .state('adminhome', {
                 url: "/adminhome",
-                templateUrl: 'app/modules/adminhomepage.html',
-                //controller: 'custctrl',
+                templateUrl: 'app/modules/adminhomepage.html'
             })
             .state('customer', {
                 url: "/admin",

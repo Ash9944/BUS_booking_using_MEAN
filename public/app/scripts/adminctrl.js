@@ -30,7 +30,6 @@
             info.dateOfBirth = new Date(info.dateOfBirth)
 
             if (check === true) {
-                //var query = { "_id": $scope.employeeId };
                 var details = { "query": $scope.employeeId, "detailsToUpdate": info }
                 //console.log(details)
 

@@ -7,8 +7,6 @@
         $scope.success0 = true
         $scope.success1 = false
 
-        //var dates = {timed : time}
-        // console.log(dates)
         $scope.dates = new Date().toISOString()
         userctrlservice.busfind()
             .then((res) => $scope.users = res.data)
