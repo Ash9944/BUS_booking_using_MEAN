@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    var myApp = angular.module('ies')
+    var myApp = angular.module('bus-booking')
     myApp.controller("custctrl", custctrl)
     custctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams', 'custctrlservice']
     function custctrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams, custctrlservice) {
@@ -94,7 +94,7 @@
             var form = document.getElementById('adduser');
             var check = form.checkValidity();
             $scope.create.dep_city = $scope.create.dep_city.toLowerCase()
-            $scope.create.arr_city =  $scope.create.arr_city.toLowerCase()
+            $scope.create.arr_city = $scope.create.arr_city.toLowerCase()
             // $scope.create.departureTime =$scope.create.departureTime)
             // $scope.create.arrivalTime = new ISODate($scope.create.arrivalTime)
             $scope.create.cost = parseInt($scope.create.cost)

@@ -1,6 +1,6 @@
 (function () {
     'use strict'
-    var myApp = angular.module("ies", ['ui.router'])
+    var myApp = angular.module("bus-booking", ['ui.router'])
     myApp.config(configuration)
     configuration.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider']
     function configuration($stateProvider, $urlRouterProvider, $locationProvider) {
