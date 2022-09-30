@@ -7,12 +7,15 @@
         $scope.success0 = true
         $scope.success1 = false
         function getAlluser() {
-            adminctrlservice.allcustfind()
-                .then((res) => {
-                    console.log(res)
-                    $scope.users = res.data.data
-                })
-                .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
+            adminctrlservice.allcustfind((err,resp)=>{
+                if(!err){
+                    console.log(resp)
+                    $scope.users = resp.data.data
+                }
+                else{
+                    resp.status(500).send({ error: err.name, message: err.message })
+                }
+            })
         }
         getAlluser();
 
@@ -33,8 +36,8 @@
                 var details = { "query": $scope.employeeId, "detailsToUpdate": info }
                 //console.log(details)
 
-                adminctrlservice.updatecust(details)
-                    .then((res) => {
+                adminctrlservice.updatecust(details,(err,resp)=>{
+                    if(!err){
                         $('#edit_user').modal('hide');
                         getAlluser();
                         $("html").stop().animate({ scrollTop: 0 }, 200);
@@ -44,8 +47,8 @@
                             $scope.success = false;
                             $scope.successMsg = "";
                         }, 2000);
-                    })
-                    .catch((err) => {
+                    }
+                    else{
                         $("html").stop().animate({ scrollTop: 0 }, 200);
                         $scope.error = true;
                         $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
@@ -53,12 +56,8 @@
                             $scope.error = false;
                             $scope.errorMsg = "";
                         }, 2000);
-
                     }
-                    );
-            }
-            else {
-                bootstrapError.showErrors('edituser')
+                })
             }
         };
 
@@ -66,19 +65,20 @@
             var details = { "employeeId": info._id }
             console.log(details)
 
-            adminctrlservice.deletecust(details).then((res) => {
-                $("html").stop().animate({ scrollTop: 0 }, 200);
-                getAlluser();
-                var index = $scope.users.findIndex(function (obj) { return obj._id == info._id });
-                $scope.users.splice(index, 1);
-                $scope.success = true;
-                $scope.successMsg = "Successfully deleted the user infomation";
-                $timeout(function () {
-                    $scope.success = false;
-                    $scope.successMsg = "";
-                }, 2000);
-            })
-                .catch((err) => {
+            adminctrlservice.deletecust(details,(err,resp)=>{
+                if(!err){
+                    $("html").stop().animate({ scrollTop: 0 }, 200);
+                    getAlluser();
+                    var index = $scope.users.findIndex(function (obj) { return obj._id == info._id });
+                    $scope.users.splice(index, 1);
+                    $scope.success = true;
+                    $scope.successMsg = "Successfully deleted the user infomation";
+                    $timeout(function () {
+                        $scope.success = false;
+                        $scope.successMsg = "";
+                    }, 2000);
+                }
+                else{
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     $scope.error = true;
                     $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
@@ -86,7 +86,8 @@
                         $scope.error = false;
                         $scope.errorMsg = "";
                     }, 2000);
-                })
+                }
+            })
         }
 
         $scope.add = function () {
@@ -95,19 +96,20 @@
             $scope.create.age = parseInt($scope.create.age)
             console.log($scope.create)
 
-            adminctrlservice.addcust($scope.create).then((res) => {
-                $("html").stop().animate({ scrollTop: 0 }, 200);
-                getAlluser();
-                $scope.success = true;
-                $scope.successMsg = "Successfully added the user infomation";
-                $scope.users.push($scope.incharge);
-                $('#add_user').modal("hide");
-                $timeout(function () {
-                    $scope.success = false;
-                    $scope.successMsg = "";
-                }, 2000);
-            })
-                .catch((err) => {
+            adminctrlservice.addcust($scope.create,(err,resp)=>{
+                if(!err){
+                    $("html").stop().animate({ scrollTop: 0 }, 200);
+                    getAlluser();
+                    $scope.success = true;
+                    $scope.successMsg = "Successfully added the user infomation";
+                    $scope.users.push($scope.incharge);
+                    $('#add_user').modal("hide");
+                    $timeout(function () {
+                        $scope.success = false;
+                        $scope.successMsg = "";
+                    }, 2000);
+                }
+                else{
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     $scope.error = true;
                     $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
@@ -115,7 +117,8 @@
                         $scope.error = false;
                         $scope.errorMsg = "";
                     }, 2000);
-                })
+                }
+            })
 
         }
 
@@ -123,28 +126,36 @@
             $scope.success0 = false
             $scope.success1 = true
             console.log(info1)
-            adminctrlservice.filters(info1)
-                .then((res) => {
+            adminctrlservice.filters(info1,(err,res)=>{
+                if(!err){
                     console.log(res.data)
                     $scope.data = res.data
-                })
-                .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
-        }
+                }
+                else{
+                    res.status(500).send({ error: err.name, message: err.message })
+                }
+            })
     }
+}
 
     myApp.service("adminctrlservice", adminctrlservice)
     adminctrlservice.$inject = ['$http', '$stateParams']
     function adminctrlservice($http, $stateParams) {
-        this.allcustfind = function () {
+        this.allcustfind = function (callback) {
             var request = {
                 url: "/v1/api/customers",
                 method: 'GET',
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            return $http(request)
+            $http(request).then((response)=>{
+                callback(null,response)
+                ,(error)=>{
+                    callback(error,null)
+                }
+            })
         }
-        this.updatecust = function (datas) {
+        this.updatecust = function (datas,callback) {
             var request = {
                 url: "/v1/api/updcust",
                 method: 'POST',
@@ -152,9 +163,14 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            return $http(request)
+            $http(request).then((response)=>{
+                callback(null,response),
+                (error)=>{
+                    callback(error,null)
+                }
+            })
         }
-        this.deletecust = function (datas) {
+        this.deletecust = function (datas,callback) {
             var request = {
                 url: "/v1/api/delcust",
                 method: 'DELETE',
@@ -162,9 +178,14 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            return $http(request)
+            $http(request).then((response)=>{
+                callback(null,response),
+                (error)=>{
+                    callback(error,null)
+                }
+            })
         }
-        this.addcust = function (datas) {
+        this.addcust = function (datas,callback) {
             var request = {
                 url: "/v1/api/insertcustomers",
                 method: 'POST',
@@ -172,9 +193,14 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            return $http(request)
+            $http(request).then((response)=>{
+                callback(null,response),
+                (error)=>{
+                    callback(error,null)
+                }
+            })
         }
-        this.filters = function (datas) {
+        this.filters = function (datas,callback) {
             var request = {
                 url: `v1/api/findcust`,
                 method: 'POST',
@@ -182,8 +208,13 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' },
             };
-            return $http(request)
+            return $http(request).then((response)=>{
+                callback(null,response),
+                (error)=>{
+                    callback(error,null)
+                }
+            })
         }
     }
 }
-)();
+    )();

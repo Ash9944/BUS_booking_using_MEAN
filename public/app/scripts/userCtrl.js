@@ -8,8 +8,8 @@
     function userCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, userCtrlservice) {
 
         $scope.check = (info) => {
-            userCtrlservice.usercheck()
-                .then((res) => {
+            userCtrlservice.usercheck((err,res)=>{
+                if(!err){
                     var datslen = res.data.data.length
                     for (var i = 0; i <= datslen; i++) {
                         if (info.email == res.data.data[i].email) {
@@ -22,15 +22,18 @@
                             $state.go("adminhome")
                         }
                     }
-                })
-                .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
+                }
+                else{
+                    res.status(500).send({ error: err.name, message: err.message })
+                }
+            })
         }
     }
 
     myApp.service("userCtrlservice", userCtrlservice)
     userCtrlservice.$inject = ['$http']
     function userCtrlservice($http) {
-        this.usercheck = function () {
+        this.usercheck = function (callback) {
 
             var request = {
                 url: "/v1/api/customers",
@@ -38,7 +41,12 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            return $http(request)
+            $http(request).then((response)=>{
+                callback(null,response),
+                (error)=>{
+                    callback(error,null)
+                }
+            })
         }
     }
 })();

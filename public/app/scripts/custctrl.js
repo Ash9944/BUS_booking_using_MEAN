@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 (function () {
     'use strict';
     var myApp = angular.module('bus-booking')
@@ -8,12 +10,15 @@
         $scope.success1 = false
         $scope.value = new Date();
         function getAllbus() {
-            custctrlservice.allbusfind()
-                .then((res) => {
+            custctrlservice.allbusfind((err,res)=>{
+                if(!err){
                     console.log(res)
                     $scope.users = res.data.data
-                })
-                .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
+                }
+                else{
+                    res.status(500).send({ error: err.name, message: err.message })
+                }
+            })
 
         }
         getAllbus();
@@ -36,8 +41,8 @@
             if (check === true) {
                 var details = { "query": $scope.employeeId, "detailsToUpdate": info }
                 console.log(details)
-                custctrlservice.updatebus(details)
-                    .then((res) => {
+                custctrlservice.updatebus(details,(err,res)=>{
+                    if(!err){
                         $('#edit_user').modal('hide');
                         getAllbus();
                         $("html").stop().animate({ scrollTop: 0 }, 200);
@@ -47,8 +52,8 @@
                             $scope.success = false;
                             $scope.successMsg = "";
                         }, 2000);
-                    })
-                    .catch((err) => {
+                    }
+                    else{
                         $("html").stop().animate({ scrollTop: 0 }, 200);
                         $scope.error = true;
                         $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
@@ -56,20 +61,17 @@
                             $scope.error = false;
                             $scope.errorMsg = "";
                         }, 2000);
-
                     }
-                    );
-            }
-            else {
-                bootstrapError.showErrors('edituser')
+                })
+                    
             }
         };
 
         $scope.delete = function (info) {
             var details = { "employeeId": info._id }
             console.log(details)
-            custctrlservice.deletebus(details)
-                .then((res) => {
+            custctrlservice.deletebus(details,(err,resp)=>{
+                if(!err){
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     getAllbus();
                     var index = $scope.users.findIndex(function (obj) { return obj._id == info._id });
@@ -80,8 +82,8 @@
                         $scope.success = false;
                         $scope.successMsg = "";
                     }, 2000);
-                })
-                .catch((err) => {
+                }
+                else{
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     $scope.error = true;
                     $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
@@ -89,7 +91,9 @@
                         $scope.error = false;
                         $scope.errorMsg = "";
                     }, 2000);
-                })
+                }
+            })
+              
         }
 
         $scope.add = function () {
@@ -99,8 +103,8 @@
             $scope.create.arr_city = $scope.create.arr_city.toLowerCase()
             $scope.create.cost = parseInt($scope.create.cost)
             console.log($scope.create)
-            custctrlservice.addbus($scope.create)
-                .then((res) => {
+            custctrlservice.addbus($scope.create,(err,res)=>{
+                if(!err){
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     getAllbus();
                     $scope.success = true;
@@ -111,8 +115,8 @@
                         $scope.success = false;
                         $scope.successMsg = "";
                     }, 2000);
-                })
-                .catch((err) => {
+                }
+                else{
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     $scope.error = true;
                     $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
@@ -120,7 +124,8 @@
                         $scope.error = false;
                         $scope.errorMsg = "";
                     }, 2000);
-                })
+                }
+            })
         }
 
         $scope.filters = (info1) => {
@@ -132,27 +137,36 @@
                 }
             })
             console.log(info1)
-            custctrlservice.filters(info1).then((res) => {
-                console.log(res.data)
-                $scope.data = res.data
-            }
-            )
+            custctrlservice.filters(info1,(err,res)=>{
+                if(!err){
+                    console.log(res.data)
+                    $scope.data = res.data
+                }
+                else{
+                    res.status(500).send({ error: err.name, message: err.message })
+                }
+            })
         }
     }
 
     myApp.service("custctrlservice", custctrlservice)
     custctrlservice.$inject = ['$http', '$stateParams']
     function custctrlservice($http, $stateParams) {
-        this.allbusfind = function () {
+        this.allbusfind = function (callback) {
             var request = {
                 url: "/v1/api/allbus",
                 method: 'POST',
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            return $http(request)
+            $http(request).then((response)=>{
+                callback(null,response),
+                (error)=>{
+                    callback(error,null)
+                }
+            })
         }
-        this.updatebus = function (datas) {
+        this.updatebus = function (datas,callback) {
             var request = {
                 url: "/v1/api/updbus",
                 method: 'POST',
@@ -160,9 +174,14 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            return $http(request)
+            $http(request).then((response)=>{
+                callback(null,response),
+                (error)=>{
+                    callback(error,null)
+                }
+            })
         }
-        this.deletebus = function (datas) {
+        this.deletebus = function (datas,callback) {
             var request = {
                 url: "/v1/api/delbus",
                 method: 'DELETE',
@@ -170,9 +189,14 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            return $http(request)
+            $http(request).then((response)=>{
+                callback(null,response),
+                (error)=>{
+                    callback(error,null)
+                }
+            })
         }
-        this.addbus = function (datas) {
+        this.addbus = function (datas,callback) {
             var request = {
                 url: "/v1/api/adddbus",
                 method: 'POST',
@@ -180,9 +204,14 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            return $http(request)
+            $http(request).then((response)=>{
+                callback(null,response),
+                (error)=>{
+                    callback(error,null)
+                }
+            })
         }
-        this.filters = function (datas) {
+        this.filters = function (datas,callback) {
             var request = {
                 url: `v1/api/bus`,
                 method: 'POST',
@@ -190,7 +219,12 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' },
             };
-            return $http(request)
+            $http(request).then((response)=>{
+                callback(null,response),
+                (error)=>{
+                    callback(error,null)
+                }
+            })
         }
     }
 })();

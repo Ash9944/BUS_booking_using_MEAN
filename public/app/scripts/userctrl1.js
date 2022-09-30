@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 (function () {
     'use strict';
     var myApp = angular.module('bus-booking')
@@ -8,9 +10,14 @@
         $scope.success1 = false
 
         $scope.dates = new Date().toISOString()
-        userctrlservice.busfind()
-            .then((res) => $scope.users = res.data)
-            .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
+        userctrlservice.busfind((err,res)=>{
+            if(!err){
+                $scope.users = res.data
+            }
+            else{
+                res.status(500).send({ error: err.name, message: err.message })
+            }
+        })
         $scope.loadInfo = (info) => {
             //console.log(info)
             $scope.edit = JSON.parse(JSON.stringify(info));
@@ -20,16 +27,19 @@
             console.log(info)
             info.time_of_booking = new Date()
             var datas = { id: $stateParams.custid, query: info }
-            userctrlservice.addbooking(datas)
-                .then((res) => {
+            userctrlservice.addbooking(datas,(err,res)=>{
+                if(!err){
                     $scope.success = true;
                     $scope.successMsg = "Successfully Booked Your Bus"
                     $timeout(function () {
                         $scope.success = false;
                         $scope.successMsg = "";
                     }, 2000);
-                })
-                .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
+                }
+                else{
+                    res.status(500).send({ error: err.name, message: err.message })
+                }
+            })
         }
 
         $scope.filters = (info1) => {
@@ -44,12 +54,16 @@
                 }
             })
             console.log(info1)
-            userctrlservice.filters(info1)
-                .then((res) => {
+            userctrlservice.filters(info1,(err,res)=>{
+                if(!err){
                     console.log(res)
                     $scope.data = res.data
-                })
-                .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
+                }
+                else{
+                    res.status(500).send({ error: err.name, message: err.message })
+                }
+                 
+            })
         }
     }
 
@@ -57,16 +71,21 @@
     userctrlservice.$inject = ['$http', '$stateParams']
     function userctrlservice($http, $stateParams) {
         var time = new Date()
-        this.busfind = function () {
+        this.busfind = function (callback) {
             var request = {
                 url: `v1/api/bus/${$stateParams.departure}/${$stateParams.arrival}`,
                 method: 'GET',
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json', 'data': time.toISOString() },
             };
-            return $http(request)
+            $http(request).then((response)=>{
+                callback(null,response),
+                (error)=>{
+                    callback(error,null)
+                }
+            })
         }
-        this.addbooking = function (datas) {
+        this.addbooking = function (datas,callback) {
             var request = {
                 url: `/v1/api/addcustomers`,
                 method: 'POST',
@@ -74,9 +93,14 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json', 'data': time.toISOString() },
             };
-            return $http(request)
+            $http(request).then((response)=>{
+                callback(null,response),
+                (error)=>{
+                    callback(error,null)
+                }
+            })
         }
-        this.filters = function (datas) {
+        this.filters = function (datas,callback) {
             var request = {
                 url: `v1/api/bus`,
                 method: 'POST',
@@ -84,7 +108,12 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' },
             };
-            return $http(request)
+            return $http(request).then((response)=>{
+                callback(null,response),
+                (error)=>{
+                    callback(error,null)
+                }
+            })
         }
     }
 })();
