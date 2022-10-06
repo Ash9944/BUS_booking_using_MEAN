@@ -1,4 +1,4 @@
-const Customer = require("../daos/customer_db");
+const Customer = require("../daos/userDao");
 
 module.exports.getAllUserDetails = function () {
   return Customer.getAll()

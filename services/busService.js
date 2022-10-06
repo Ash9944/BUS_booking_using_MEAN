@@ -1,14 +1,14 @@
 const { query } = require("express");
-const Bus = require("../daos/bus_db")
+const Bus = require("../daos/busDao")
 
 module.exports.getBusinroutes = (query) => {
 
   let filter = {};
-  
-  if (query.arr){
+
+  if (query.arr) {
     filter.arr_city = query.arr.toLowerCase();
   }
-  if (query.dep){
+  if (query.dep) {
     filter.dep_city = query.dep.toLowerCase();
   }
   if (query.min || query.max) {
@@ -21,10 +21,10 @@ module.exports.getBusinroutes = (query) => {
       filter.cost['$lte'] = parseInt(query.max);
   }
 
-  if (query.type){
+  if (query.type) {
     filter.type = query.type;
   }
-  if (query.time){
+  if (query.time) {
     filter.departureTime = { '$gte': query.time };
   }
   console.log(filter)
