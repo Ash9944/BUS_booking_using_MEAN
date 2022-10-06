@@ -8,8 +8,8 @@
     function indexCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, indexCtrlservice) {
 
         $scope.check = (info) => {
-            indexCtrlservice.usercheck((err,res)=>{
-                if(!err){
+            indexCtrlservice.usercheck((err, res) => {
+                if (!err) {
                     var datslen = res.data.data.length
                     for (var i = 0; i <= datslen; i++) {
                         if (info.email == res.data.data[i].email) {
@@ -23,7 +23,7 @@
                         }
                     }
                 }
-                else{
+                else {
                     res.status(500).send({ error: err.name, message: err.message })
                 }
             })
@@ -41,11 +41,10 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            $http(request).then((response)=>{
-                callback(null,response),
-                (error)=>{
-                    callback(error,null)
-                }
+            $http(request).then(function (response) {
+                callback(null, response)
+            }, function (error) {
+                callback(error, null)
             })
         }
     }

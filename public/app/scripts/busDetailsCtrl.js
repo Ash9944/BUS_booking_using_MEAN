@@ -9,12 +9,12 @@
         $scope.success1 = false
         $scope.value = new Date();
         function getAllbus() {
-            busDetailsCtrlservice.allbusfind((err,res)=>{
-                if(!err){
+            busDetailsCtrlservice.allbusfind((err, res) => {
+                if (!err) {
                     console.log(res)
                     $scope.users = res.data.data
                 }
-                else{
+                else {
                     res.status(500).send({ error: err.name, message: err.message })
                 }
             })
@@ -40,8 +40,8 @@
             if (check === true) {
                 var details = { "query": $scope.employeeId, "detailsToUpdate": info }
                 console.log(details)
-                busDetailsCtrlservice.updatebus(details,(err,res)=>{
-                    if(!err){
+                busDetailsCtrlservice.updatebus(details, (err, res) => {
+                    if (!err) {
                         $('#edit_user').modal('hide');
                         getAllbus();
                         $("html").stop().animate({ scrollTop: 0 }, 200);
@@ -52,7 +52,7 @@
                             $scope.successMsg = "";
                         }, 2000);
                     }
-                    else{
+                    else {
                         $("html").stop().animate({ scrollTop: 0 }, 200);
                         $scope.error = true;
                         $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
@@ -62,15 +62,15 @@
                         }, 2000);
                     }
                 })
-                    
+
             }
         };
 
         $scope.delete = function (info) {
             var details = { "employeeId": info._id }
             console.log(details)
-            busDetailsCtrlservice.deletebus(details,(err,resp)=>{
-                if(!err){
+            busDetailsCtrlservice.deletebus(details, (err, resp) => {
+                if (!err) {
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     getAllbus();
                     var index = $scope.users.findIndex(function (obj) { return obj._id == info._id });
@@ -82,7 +82,7 @@
                         $scope.successMsg = "";
                     }, 2000);
                 }
-                else{
+                else {
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     $scope.error = true;
                     $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
@@ -92,7 +92,7 @@
                     }, 2000);
                 }
             })
-              
+
         }
 
         $scope.add = function () {
@@ -102,8 +102,8 @@
             $scope.create.arr_city = $scope.create.arr_city.toLowerCase()
             $scope.create.cost = parseInt($scope.create.cost)
             console.log($scope.create)
-            busDetailsCtrlservice.addbus($scope.create,(err,res)=>{
-                if(!err){
+            busDetailsCtrlservice.addbus($scope.create, (err, res) => {
+                if (!err) {
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     getAllbus();
                     $scope.success = true;
@@ -115,7 +115,7 @@
                         $scope.successMsg = "";
                     }, 2000);
                 }
-                else{
+                else {
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     $scope.error = true;
                     $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
@@ -136,12 +136,12 @@
                 }
             })
             console.log(info1)
-            busDetailsCtrlservice.filters(info1,(err,res)=>{
-                if(!err){
+            busDetailsCtrlservice.filters(info1, (err, res) => {
+                if (!err) {
                     console.log(res.data)
                     $scope.data = res.data
                 }
-                else{
+                else {
                     res.status(500).send({ error: err.name, message: err.message })
                 }
             })
@@ -158,71 +158,67 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            $http(request).then((response)=>{
-                callback(null,response),
-                (error)=>{
-                    callback(error,null)
-                }
+            $http(request).then((response) => {
+                callback(null, response),
+                    (error) => {
+                        callback(error, null)
+                    }
             })
         }
-        this.updatebus = function (datas,callback) {
+        this.updatebus = function (details, callback) {
             var request = {
                 url: "/v1/api/updbus",
                 method: 'POST',
-                data: datas,
+                data: details,
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            $http(request).then((response)=>{
-                callback(null,response),
-                (error)=>{
-                    callback(error,null)
-                }
+            $http(request).then(function (response) {
+                callback(null, response)
+            }, function (error) {
+                callback(error, null)
             })
         }
-        this.deletebus = function (datas,callback) {
+        this.deletebus = function (details, callback) {
             var request = {
                 url: "/v1/api/delbus",
                 method: 'DELETE',
-                data: datas,
+                data: details,
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            $http(request).then((response)=>{
-                callback(null,response),
-                (error)=>{
-                    callback(error,null)
-                }
+            $http(request).then(function (response) {
+                callback(null, response)
+            }, function (error) {
+                callback(error, null)
             })
         }
-        this.addbus = function (datas,callback) {
+        this.addbus = function (details, callback) {
             var request = {
                 url: "/v1/api/adddbus",
                 method: 'POST',
-                data: datas,
+                data: details,
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            $http(request).then((response)=>{
-                callback(null,response),
-                (error)=>{
-                    callback(error,null)
-                }
+            $http(request).then(function (response) {
+                callback(null, response)
+            }, function (error) {
+                callback(error, null)
             })
         }
-        this.filters = function (datas,callback) {
+        this.filters = function (details, callback) {
             var request = {
                 url: `v1/api/bus`,
                 method: 'POST',
-                data: datas,
+                data: details,
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' },
             };
-            $http(request).then((response)=>{
-                callback(null,response),
-                (error)=>{
-                    callback(error,null)
-                }
+            $http(request).then(function (response) {
+                callback(null, response)
+            }, function (error) {
+                callback(error, null)
             })
         }
     }

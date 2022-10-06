@@ -7,12 +7,12 @@
         $scope.success0 = true
         $scope.success1 = false
         function getAlluser() {
-            userDetailsCtrlservice.allcustfind((err,resp)=>{
-                if(!err){
+            userDetailsCtrlservice.allcustfind((err, resp) => {
+                if (!err) {
                     console.log(resp)
                     $scope.users = resp.data.data
                 }
-                else{
+                else {
                     resp.status(500).send({ error: err.name, message: err.message })
                 }
             })
@@ -36,8 +36,8 @@
                 var details = { "query": $scope.employeeId, "detailsToUpdate": info }
                 //console.log(details)
 
-                userDetailsCtrlservice.updatecust(details,(err,resp)=>{
-                    if(!err){
+                userDetailsCtrlservice.updatecust(details, (err, resp) => {
+                    if (!err) {
                         $('#edit_user').modal('hide');
                         getAlluser();
                         $("html").stop().animate({ scrollTop: 0 }, 200);
@@ -48,7 +48,7 @@
                             $scope.successMsg = "";
                         }, 2000);
                     }
-                    else{
+                    else {
                         $("html").stop().animate({ scrollTop: 0 }, 200);
                         $scope.error = true;
                         $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
@@ -65,8 +65,8 @@
             var details = { "employeeId": info._id }
             console.log(details)
 
-            userDetailsCtrlservice.deletecust(details,(err,resp)=>{
-                if(!err){
+            userDetailsCtrlservice.deletecust(details, (err, resp) => {
+                if (!err) {
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     getAlluser();
                     var index = $scope.users.findIndex(function (obj) { return obj._id == info._id });
@@ -78,7 +78,7 @@
                         $scope.successMsg = "";
                     }, 2000);
                 }
-                else{
+                else {
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     $scope.error = true;
                     $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
@@ -96,8 +96,8 @@
             $scope.create.age = parseInt($scope.create.age)
             console.log($scope.create)
 
-            userDetailsCtrlservice.addcust($scope.create,(err,resp)=>{
-                if(!err){
+            userDetailsCtrlservice.addcust($scope.create, (err, resp) => {
+                if (!err) {
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     getAlluser();
                     $scope.success = true;
@@ -109,7 +109,7 @@
                         $scope.successMsg = "";
                     }, 2000);
                 }
-                else{
+                else {
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     $scope.error = true;
                     $scope.errorMsg = (err.data && err.data.message) ? err.data.message : err.statusText;
@@ -126,17 +126,17 @@
             $scope.success0 = false
             $scope.success1 = true
             console.log(info1)
-            userDetailsCtrlservice.filters(info1,(err,res)=>{
-                if(!err){
+            userDetailsCtrlservice.filters(info1, (err, res) => {
+                if (!err) {
                     console.log(res.data)
                     $scope.data = res.data
                 }
-                else{
+                else {
                     res.status(500).send({ error: err.name, message: err.message })
                 }
             })
+        }
     }
-}
 
     myApp.service("userDetailsCtrlservice", userDetailsCtrlservice)
     userDetailsCtrlservice.$inject = ['$http', '$stateParams']
@@ -148,73 +148,68 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            $http(request).then((response)=>{
-                callback(null,response)
-                ,(error)=>{
-                    callback(error,null)
-                }
+            $http(request).then(function (response) {
+                callback(null, response)
+            }, function (error) {
+                callback(error, null)
             })
         }
-        this.updatecust = function (datas,callback) {
+        this.updatecust = function (details, callback) {
             var request = {
                 url: "/v1/api/updcust",
                 method: 'POST',
-                data: datas,
+                data: details,
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            $http(request).then((response)=>{
-                callback(null,response),
-                (error)=>{
-                    callback(error,null)
-                }
+            $http(request).then(function (response) {
+                callback(null, response)
+            }, function (error) {
+                callback(error, null)
             })
         }
-        this.deletecust = function (datas,callback) {
+        this.deletecust = function (details, callback) {
             var request = {
                 url: "/v1/api/delcust",
                 method: 'DELETE',
-                data: datas,
+                data: details,
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            $http(request).then((response)=>{
-                callback(null,response),
-                (error)=>{
-                    callback(error,null)
-                }
+            $http(request).then(function (response) {
+                callback(null, response)
+            }, function (error) {
+                callback(error, null)
             })
         }
-        this.addcust = function (datas,callback) {
+        this.addcust = function (details, callback) {
             var request = {
                 url: "/v1/api/insertcustomers",
                 method: 'POST',
-                data: datas,
+                data: details,
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
-            $http(request).then((response)=>{
-                callback(null,response),
-                (error)=>{
-                    callback(error,null)
-                }
+            $http(request).then(function (response) {
+                callback(null, response)
+            }, function (error) {
+                callback(error, null)
             })
         }
-        this.filters = function (datas,callback) {
+        this.filters = function (details, callback) {
             var request = {
                 url: `v1/api/findcust`,
                 method: 'POST',
-                data: datas,
+                data: details,
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' },
             };
-            return $http(request).then((response)=>{
-                callback(null,response),
-                (error)=>{
-                    callback(error,null)
-                }
+            $http(request).then(function (response) {
+                callback(null, response)
+            }, function (error) {
+                callback(error, null)
             })
         }
     }
 }
-    )();
+)();

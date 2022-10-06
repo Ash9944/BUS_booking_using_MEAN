@@ -84,11 +84,11 @@
                     }
             })
         }
-        this.addbooking = function (datas, callback) {
+        this.addbooking = function (details, callback) {
             var request = {
                 url: `/v1/api/addcustomers`,
                 method: 'POST',
-                data: datas,
+                data: details,
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json', 'data': time.toISOString() },
             };
@@ -99,11 +99,11 @@
                     }
             })
         }
-        this.filters = function (datas, callback) {
+        this.filters = function (details, callback) {
             var request = {
                 url: `v1/api/bus`,
                 method: 'POST',
-                data: datas,
+                data: details,
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' },
             };
