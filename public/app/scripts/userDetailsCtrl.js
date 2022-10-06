@@ -143,7 +143,7 @@
     function userDetailsCtrlservice($http, $stateParams) {
         this.allcustfind = function (callback) {
             var request = {
-                url: "/v1/api/customers",
+                url: "/user/",
                 method: 'GET',
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
@@ -156,7 +156,7 @@
         }
         this.updatecust = function (details, callback) {
             var request = {
-                url: "/v1/api/updcust",
+                url: "/user/update",
                 method: 'POST',
                 data: details,
                 timeout: 2 * 60 * 1000,
@@ -170,7 +170,7 @@
         }
         this.deletecust = function (details, callback) {
             var request = {
-                url: "/v1/api/delcust",
+                url: "/user/delete",
                 method: 'DELETE',
                 data: details,
                 timeout: 2 * 60 * 1000,
@@ -184,7 +184,7 @@
         }
         this.addcust = function (details, callback) {
             var request = {
-                url: "/v1/api/insertcustomers",
+                url: "/user/add",
                 method: 'POST',
                 data: details,
                 timeout: 2 * 60 * 1000,
@@ -198,7 +198,7 @@
         }
         this.filters = function (details, callback) {
             var request = {
-                url: `v1/api/findcust`,
+                url: `/user/filter`,
                 method: 'POST',
                 data: details,
                 timeout: 2 * 60 * 1000,

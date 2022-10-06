@@ -8,40 +8,40 @@ router.get("/", function (req, res) {
         .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
 })
 
-router.get("/customers/:id", (req, res) => {
+router.get("/:id", (req, res) => {
     user.getuser(req.params.id)
         .then((resp) => res.json({ data: resp }))
         .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
 })
 
-router.post("/addcustomers", (req, res) => {
+router.post("/Booking", (req, res) => {
     user.addBooking(req.body)
         .then((resp) => res.send(resp))
         .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
 })
 
-router.post("/insertcustomers", (req, res) => {
+router.post("/add", (req, res) => {
     console.log(req.body)
-    user.addCustomer(req.body)
+    user.adduser(req.body)
         .then((resp) => res.send("success"))
         .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
 })
 
-router.delete("/delcust", (req, res) => {
+router.delete("/delete", (req, res) => {
     console.log(req.body)
-    user.deletecustomer(req.body.employeeId)
+    user.deleteuser(req.body.employeeId)
         .then((resp) => res.send("success !"))
         .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
 })
 
-router.post("/updcust", (req, res) => {
-    user.updateCustomer(req.body)
+router.post("/update", (req, res) => {
+    user.updateuser(req.body)
         .then((resp) => res.send("success !"))
         .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
 })
 
-router.post("/findcust", (req, res) => {
-    user.getcustbyquery(req.body)
+router.post("/filter", (req, res) => {
+    user.getuserbyquery(req.body)
         .then((resp) => res.send(resp))
         .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
 })

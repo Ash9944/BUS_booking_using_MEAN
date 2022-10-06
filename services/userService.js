@@ -15,21 +15,21 @@ module.exports.addBooking = (query) => {
   return Customer.updateArrayById(query.id, filter)
 }
 
-module.exports.addCustomer = (info) => {
+module.exports.adduser = (info) => {
   info.Bookings = []
   return Customer.create(info)
 }
 
-module.exports.deletecustomer = (id) => {
+module.exports.deleteuser = (id) => {
   return Customer.remove(id)
 }
 
-module.exports.updateCustomer = (query) => {
+module.exports.updateuser = (query) => {
   console.log(query)
   return Customer.updateById(query.query, query.detailsToUpdate)
 }
 
-module.exports.getcustbyquery = (query) => {
+module.exports.getuserbyquery = (query) => {
   console.log(query)
   filter = {}
   if (query.gend) {

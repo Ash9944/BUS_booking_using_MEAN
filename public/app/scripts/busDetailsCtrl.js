@@ -153,7 +153,7 @@
     function busDetailsCtrlservice($http, $stateParams) {
         this.allbusfind = function (callback) {
             var request = {
-                url: "/v1/api/allbus",
+                url: "/bus/",
                 method: 'POST',
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
@@ -166,7 +166,7 @@
         }
         this.updatebus = function (details, callback) {
             var request = {
-                url: "/v1/api/updbus",
+                url: "/bus/update",
                 method: 'POST',
                 data: details,
                 timeout: 2 * 60 * 1000,
@@ -180,7 +180,7 @@
         }
         this.deletebus = function (details, callback) {
             var request = {
-                url: "/v1/api/delbus",
+                url: "/bus/delete",
                 method: 'DELETE',
                 data: details,
                 timeout: 2 * 60 * 1000,
@@ -194,7 +194,7 @@
         }
         this.addbus = function (details, callback) {
             var request = {
-                url: "/v1/api/adddbus",
+                url: "/bus/add",
                 method: 'POST',
                 data: details,
                 timeout: 2 * 60 * 1000,
@@ -208,7 +208,7 @@
         }
         this.filters = function (details, callback) {
             var request = {
-                url: `v1/api/bus`,
+                url: `bus/filter`,
                 method: 'POST',
                 data: details,
                 timeout: 2 * 60 * 1000,

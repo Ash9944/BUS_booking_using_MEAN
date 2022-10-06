@@ -36,7 +36,7 @@
         this.usercheck = function (callback) {
 
             var request = {
-                url: "/v1/api/customers",
+                url: "/user/",
                 method: 'GET',
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }

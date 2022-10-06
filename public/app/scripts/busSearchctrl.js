@@ -27,7 +27,7 @@
     function busSearchCtrlservice($http, $stateParams) {
         this.busroutesfind = function (callback) {
             var request = {
-                url: `v1/api/customers/${$stateParams.id}`,
+                url: `/user/${$stateParams.id}`,
                 method: 'GET',
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }

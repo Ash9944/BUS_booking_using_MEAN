@@ -72,7 +72,7 @@
         var time = new Date()
         this.busfind = function (callback) {
             var request = {
-                url: `v1/api/bus/${$stateParams.departure}/${$stateParams.arrival}`,
+                url: `/bus/${$stateParams.departure}/${$stateParams.arrival}`,
                 method: 'GET',
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json', 'data': time.toISOString() },
@@ -85,7 +85,7 @@
         }
         this.addbooking = function (details, callback) {
             var request = {
-                url: `/v1/api/addcustomers`,
+                url: `/user/Booking`,
                 method: 'POST',
                 data: details,
                 timeout: 2 * 60 * 1000,
@@ -99,7 +99,7 @@
         }
         this.filters = function (details, callback) {
             var request = {
-                url: `v1/api/bus`,
+                url: `/bus/filter`,
                 method: 'POST',
                 data: details,
                 timeout: 2 * 60 * 1000,
