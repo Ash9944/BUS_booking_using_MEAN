@@ -1,7 +1,7 @@
 const { query } = require("express");
-const Bus = require("../daos/busDao")
+const BusService = require("../daos/busDao")
 
-module.exports.getBusinroutes = (query) => {
+module.exports.busFilterQuery = (query) => {
 
   let filter = {};
 
@@ -28,21 +28,21 @@ module.exports.getBusinroutes = (query) => {
     filter.departureTime = { '$gte': query.time };
   }
   console.log(filter)
-  return Bus.getByQuery(filter);
+  return BusService.getByQuery(filter);
 }
 
-module.exports.getAllUserDetails = function () {
-  return Bus.getAll()
+module.exports.getAllBusDetails = function () {
+  return BusService.getAll()
 }
 
 module.exports.updBus = function (id, detailstoupdate) {
-  return Bus.updateById(id, detailstoupdate)
+  return BusService.updateById(id, detailstoupdate)
 }
 
 module.exports.addBus = function (detailstoadd) {
-  return Bus.create(detailstoadd)
+  return BusService.create(detailstoadd)
 }
 
 module.exports.deleteBus = (id) => {
-  return Bus.remove(id)
+  return BusService.remove(id)
 }

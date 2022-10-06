@@ -4,7 +4,7 @@ const router = express.Router();
 const busController = require("../services/busService");
 
 router.post("/allbus", function (req, res) {
-    busController.getAllUserDetails()
+    busController.getAllBusDetails()
         .then((resp) => res.json({ data: resp }))
         .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
 });
@@ -12,13 +12,13 @@ router.post("/allbus", function (req, res) {
 router.get("/bus/:departure/:arrival", function (req, res) {
     query1 = { arr: req.params.arrival, dep: req.params.departure }
     query1.time = req.headers.data
-    busController.getBusinroutes(query1)
+    busController.busFilterQuery(query1)
         .then((resp) => res.json(resp))
         .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
 })
 
 router.post("/bus", function (req, res) {
-    busController.getBusinroutes(req.body)
+    busController.busFilterQuery(req.body)
         .then((resp) => res.json(resp))
         .catch((err) => res.status(500).send({ error: err.name, message: err.message }))
 })
