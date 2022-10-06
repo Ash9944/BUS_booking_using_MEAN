@@ -2,24 +2,24 @@
     'use strict';
     var myApp = angular.module('bus-booking');
 
-    myApp.controller('userCtrl', userCtrl);
-    userCtrl.$inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', 'userCtrlservice'];
+    myApp.controller('indexCtrl', indexCtrl);
+    indexCtrl.$inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', 'indexCtrlservice'];
 
-    function userCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, userCtrlservice) {
+    function indexCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, indexCtrlservice) {
 
         $scope.check = (info) => {
-            userCtrlservice.usercheck((err,res)=>{
+            indexCtrlservice.usercheck((err,res)=>{
                 if(!err){
                     var datslen = res.data.data.length
                     for (var i = 0; i <= datslen; i++) {
                         if (info.email == res.data.data[i].email) {
                             //console.log(info.email,res.data.data[i].email)
-                            $state.go("buses", {
+                            $state.go("busSearch", {
                                 id: res.data.data[i]._id
                             })
                         }
                         if (info.email.toString() == "Admin@admin") {
-                            $state.go("adminhome")
+                            $state.go("adminHome")
                         }
                     }
                 }
@@ -30,9 +30,9 @@
         }
     }
 
-    myApp.service("userCtrlservice", userCtrlservice)
-    userCtrlservice.$inject = ['$http']
-    function userCtrlservice($http) {
+    myApp.service("indexCtrlservice", indexCtrlservice)
+    indexCtrlservice.$inject = ['$http']
+    function indexCtrlservice($http) {
         this.usercheck = function (callback) {
 
             var request = {

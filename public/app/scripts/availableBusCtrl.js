@@ -2,14 +2,14 @@
 (function () {
     'use strict';
     var myApp = angular.module('bus-booking')
-    myApp.controller("userctrl", userctrl)
-    userctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams', 'userctrlservice']
-    function userctrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams, userctrlservice) {
+    myApp.controller("availableBusCtrl", availableBusCtrl)
+    availableBusCtrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams', 'availableBusCtrlservice']
+    function availableBusCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams, availableBusCtrlservice) {
         $scope.success0 = true
         $scope.success1 = false
 
         $scope.dates = new Date().toISOString()
-        userctrlservice.busfind((err, res) => {
+        availableBusCtrlservice.busfind((err, res) => {
             if (!err) {
                 $scope.users = res.data
             }
@@ -26,7 +26,7 @@
             console.log(info)
             info.time_of_booking = new Date()
             var datas = { id: $stateParams.custid, query: info }
-            userctrlservice.addbooking(datas, (err, res) => {
+            availableBusCtrlservice.addbooking(datas, (err, res) => {
                 if (!err) {
                     $scope.success = true;
                     $scope.successMsg = "Successfully Booked Your Bus"
@@ -53,7 +53,7 @@
                 }
             })
             console.log(info1)
-            userctrlservice.filters(info1, (err, res) => {
+            availableBusCtrlservice.filters(info1, (err, res) => {
                 if (!err) {
                     console.log(res)
                     $scope.data = res.data
@@ -66,9 +66,9 @@
         }
     }
 
-    myApp.service("userctrlservice", userctrlservice)
-    userctrlservice.$inject = ['$http', '$stateParams']
-    function userctrlservice($http, $stateParams) {
+    myApp.service("availableBusCtrlservice", availableBusCtrlservice)
+    availableBusCtrlservice.$inject = ['$http', '$stateParams']
+    function availableBusCtrlservice($http, $stateParams) {
         var time = new Date()
         this.busfind = function (callback) {
             var request = {

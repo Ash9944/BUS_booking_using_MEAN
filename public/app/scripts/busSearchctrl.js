@@ -1,10 +1,10 @@
 (function () {
     'use strict';
     var myApp = angular.module('bus-booking');
-    myApp.controller("busctrl", busctrl)
-    busctrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams', 'busctrlservice']
-    function busctrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams, busctrlservice) {
-        busctrlservice.busroutesfind((err,resp)=>{
+    myApp.controller("busSearchCtrl", busSearchCtrl)
+    busSearchCtrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams', 'busSearchCtrlservice']
+    function busSearchCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams, busSearchCtrlservice) {
+        busSearchCtrlservice.busroutesfind((err,resp)=>{
             if(!err){
                 $scope.Users = resp.data
             }
@@ -14,7 +14,7 @@
         })
            
         $scope.give = (x, y) => {
-            $state.go("userbus", {
+            $state.go("availableBus", {
                 custid: $stateParams.id,
                 departure: x,
                 arrival: y
@@ -22,9 +22,9 @@
         }
     }
 
-    myApp.service("busctrlservice", busctrlservice)
-    busctrlservice.$inject = ['$http', '$stateParams']
-    function busctrlservice($http, $stateParams) {
+    myApp.service("busSearchCtrlservice",busSearchCtrlservice)
+    busSearchCtrlservice.$inject = ['$http', '$stateParams']
+    function busSearchCtrlservice($http, $stateParams) {
         this.busroutesfind = function (callback) {
             var request = {
                 url: `v1/api/customers/${$stateParams.id}`,

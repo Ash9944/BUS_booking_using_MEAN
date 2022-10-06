@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const customerController = require("../services/customer");
+const customerController = require("../services/userService");
 
 router.get("/customers", function (req, res) {
     customerController.getAllUserDetails()
