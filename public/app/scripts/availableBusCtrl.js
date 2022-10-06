@@ -77,11 +77,10 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json', 'data': time.toISOString() },
             };
-            $http(request).then((response) => {
-                callback(null, response),
-                    (error) => {
-                        callback(error, null)
-                    }
+            $http(request).then(function (response) {
+                callback(null, response)
+            }, function (error) {
+                callback(error, null)
             })
         }
         this.addbooking = function (details, callback) {
@@ -92,11 +91,10 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json', 'data': time.toISOString() },
             };
-            $http(request).then((response) => {
-                callback(null, response),
-                    (error) => {
-                        callback(error, null)
-                    }
+            $http(request).then(function (response) {
+                callback(null, response)
+            }, function (error) {
+                callback(error, null)
             })
         }
         this.filters = function (details, callback) {
@@ -107,11 +105,10 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' },
             };
-            $http(request).then((response) => {
-                callback(null, response),
-                    (error) => {
-                        callback(error, null)
-                    }
+            $http(request).then(function (response) {
+                callback(null, response)
+            }, function (error) {
+                callback(error, null)
             })
         }
     }
