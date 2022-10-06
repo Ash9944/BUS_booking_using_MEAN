@@ -9,11 +9,11 @@
         $scope.success1 = false
 
         $scope.dates = new Date().toISOString()
-        userctrlservice.busfind((err,res)=>{
-            if(!err){
+        userctrlservice.busfind((err, res) => {
+            if (!err) {
                 $scope.users = res.data
             }
-            else{
+            else {
                 res.status(500).send({ error: err.name, message: err.message })
             }
         })
@@ -26,8 +26,8 @@
             console.log(info)
             info.time_of_booking = new Date()
             var datas = { id: $stateParams.custid, query: info }
-            userctrlservice.addbooking(datas,(err,res)=>{
-                if(!err){
+            userctrlservice.addbooking(datas, (err, res) => {
+                if (!err) {
                     $scope.success = true;
                     $scope.successMsg = "Successfully Booked Your Bus"
                     $timeout(function () {
@@ -35,7 +35,7 @@
                         $scope.successMsg = "";
                     }, 2000);
                 }
-                else{
+                else {
                     res.status(500).send({ error: err.name, message: err.message })
                 }
             })
@@ -53,15 +53,15 @@
                 }
             })
             console.log(info1)
-            userctrlservice.filters(info1,(err,res)=>{
-                if(!err){
+            userctrlservice.filters(info1, (err, res) => {
+                if (!err) {
                     console.log(res)
                     $scope.data = res.data
                 }
-                else{
+                else {
                     res.status(500).send({ error: err.name, message: err.message })
                 }
-                 
+
             })
         }
     }
@@ -77,14 +77,14 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json', 'data': time.toISOString() },
             };
-            $http(request).then((response)=>{
-                callback(null,response),
-                (error)=>{
-                    callback(error,null)
-                }
+            $http(request).then((response) => {
+                callback(null, response),
+                    (error) => {
+                        callback(error, null)
+                    }
             })
         }
-        this.addbooking = function (datas,callback) {
+        this.addbooking = function (datas, callback) {
             var request = {
                 url: `/v1/api/addcustomers`,
                 method: 'POST',
@@ -92,14 +92,14 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json', 'data': time.toISOString() },
             };
-            $http(request).then((response)=>{
-                callback(null,response),
-                (error)=>{
-                    callback(error,null)
-                }
+            $http(request).then((response) => {
+                callback(null, response),
+                    (error) => {
+                        callback(error, null)
+                    }
             })
         }
-        this.filters = function (datas,callback) {
+        this.filters = function (datas, callback) {
             var request = {
                 url: `v1/api/bus`,
                 method: 'POST',
@@ -107,11 +107,11 @@
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' },
             };
-            return $http(request).then((response)=>{
-                callback(null,response),
-                (error)=>{
-                    callback(error,null)
-                }
+            $http(request).then((response) => {
+                callback(null, response),
+                    (error) => {
+                        callback(error, null)
+                    }
             })
         }
     }

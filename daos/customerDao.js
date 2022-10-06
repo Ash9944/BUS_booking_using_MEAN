@@ -1,4 +1,4 @@
-var mongodb = require('./db_con');
+var mongodb = require('./mongodb');
 
 module.exports.create = (record) => {
     return new Promise((resolve, reject) => {

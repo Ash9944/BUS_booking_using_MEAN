@@ -1,7 +1,7 @@
 const { query } = require("express");
 const express = require("express");
 const router = express.Router();
-const busController = require("../services/bus");
+const busController = require("../services/busService");
 
 router.post("/allbus", function (req, res) {
     busController.getAllUserDetails()

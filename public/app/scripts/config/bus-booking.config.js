@@ -5,36 +5,36 @@
     configuration.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider']
     function configuration($stateProvider, $urlRouterProvider, $locationProvider) {
         $locationProvider.html5Mode(false)
-        $urlRouterProvider.otherwise('/customer')
+        $urlRouterProvider.otherwise('/index')
         $stateProvider
-            .state('customers', {
-                url: "/customer",
-                templateUrl: 'app/modules/user.html',
-                controller: 'userCtrl',
+            .state('index', {
+                url: "/index",
+                templateUrl: 'app/modules/index.html',
+                controller: 'indexCtrl',
             })
-            .state('buses', {
-                url: "/bus/:id",
-                templateUrl: 'app/modules/bussearch.html',
-                controller: 'busctrl',
+            .state('busSearch', {
+                url: "/busSearch/:id",
+                templateUrl: 'app/modules/busSearch.html',
+                controller: 'busSearchCtrl',
             })
-            .state('userbus', {
-                url: "/user/:custid/:departure/:arrival",
-                templateUrl: 'app/modules/buses.html',
-                controller: 'userctrl',
+            .state('availableBus', {
+                url: "/availableBus/:custid/:departure/:arrival",
+                templateUrl: 'app/modules/availableBus.html',
+                controller: 'availableBusCtrl',
             })
-            .state('adminhome', {
-                url: "/adminhome",
-                templateUrl: 'app/modules/adminhomepage.html'
+            .state('adminHome', {
+                url: "/adminHome",
+                templateUrl: 'app/modules/adminHome.html'
             })
-            .state('customer', {
-                url: "/admin",
-                templateUrl: 'app/modules/busdbadmin.html',
-                controller: 'custctrl',
+            .state('busDetails', {
+                url: "/busDetails",
+                templateUrl: 'app/modules/busDetails.html',
+                controller: 'busDetailsCtrl',
             })
-            .state('customeradmin', {
-                url: "/custadmin",
-                templateUrl: 'app/modules/custdbadmin.html',
-                controller: 'adminctrl',
+            .state('userDetails', {
+                url: "/userDetails",
+                templateUrl: 'app/modules/userDetails.html',
+                controller: 'userDetailsCtrl',
             })
 
     }
