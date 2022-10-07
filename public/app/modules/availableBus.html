@@ -70,6 +70,7 @@
                         <th>Arriving Time</th>
                         <th>Cost</th>
                         <th>Bus type</th>
+                        <th>Amenities</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -84,8 +85,8 @@
                         <td data-title="cost">{{user.cost | currency:"₹"}}</td>
                         <td data-title="Type">{{user.type}}</td>
                         <td data-title="Action" class="action-btn px-0">
-                            <a class="btn btn-primary-2 rounded-0 py-0" href="javascript:void(0)"
-                                data-toggle="modal" data-target="#show_ameneties" ng-click="loadInfo(user)">
+                            <a class="btn btn-primary-2 rounded-0 py-0" href="javascript:void(0)" data-toggle="modal"
+                                data-target="#show_ameneties" ng-click="loadInfo(user)">
                                 <i class="fas fa-edit mr-1"></i> Amenities
                             </a>
                         <td data-title="Action" class="action-btn px-0">
@@ -112,6 +113,7 @@
                         <th>Arriving Time</th>
                         <th>Cost</th>
                         <th>Bus type</th>
+                        <th>Amenities</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -125,8 +127,8 @@
                         <td data-title="cost">{{dta.cost | currency:"₹"}}</td>
                         <td data-title="Type">{{dta.type}}</td>
                         <td data-title="Action" class="action-btn px-0">
-                            <a class="btn btn-primary-2 rounded-0 py-0" href="javascript:void(0)"
-                                data-toggle="modal" data-target="#show_ameneties" ng-click="loadInfo(dta)">
+                            <a class="btn btn-primary-2 rounded-0 py-0" href="javascript:void(0)" data-toggle="modal"
+                                data-target="#show_ameneties" ng-click="loadInfo(dta)">
                                 <i class="fas fa-edit mr-1"></i> Amenities
                             </a>
                         <td data-title="Action" class="action-btn px-0">
@@ -141,7 +143,8 @@
     </div>
 </section>
 
-<div class="modal fade" id="show_ameneties" tabindex="-1" role="dialog" aria-labelledby="edit_user_modal" aria-hidden="true">
+<div class="modal fade" id="show_ameneties" tabindex="-1" role="dialog" aria-labelledby="edit_user_modal"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -151,20 +154,20 @@
                 </button>
             </div>
             <div class="modal-body">
-                    <table class="table table-padded">
-                        <thead>
-                            <tr>
-                                <th>Bus Amenities</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="use in edit.amenities| orderBy : '-time_of_booking'">
+                <table class="table table-padded">
+                    <thead>
+                        <tr>
+                            <th>Bus Amenities</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="use in edit.amenities| orderBy : '-time_of_booking'">
 
-                                <td data-title="Name">{{use}}</td>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            <td data-title="Name">{{use}}</td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
                 </form>
             </div>
             <div class="modal-footer">
