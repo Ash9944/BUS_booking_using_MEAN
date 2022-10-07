@@ -47,6 +47,7 @@
             //console.log(info1)
             info1.dep = $stateParams.departure
             info1.arr = $stateParams.arrival
+            info1.frontendtime = new Date()
             Object.keys(info1).forEach(key => {
                 if (info1[key] === null || info1[key] == "") {
                     delete info1[key];
