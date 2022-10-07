@@ -107,6 +107,7 @@
                             <td data-title="arrtime">{{user.arrivalTime | date:"short"}}</td>
                             <td data-title="cost">{{user.cost | currency:"₹"}}</td>
                             <td data-title="Type">{{user.type}}</td>
+                            <td data-title="Type">{{user.amenities}}</td>
                             <td data-title="Action" class="action-btn px-0">
                                 <a class="btn btn-primary-2 rounded-0 py-0" href="javascript:void(0)"
                                     data-toggle="modal" data-target="#edit_user" ng-click="loadInfo(user)">
@@ -238,6 +239,14 @@
                             <label for="type">Choose a bus type:</label>
 
                             <select name="type" ng-model="create.type">
+                                <option value="AC">AC</option>
+                                <option value="NON-AC">NON-AC</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-6 mb-2">
+                            <label for="type">Choose Amenities available in bus:</label>
+
+                            <select name="type" ng-model="create.amenities">
                                 <option value="AC">AC</option>
                                 <option value="NON-AC">NON-AC</option>
                             </select>

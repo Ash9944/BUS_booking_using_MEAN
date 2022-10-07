@@ -24,8 +24,17 @@ module.exports.busFilterQuery = (query) => {
   if (query.type) {
     filter.type = query.type;
   }
+  function addHoursToDate(objDate, intHours) {
+    var numberOfMlSeconds = objDate.getTime();
+    var addMlSeconds = (intHours * 60) * 60 * 1000;
+    var newDateObj = new Date(numberOfMlSeconds + addMlSeconds);
+ 
+    return newDateObj.toISOString();
+}
+  let addtime = addHoursToDate(new Date(query.time),24)
+  console.log(addtime)
   if (query.time) {
-    filter.departureTime = { '$gte': query.time };
+    filter.departureTime = { '$gte': query.time , '$lte':addtime};
   }
   console.log(filter)
   return BusService.getByQuery(filter);
