@@ -208,7 +208,7 @@
         }
         this.filters = function (details, callback) {
             var request = {
-                url: `bus/filter`,
+                url: `/bus/filter`,
                 method: 'POST',
                 data: details,
                 timeout: 2 * 60 * 1000,
