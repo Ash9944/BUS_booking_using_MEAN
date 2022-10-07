@@ -1,17 +1,18 @@
 const { query } = require("express");
 const BusService = require("../daos/busDao")
 function addHoursToDate(objDate, intHours) {
-    var numberOfMlSeconds = objDate.getTime();
-    var addMlSeconds = (intHours * 60) * 60 * 1000;
-    var newDateObj = new Date(numberOfMlSeconds + addMlSeconds);
- 
-    return newDateObj.toISOString();
-   }
+  var numberOfMlSeconds = objDate.getTime();
+  var addMlSeconds = (intHours * 60) * 60 * 1000;
+  var newDateObj = new Date(numberOfMlSeconds + addMlSeconds);
+
+  return newDateObj.toISOString();
+}
+
 module.exports.busFilterQuery = (query) => {
 
   let filter = {};
   console.log(query)
-  
+
   if (query.arr) {
     filter.arr_city = query.arr.toLowerCase();
   }
@@ -33,14 +34,14 @@ module.exports.busFilterQuery = (query) => {
   }
 
   if (query.time) {
-    let addtime = addHoursToDate(new Date(query.time),24)
-    filter.departureTime = { '$gte': query.time,'$lte':addtime};
-    
+    let addtime = addHoursToDate(new Date(query.time), 24)
+    filter.departureTime = { '$gte': query.time, '$lte': addtime };
+
   }
 
-  if (query.frontendtime){
-    let addtime1 = addHoursToDate(new Date(query.frontendtime),24)
-    filter.departureTime = { '$gte': query.frontendtime, '$lte':addtime1};
+  if (query.frontendtime) {
+    let addtime1 = addHoursToDate(new Date(query.frontendtime), 24)
+    filter.departureTime = { '$gte': query.frontendtime, '$lte': addtime1 };
   }
 
   console.log(filter)

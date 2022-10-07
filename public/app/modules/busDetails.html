@@ -2,13 +2,13 @@
     <li class="module_name flex-grow-1">Hi Admin !</li>
 </ol>
 <button class="btn btn-sm btn-success" data-ui-sref="adminHome">
-    <i class="fas fa-plus mr-1"></i>GO BACK !</button>
+    <i class="fas fa-plus mr-1"></i>Home</button>
 <section class="content">
     <div class="element-wrapper">
-        <h1 class="element-title">Add BUS service</h1>
+        <h1 class="element-title">Bus Details</h1>
         <div class="element-actions">
             <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#add_user">
-                <i class="fas fa-plus mr-1"></i>Add BUS service</button>
+                <i class="fas fa-plus mr-1"></i>Add Bus Details</button>
         </div>
     </div>
     <div ng-if="error" id="error" class="alert alert-danger alert-white rounded">
@@ -32,27 +32,27 @@
 
     <form class="form-inline">
         <div class="form-group">
-            <label>Departure City:</label>
+            <label>From City:</label>
             <input type="text" class="form-control" placeholder="Enter Departure City" name="Min" ng-model="filter.dep">
         </div>
         <div class="form-group">
-            <label>Arrival City:</label>
+            <label>To City:</label>
             <input type="text" class="form-control" placeholder="Enter Arrival City" name="Min" ng-model="filter.arr">
         </div>
         <div class="form-group">
-            <label>Min Cost:</label>
+            <label>Minimum Cost:</label>
             <input type="text" class="form-control" placeholder="Enter Max Budget" name="Min" ng-model="filter.min">
         </div>
         <div class="form-group">
-            <label>Max Cost:</label>
+            <label>Maximum Cost:</label>
             <input type="text" class="form-control" placeholder="Enter Min Budget" name="Max" ng-model="filter.max">
         </div>
         <div class="form-group">
-            <label for="type">Choose a bus type:</label>
+            <label for="type">Type:</label>
 
             <select name="type" ng-model="filter.type">
-                <option value="AC">AC</option>
-                <option value="NON-AC">NON-AC</option>
+                <option value="AC">Ac</option>
+                <option value="NON-AC">Non-Ac</option>
             </select>
         </div>
         <div class="form-group">
@@ -87,13 +87,13 @@
                 <table class="table table-padded">
                     <thead>
                         <tr>
-                            <th>Bus Name</th>
-                            <th>Departure Point</th>
-                            <th>Arriving Point</th>
-                            <th>Starting Time</th>
+                            <th>Name</th>
+                            <th>From City</th>
+                            <th>To City</th>
+                            <th>Departure Time</th>
                             <th>Arriving Time</th>
                             <th>Cost</th>
-                            <th>Bus type</th>
+                            <th>Type</th>
                             <th>Amenities</th>
                             <th>Action</th>
                         </tr>
@@ -129,13 +129,13 @@
                 <table class="table table-padded">
                     <thead>
                         <tr>
-                            <th>Bus Name</th>
-                            <th>Departure Point</th>
-                            <th>Arriving Point</th>
-                            <th>Starting Time</th>
+                            <th>Name</th>
+                            <th>From City</th>
+                            <th>To City</th>
+                            <th>Departure Time</th>
                             <th>Arriving Time</th>
                             <th>Cost</th>
-                            <th>Bus type</th>
+                            <th>Type</th>
                             <th>Amenities</th>
                             <th>Action</th>
                         </tr>
@@ -173,7 +173,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title" id="add_user_modal">Add user Person</h6>
+                <h6 class="modal-title" id="add_user_modal">Add Bus Details</h6>
                 <button type="button" class="close" aria-label="Close" ng-click="closeModal('add_user','adduser')">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -183,11 +183,11 @@
                     {{create}}
                     <div class="row">
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Id</label>
+                            <label>ID</label>
                             <input class="form-control" type="text" style="text-transform:uppercase"
                                 ng-model="create.id" required>
                             <div class="invalid-feedback">
-                                please enter Bus Id
+                                Please Enter Bus ID
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
@@ -195,65 +195,65 @@
                             <input class="form-control" type="text" style="text-transform:uppercase"
                                 ng-model="create.name" required>
                             <div class="invalid-feedback">
-                                please enter your Bus Name
+                                Please Enter Your Bus Name
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus starting Point</label>
+                            <label>From City</label>
                             <input class="form-control" type="text" style="text-transform:uppercase"
                                 ng-model="create.dep_city" required>
                             <div class="invalid-feedback">
-                                please enter starting Point
+                                Please Enter Bus From City
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Ending Point</label>
+                            <label>To City</label>
                             <input class="form-control" type="text" style="text-transform:uppercase"
                                 ng-model="create.arr_city" required>
                             <div class="invalid-feedback">
-                                please enter Ending Point
+                                Please Enter Bus To City
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Departure Time</label>
+                            <label>Departure Time</label>
                             <input type="datetime-local" ng-model="create.departureTime">
                             <div class="invalid-feedback">
-                                please enter Departure Time
+                                Please Enter Bus Departure Time
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Arrival Time</label>
+                            <label>Arrival Time</label>
                             <input type="datetime-local" ng-model="create.arrivalTime">
                             <div class="invalid-feedback">
-                                please enter Arrival Time
+                                Please Enter Bus Arrival Time
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Ticket Cost</label>
+                            <label>Ticket Cost</label>
                             <input class="form-control" type="text" style="text-transform:lowercase"
                                 ng-model="create.cost" required>
                             <div class="invalid-feedback">
-                                please enter Cost of Ticket
+                                Please Enter Cost of Bus Ticket
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label for="type">Choose a bus type:</label>
+                            <label for="type">Type:</label>
 
                             <select name="type" ng-model="create.type">
-                                <option value="AC">AC</option>
-                                <option value="NON-AC">NON-AC</option>
+                                <option value="AC">Ac</option>
+                                <option value="NON-AC">Non-Ac</option>
                             </select>
                         </div>
-                        <div class="form-group col-sm-6 mb-2">
+                        <!-- <div class="form-group col-sm-6 mb-2">
                             <label for="type">Choose Amenities available in bus:</label>
 
                             <select name="type" ng-model="create.amenities">
                                 <option value="AC">AC</option>
                                 <option value="NON-AC">NON-AC</option>
                             </select>
-                        </div>
+                        </div> -->
                     </div>
                 </form>
             </div>
@@ -272,7 +272,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title" id="edit_user_modal">Edit user Information</h6>
+                <h6 class="modal-title" id="edit_user_modal">Edit Bus Details</h6>
                 <button type="button" class="close" ng-click="closeModal('edit_user','edituser')" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -281,68 +281,68 @@
                 <form id="edituser">
                     <div class="row">
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Id</label>
+                            <label>ID</label>
                             <input class="form-control" type="text" style="text-transform:uppercase" ng-model="edit.id">
                             <div class="invalid-feedback">
-                                please enter Bus Id
+                                Please Enter Bus ID
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Name</label>
+                            <label>Name</label>
                             <input class="form-control" type="text" style="text-transform:uppercase"
                                 ng-model="edit.name">
                             <div class="invalid-feedback">
-                                please enter your Bus Name
+                                Please Enter Your Bus Name
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus starting Point</label>
+                            <label>From City</label>
                             <input class="form-control" type="text" style="text-transform:uppercase"
                                 ng-model="edit.dep_city">
                             <div class="invalid-feedback">
-                                please enter starting Point
+                                Please Enter From City
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Ending Point</label>
+                            <label>To City</label>
                             <input class="form-control" type="text" style="text-transform:uppercase"
                                 ng-model="edit.arr_city">
                             <div class="invalid-feedback">
-                                please enter Ending Point
+                                Please Enter To City
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Departure Time</label>
+                            <label>Departure Time</label>
                             <input type="datetime-local" ng-model="edit.departureTime">
                             <div class="invalid-feedback">
-                                please enter Departure Time
+                                Please Enter Departure Time
                                 {{edit.departureTime | date:'short'}}
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Arrival Time</label>
+                            <label>Arrival Time</label>
                             <input type="datetime-local" ng-model="edit.arrivalTime">
                             <div class="invalid-feedback">
-                                please enter Arrival Time
+                                Please Enter Arrival Time
                                 {{edit.arrivalTime | date:'short'}}
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Bus Ticket Cost</label>
+                            <label>Ticket Cost</label>
                             <input class="form-control" type="text" style="text-transform:lowercase"
                                 ng-model="edit.cost">
                             <div class="invalid-feedback">
-                                please enter Cost of Ticket
+                                Please Enter Cost of Bus Ticket
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label for="type">Choose a bus type:</label>
+                            <label for="type">Type:</label>
 
                             <select name="type" ng-model="edit.type">
-                                <option value="AC">AC</option>
-                                <option value="NON-AC">NON-AC</option>
+                                <option value="AC">Ac</option>
+                                <option value="NON-AC">Non-Ac</option>
                             </select>
                         </div>
                     </div>

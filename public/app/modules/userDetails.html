@@ -2,13 +2,13 @@
     <li class="module_name flex-grow-1">Hi Admin !</li>
 </ol>
 <button class="btn btn-sm btn-success" data-ui-sref="adminHome">
-    <i class="fas fa-plus mr-1"></i>GO BACK !</button>
+    <i class="fas fa-plus mr-1"></i>Home</button>
 <section class="content">
     <div class="element-wrapper">
-        <h1 class="element-title">Add Customer</h1>
+        <h1 class="element-title">User Details</h1>
         <div class="element-actions">
             <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#add_user">
-                <i class="fas fa-plus mr-1"></i>Add Customers</button>
+                <i class="fas fa-plus mr-1"></i>Add User Details</button>
         </div>
     </div>
     <div ng-if="error" id="error" class="alert alert-danger alert-white rounded">
@@ -56,10 +56,10 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Google ID</th>
-                            <th>age</th>
-                            <th>gender</th>
-                            <th>email</th>
+                            <th>ID</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>E-mail</th>
                             <th>Date Of Birth</th>
                             <th>Total Bookings</th>
                             <th>Action</th>
@@ -97,10 +97,10 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Google ID</th>
-                            <th>age</th>
-                            <th>gender</th>
-                            <th>email</th>
+                            <th>ID</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>E-mail</th>
                             <th>Date Of Birth</th>
                             <th>Total Bookings</th>
                             <th>Action</th>
@@ -138,7 +138,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title" id="add_user_modal">Add user Person</h6>
+                <h6 class="modal-title" id="add_user_modal">Add User Details</h6>
                 <button type="button" class="close" aria-label="Close" ng-click="closeModal('add_user','adduser')">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -151,14 +151,14 @@
                             <label>Name</label>
                             <input class="form-control" type="text" ng-model="create.name" required>
                             <div class="invalid-feedback">
-                                please enter your Name
+                                Please Enter Your Name
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Google ID</label>
+                            <label>ID</label>
                             <input class="form-control" type="text" ng-model="create.googleId" required>
                             <div class="invalid-feedback">
-                                please enter your Google ID
+                                Please Enter Your ID
                             </div>
                         </div>
                     </div>
@@ -167,29 +167,29 @@
                             <label>Age</label>
                             <input class="form-control" type="text" ng-model="create.age" required>
                             <div class="invalid-feedback">
-                                please enterYour Age
+                                Please Enter Your Age
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label for="type">Gender</label>
 
                             <select name="type" ng-model="create.gender">
-                                <option value="MALE">MALE</option>
-                                <option value="FEMALE">FEMALE</option>
+                                <option value="MALE">Male</option>
+                                <option value="FEMALE">Female</option>
                             </select>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label>E-mail</label>
                             <input class="form-control" type="text" ng-model="create.email" required>
                             <div class="invalid-feedback">
-                                please enter yor E-mail
+                                Please Enter Your E-mail
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>enter date Of Birth</label>
+                            <label>Enter Date Of Birth</label>
                             <input class="form-control" type="date" ng-model="create.dateOfBirth" required>
                             <div class="invalid-feedback">
-                                please enter your Date of Birth
+                                Please Enter Your Date of Birth
                             </div>
                         </div>
                     </div>
@@ -210,7 +210,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title" id="edit_user_modal">Edit user Information</h6>
+                <h6 class="modal-title" id="edit_user_modal">Edit User Details</h6>
                 <button type="button" class="close" ng-click="closeModal('edit_user','edituser')" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -222,14 +222,14 @@
                             <label>Name</label>
                             <input class="form-control" type="text" ng-model="edit.name">
                             <div class="invalid-feedback">
-                                please enter your Name
+                                Please Enter Your Name
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
-                            <label>Google ID</label>
+                            <label>ID</label>
                             <input class="form-control" type="text" ng-model="edit.googleId">
                             <div class="invalid-feedback">
-                                please enter your Google ID
+                                Please Enter Your ID
                             </div>
                         </div>
                     </div>
@@ -238,15 +238,15 @@
                             <label>Age</label>
                             <input class="form-control" type="text" ng-model="edit.age">
                             <div class="invalid-feedback">
-                                please enterYour Age
+                                Please Enter Your Age
                             </div>
                         </div>
                         <div class="form-group col-sm-6 mb-2">
                             <label for="type">Gender</label>
 
                             <select name="type" ng-model="edit.gender">
-                                <option value="MALE">MALE</option>
-                                <option value="FEMALE">FEMALE</option>
+                                <option value="MALE">Male</option>
+                                <option value="FEMALE">Female</option>
                             </select>
                         </div>
                     </div>
@@ -254,11 +254,11 @@
                         <label>E-mail</label>
                         <input class="form-control" type="text" ng-model="edit.email">
                         <div class="invalid-feedback">
-                            please enter yor E-mail
+                            Please Enter Your E-mail
                         </div>
                     </div>
                     <div class="form-group col-sm-6 mb-2">
-                        <label>enter date Of Birth</label>
+                        <label>Enter Date Of Birth</label>
                         <input class="form-control" type="date" ng-model="edit.dateOfBirth">
                         <div class="invalid-feedback">
                             Your Date of Birth : {{edit.dateOfBirth | date:'longDate'}}
@@ -267,15 +267,15 @@
                     <table class="table table-padded">
                         <thead>
                             <tr>
-                                <th>Bus Name</th>
-                                <th>Departure Point</th>
-                                <th>Arriving Point</th>
-                                <th>Starting Time</th>
+                                <th>Name</th>
+                                <th>From City</th>
+                                <th>To City</th>
+                                <th>Departure Time</th>
                                 <th>Arriving Time</th>
                                 <th>Cost</th>
-                                <th>Bus type</th>
+                                <th>Type</th>
                                 <th>Time Booked</th>
-                                <th>Bus Amenities</th>
+                                <th>Amenities</th>
                             </tr>
                         </thead>
                         <tbody>
