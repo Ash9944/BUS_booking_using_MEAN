@@ -1,5 +1,6 @@
 const { query } = require("express");
 const BusService = require("../daos/busDao")
+
 function addHoursToDate(objDate, intHours) {
   var numberOfMlSeconds = objDate.getTime();
   var addMlSeconds = (intHours * 60) * 60 * 1000;
@@ -36,7 +37,6 @@ module.exports.busFilterQuery = (query) => {
   if (query.time) {
     let addtime = addHoursToDate(new Date(query.time), 24)
     filter.departureTime = { '$gte': query.time, '$lte': addtime };
-
   }
 
   if (query.frontendtime) {
