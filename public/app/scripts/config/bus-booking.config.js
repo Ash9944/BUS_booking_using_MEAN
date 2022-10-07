@@ -5,12 +5,12 @@
     configuration.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider']
     function configuration($stateProvider, $urlRouterProvider, $locationProvider) {
         $locationProvider.html5Mode(false)
-        $urlRouterProvider.otherwise('/index')
+        $urlRouterProvider.otherwise('/login')
         $stateProvider
-            .state('index', {
-                url: "/index",
-                templateUrl: 'app/modules/index.html',
-                controller: 'indexCtrl',
+            .state('login', {
+                url: "/login",
+                templateUrl: 'app/modules/login.html',
+                controller: 'loginCtrl',
             })
             .state('busSearch', {
                 url: "/busSearch/:id",

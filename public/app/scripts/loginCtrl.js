@@ -2,13 +2,13 @@
     'use strict';
     var myApp = angular.module('bus-booking');
 
-    myApp.controller('indexCtrl', indexCtrl);
-    indexCtrl.$inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', 'indexCtrlservice'];
+    myApp.controller('loginCtrl', loginCtrl);
+    loginCtrl.$inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', 'loginCtrlService'];
 
-    function indexCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, indexCtrlservice) {
+    function loginCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, loginCtrlService) {
 
         $scope.check = (info) => {
-            indexCtrlservice.usercheck((err, res) => {
+            loginCtrlService.usercheck((err, res) => {
                 if (!err) {
                     var datslen = res.data.data.length
                     for (var i = 0; i <= datslen; i++) {
@@ -30,9 +30,9 @@
         }
     }
 
-    myApp.service("indexCtrlservice", indexCtrlservice)
-    indexCtrlservice.$inject = ['$http']
-    function indexCtrlservice($http) {
+    myApp.service("loginCtrlService", loginCtrlService)
+    loginCtrlService.$inject = ['$http']
+    function loginCtrlService($http) {
         this.usercheck = function (callback) {
 
             var request = {

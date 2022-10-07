@@ -3,13 +3,13 @@
     'use strict';
     var myApp = angular.module('bus-booking')
     myApp.controller("busDetailsCtrl", busDetailsCtrl)
-    busDetailsCtrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams', 'busDetailsCtrlservice']
-    function busDetailsCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams, busDetailsCtrlservice) {
+    busDetailsCtrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams', 'busDetailsCtrlService']
+    function busDetailsCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams, busDetailsCtrlService) {
         $scope.success0 = true
         $scope.success1 = false
         $scope.value = new Date();
         function getAllbus() {
-            busDetailsCtrlservice.allbusfind((err, res) => {
+            busDetailsCtrlService.allbusfind((err, res) => {
                 if (!err) {
                     console.log(res)
                     $scope.users = res.data.data
@@ -40,7 +40,7 @@
             if (check === true) {
                 var details = { "query": $scope.employeeId, "detailsToUpdate": info }
                 console.log(details)
-                busDetailsCtrlservice.updatebus(details, (err, res) => {
+                busDetailsCtrlService.updatebus(details, (err, res) => {
                     if (!err) {
                         $('#edit_user').modal('hide');
                         getAllbus();
@@ -69,7 +69,7 @@
         $scope.delete = function (info) {
             var details = { "employeeId": info._id }
             console.log(details)
-            busDetailsCtrlservice.deletebus(details, (err, resp) => {
+            busDetailsCtrlService.deletebus(details, (err, resp) => {
                 if (!err) {
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     getAllbus();
@@ -102,7 +102,7 @@
             $scope.create.arr_city = $scope.create.arr_city.toLowerCase()
             $scope.create.cost = parseInt($scope.create.cost)
             console.log($scope.create)
-            busDetailsCtrlservice.addbus($scope.create, (err, res) => {
+            busDetailsCtrlService.addbus($scope.create, (err, res) => {
                 if (!err) {
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     getAllbus();
@@ -136,7 +136,7 @@
                 }
             })
             console.log(info1)
-            busDetailsCtrlservice.filters(info1, (err, res) => {
+            busDetailsCtrlService.filters(info1, (err, res) => {
                 if (!err) {
                     console.log(res.data)
                     $scope.data = res.data
@@ -148,9 +148,9 @@
         }
     }
 
-    myApp.service("busDetailsCtrlservice", busDetailsCtrlservice)
-    busDetailsCtrlservice.$inject = ['$http', '$stateParams']
-    function busDetailsCtrlservice($http, $stateParams) {
+    myApp.service("busDetailsCtrlService", busDetailsCtrlService)
+    busDetailsCtrlService.$inject = ['$http', '$stateParams']
+    function busDetailsCtrlService($http, $stateParams) {
         this.allbusfind = function (callback) {
             var request = {
                 url: "/bus/",

@@ -2,12 +2,12 @@
     'use strict';
     var myApp = angular.module('bus-booking')
     myApp.controller("userDetailsCtrl", userDetailsCtrl)
-    userDetailsCtrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams', 'userDetailsCtrlservice']
-    function userDetailsCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams, userDetailsCtrlservice) {
+    userDetailsCtrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams', 'userDetailsCtrlService']
+    function userDetailsCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams, userDetailsCtrlService) {
         $scope.success0 = true
         $scope.success1 = false
         function getAlluser() {
-            userDetailsCtrlservice.allcustfind((err, resp) => {
+            userDetailsCtrlService.allcustfind((err, resp) => {
                 if (!err) {
                     console.log(resp)
                     $scope.users = resp.data.data
@@ -36,7 +36,7 @@
                 var details = { "query": $scope.employeeId, "detailsToUpdate": info }
                 //console.log(details)
 
-                userDetailsCtrlservice.updatecust(details, (err, resp) => {
+                userDetailsCtrlService.updatecust(details, (err, resp) => {
                     if (!err) {
                         $('#edit_user').modal('hide');
                         getAlluser();
@@ -65,7 +65,7 @@
             var details = { "employeeId": info._id }
             console.log(details)
 
-            userDetailsCtrlservice.deletecust(details, (err, resp) => {
+            userDetailsCtrlService.deletecust(details, (err, resp) => {
                 if (!err) {
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     getAlluser();
@@ -96,7 +96,7 @@
             $scope.create.age = parseInt($scope.create.age)
             console.log($scope.create)
 
-            userDetailsCtrlservice.addcust($scope.create, (err, resp) => {
+            userDetailsCtrlService.addcust($scope.create, (err, resp) => {
                 if (!err) {
                     $("html").stop().animate({ scrollTop: 0 }, 200);
                     getAlluser();
@@ -126,7 +126,7 @@
             $scope.success0 = false
             $scope.success1 = true
             console.log(info1)
-            userDetailsCtrlservice.filters(info1, (err, res) => {
+            userDetailsCtrlService.filters(info1, (err, res) => {
                 if (!err) {
                     console.log(res.data)
                     $scope.data = res.data
@@ -138,9 +138,9 @@
         }
     }
 
-    myApp.service("userDetailsCtrlservice", userDetailsCtrlservice)
-    userDetailsCtrlservice.$inject = ['$http', '$stateParams']
-    function userDetailsCtrlservice($http, $stateParams) {
+    myApp.service("userDetailsCtrlService", userDetailsCtrlService)
+    userDetailsCtrlService.$inject = ['$http', '$stateParams']
+    function userDetailsCtrlService($http, $stateParams) {
         this.allcustfind = function (callback) {
             var request = {
                 url: "/user/",
