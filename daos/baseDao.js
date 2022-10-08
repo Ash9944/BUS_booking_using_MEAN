@@ -353,7 +353,6 @@ module.exports = function BaseDao(collectionName) {
         removeItemInArrayById: removeItemInArrayById,
         bulkWrite: bulkWrite,
         getIdFilter: getIdFilter,
-        getDb: getDb,
         getCollectionName: function () {
             return collectionName;
         },
