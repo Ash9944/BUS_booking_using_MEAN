@@ -154,7 +154,7 @@
         this.allbusfind = function (callback) {
             var request = {
                 url: "/bus/",
-                method: 'POST',
+                method: 'GET',
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
             };
