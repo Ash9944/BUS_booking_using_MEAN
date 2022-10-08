@@ -1,5 +1,4 @@
-const { query } = require("express");
-const BusService = require("../daos/busDao")
+const busDao = require("../daos/busDao")
 
 function addHoursToDate(objDate, intHours) {
   var numberOfMlSeconds = objDate.getTime();
@@ -45,21 +44,21 @@ module.exports.busFilterQuery = (query) => {
   }
 
   console.log(filter)
-  return BusService.getByQuery(filter);
+  return busDao.getByQuery(filter);
 }
 
 module.exports.getAllBusDetails = function () {
-  return BusService.getAll()
+  return busDao.getAll()
 }
 
 module.exports.updBus = function (id, detailstoupdate) {
-  return BusService.updateById(id, detailstoupdate)
+  return busDao.updateById(id, detailstoupdate)
 }
 
 module.exports.addBus = function (detailstoadd) {
-  return BusService.create(detailstoadd)
+  return busDao.create(detailstoadd)
 }
 
 module.exports.deleteBus = (id) => {
-  return BusService.remove(id)
+  return busDao.remove(id)
 }

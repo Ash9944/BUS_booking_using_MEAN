@@ -1,4 +1,3 @@
-const { query } = require("express");
 const express = require("express");
 const router = express.Router();
 const busController = require("../services/busService");
