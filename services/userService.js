@@ -1,4 +1,5 @@
 const Customer = require("../daos/userDao");
+const moment =  require('moment')
 
 module.exports.getAllUserDetails = function () {
   return Customer.getAll()
@@ -11,6 +12,8 @@ module.exports.getuser = (id) => {
 module.exports.addBooking = (query) => {
   var filter = {}
   filter.Bookings = query.query
+  const m =  moment()
+  filter.Bookings.time_of_booking = moment(filter.Bookings.time_of_booking).toDate()
   console.log(filter)
   return Customer.updateArrayById(query.id, filter)
 }
