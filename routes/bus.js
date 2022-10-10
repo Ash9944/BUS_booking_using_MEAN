@@ -1,9 +1,8 @@
-const { query } = require("express");
 const express = require("express");
 const router = express.Router();
 const busController = require("../services/busService");
 
-router.post("/", function (req, res) {
+router.get("/", function (req, res) {
     busController.getAllBusDetails()
         .then((resp) => res.json({ data: resp }))
         .catch((err) => res.status(500).send({ error: err.name, message: err.message }))

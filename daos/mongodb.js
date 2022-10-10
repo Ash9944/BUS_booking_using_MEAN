@@ -19,4 +19,4 @@ module.exports.getMongodb = function () {
     return mongodb;
 }
 
-module.exports.ObjectID = mongodb.ObjectID;
+module.exports.ObjectID = mongodb.ObjectId;
