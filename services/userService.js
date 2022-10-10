@@ -1,9 +1,8 @@
-<<<<<<< HEAD
+
 const Customer = require("../daos/userDao");
 const moment =  require('moment')
-=======
 const userDao = require("../daos/userDao");
->>>>>>> 1ccfca0f78be2bec01b3a30e451eb50385a496bd
+
 
 module.exports.getAllUserDetails = function () {
   return userDao.getAll()
