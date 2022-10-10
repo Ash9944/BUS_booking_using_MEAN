@@ -1,5 +1,3 @@
-
-const Customer = require("../daos/userDao");
 const moment =  require('moment')
 const userDao = require("../daos/userDao");
 
