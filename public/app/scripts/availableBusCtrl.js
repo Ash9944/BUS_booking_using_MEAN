@@ -76,7 +76,7 @@
                 url: `/bus/${$stateParams.departure}/${$stateParams.arrival}`,
                 method: 'GET',
                 timeout: 2 * 60 * 1000,
-                headers: { 'Content-type': 'application/json', 'data': time.toISOString() },
+                headers: { 'Content-type': 'application/json', 'data': time },
             };
             $http(request).then(function (response) {
                 callback(null, response)

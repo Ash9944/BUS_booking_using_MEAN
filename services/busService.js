@@ -28,11 +28,11 @@ module.exports.busFilterQuery = (query) => {
   }
 
   if (query.time) {
-    filter.departureTime = { '$gte': new Date(query.time), '$lte': new Date(addtime) };
+    filter.departureTime = { '$gte': new Date(query.time) };
   }
 
   if (query.frontendtime) {
-    filter.departureTime = { '$gte': new Date(query.frontendtime), '$lte': new Date(add_time) };
+    filter.departureTime = { '$gte': new Date(query.frontendtime) };
   }
 
   console.log(filter)
@@ -45,8 +45,8 @@ module.exports.getAllBusDetails = function () {
 
 module.exports.updBus = function (id, detailstoupdate) {
 
-  detailstoupdate.arrivalTime = moment( detailstoupdate.arrivalTime).toDate()
-  detailstoupdate.departureTime = moment( detailstoupdate.departureTime).toDate()
+  detailstoupdate.arrivalTime = moment(detailstoupdate.arrivalTime).toDate()
+  detailstoupdate.departureTime = moment(detailstoupdate.departureTime).toDate()
   console.log(detailstoupdate)
   return busDao.updateById(id, detailstoupdate)
 }
