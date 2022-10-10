@@ -1,12 +1,6 @@
+const moment = require("moment/moment");
 const busDao = require("../daos/busDao")
 
-function addHoursToDate(objDate, intHours) {
-  var numberOfMlSeconds = objDate.getTime();
-  var addMlSeconds = (intHours * 60) * 60 * 1000;
-  var newDateObj = new Date(numberOfMlSeconds + addMlSeconds);
-
-  return newDateObj.toISOString();
-}
 
 module.exports.busFilterQuery = (query) => {
 
@@ -34,13 +28,11 @@ module.exports.busFilterQuery = (query) => {
   }
 
   if (query.time) {
-    let addtime = addHoursToDate(new Date(query.time), 24)
-    filter.departureTime = { '$gte': query.time, '$lte': addtime };
+    filter.departureTime = { '$gte': new Date(query.time), '$lte': new Date(addtime) };
   }
 
   if (query.frontendtime) {
-    let addtime1 = addHoursToDate(new Date(query.frontendtime), 24)
-    filter.departureTime = { '$gte': query.frontendtime, '$lte': addtime1 };
+    filter.departureTime = { '$gte': new Date(query.frontendtime), '$lte': new Date(add_time) };
   }
 
   console.log(filter)
@@ -52,10 +44,17 @@ module.exports.getAllBusDetails = function () {
 }
 
 module.exports.updBus = function (id, detailstoupdate) {
+
+  detailstoupdate.arrivalTime = moment( detailstoupdate.arrivalTime).toDate()
+  detailstoupdate.departureTime = moment( detailstoupdate.departureTime).toDate()
+  console.log(detailstoupdate)
   return busDao.updateById(id, detailstoupdate)
 }
 
 module.exports.addBus = function (detailstoadd) {
+  detailstoadd.arrivalTime = moment(detailstoadd.arrivalTime).toDate()
+  detailstoadd.departureTime = moment(detailstoadd.departureTime).toDate()
+  console.log(detailstoadd)
   return busDao.create(detailstoadd)
 }
 
