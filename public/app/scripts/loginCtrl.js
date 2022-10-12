@@ -3,9 +3,9 @@
     var myApp = angular.module('bus-booking');
 
     myApp.controller('loginCtrl', loginCtrl);
-    loginCtrl.$inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', 'loginCtrlService'];
+    loginCtrl.$inject = ['$scope', '$state', 'loginCtrlService'];
 
-    function loginCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, loginCtrlService) {
+    function loginCtrl($scope, $state, loginCtrlService) {
 
         $scope.check = (info) => {
             loginCtrlService.usercheck((err, res) => {

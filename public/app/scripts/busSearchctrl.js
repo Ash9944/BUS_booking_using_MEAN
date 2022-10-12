@@ -2,8 +2,8 @@
     'use strict';
     var myApp = angular.module('bus-booking');
     myApp.controller("busSearchCtrl", busSearchCtrl)
-    busSearchCtrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams', 'busSearchCtrlService']
-    function busSearchCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams, busSearchCtrlService) {
+    busSearchCtrl.inject = ['$scope', '$state', '$stateParams', 'busSearchCtrlService']
+    function busSearchCtrl($scope, $state, $stateParams, busSearchCtrlService) {
         busSearchCtrlService.busroutesfind((err, resp) => {
             if (!err) {
                 $scope.Users = resp.data

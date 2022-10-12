@@ -1,22 +1,19 @@
 const mongodb = require('mongodb');
-const mongoclient = mongodb.MongoClient;
+const { ObjectID } = require('bson');
+const url = 'mongodb://localhost:27017/BUS_APP';
+const dbCache = {};
 
-const url = 'mongodb://localhost:27017/BUS_APP'
-var dbCache = {}
-function connection() {
-    console.log("Database connected !")
-    const mong = mongoclient.connect(url)
+function connect() {
+    var mong = mongodb.MongoClient.connect(url)
     dbCache.db = mong
+
+
 }
 
-connection()
-
-module.exports.getDb = function () {
+function getDb() {
     return dbCache.db;
 }
 
-module.exports.getMongodb = function () {
-    return mongodb;
-}
-
-module.exports.ObjectID = mongodb.ObjectId;
+module.exports.connect = connect;
+module.exports.getDb = getDb;
+module.exports.ObjectID = ObjectID;

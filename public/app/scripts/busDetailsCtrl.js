@@ -3,8 +3,8 @@
     'use strict';
     var myApp = angular.module('bus-booking')
     myApp.controller("busDetailsCtrl", busDetailsCtrl)
-    busDetailsCtrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams', 'busDetailsCtrlService']
-    function busDetailsCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams, busDetailsCtrlService) {
+    busDetailsCtrl.inject = ['$scope', '$timeout', 'busDetailsCtrlService']
+    function busDetailsCtrl($scope, $timeout, busDetailsCtrlService) {
         $scope.success0 = true
         $scope.success1 = false
         $scope.value = new Date();

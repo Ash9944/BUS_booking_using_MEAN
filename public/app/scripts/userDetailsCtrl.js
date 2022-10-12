@@ -2,8 +2,8 @@
     'use strict';
     var myApp = angular.module('bus-booking')
     myApp.controller("userDetailsCtrl", userDetailsCtrl)
-    userDetailsCtrl.inject = ['$scope', '$rootScope', '$state', '$window', '$filter', '$timeout', '$http', '$stateParams', 'userDetailsCtrlService']
-    function userDetailsCtrl($scope, $rootScope, $state, $window, $filter, $timeout, $http, $stateParams, userDetailsCtrlService) {
+    userDetailsCtrl.inject = ['$scope', '$timeout', 'userDetailsCtrlService']
+    function userDetailsCtrl($scope, $timeout, userDetailsCtrlService) {
         $scope.success0 = true
         $scope.success1 = false
         function getAlluser() {

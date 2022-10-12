@@ -2,15 +2,16 @@ var mongodb = require('./mongodb');
 
 function create(record) {
     return new Promise((resolve, reject) => {
-        mongodb.getDb().then((res) => {
-            var db =res.db("BUS_APP");
-            var coll = db.collection(this.getCollectionName());
-            resolve(coll.insert(record))
-
-        });
-
-    })
+        let db = mongodb.getDb();
+        let coll = db.collection(this.getCollectionName());
+        coll.insert(record).then(result => {
+            resolve(result);
+        }).catch(err => {
+            reject(err);
+        })
+    });
 }
+
 
 function createMany(records, callback) {
     var db = mongodb.getDb();
@@ -27,7 +28,7 @@ function createMany(records, callback) {
 function getAll() {
     return new Promise((resolve, reject) => {
         mongodb.getDb().then((res) => {
-            var db =res.db("BUS_APP")
+            var db = res.db("BUS_APP")
             var coll = db.collection(this.getCollectionName());
             coll.find({}).toArray(function (err, result) {
                 if (!err) {
@@ -241,18 +242,18 @@ function updateMany(query, detailsToUpdate, callback) {
 
 }
 
-function distinctByQuery(field, query, callback){
+function distinctByQuery(field, query, callback) {
     if (typeof query == "function") {
         callback = query;
         query = null;
     }
     var db = mongodb.getDb();
     var coll = db.collection(this.getCollectionName());
-    if(!query)
+    if (!query)
         query = {};
-    coll.distinct(field, query, function(err, result){
-        if(!err){
-            callback(null,result);
+    coll.distinct(field, query, function (err, result) {
+        if (!err) {
+            callback(null, result);
         } else {
             callback(err, null);
         }
@@ -295,7 +296,7 @@ function removeByQuery(query, callback) {
 }
 
 function getIdFilter(entity) {
-    return {_id: mongodb.ObjectID(entity._id)};
+    return { _id: mongodb.ObjectID(entity._id) };
 }
 
 function removeItemInArrayById(id, elementToDelete, callback) {
@@ -347,7 +348,7 @@ module.exports = function BaseDao(collectionName) {
         updateArrayById: updateArrayById,
         updateArrayByQuery: updateArrayByQuery,
         removeItemInArrayByQuery: removeItemInArrayByQuery,
-        distinctByQuery : distinctByQuery,
+        distinctByQuery: distinctByQuery,
         remove: remove,
         removeByQuery: removeByQuery,
         removeItemInArrayById: removeItemInArrayById,
