@@ -10,17 +10,22 @@
         $scope.check = (info) => {
             loginCtrlService.usercheck((err, res) => {
                 if (!err) {
-                    var datslen = res.data.data.length
-                    for (var i = 0; i <= datslen; i++) {
-                        if (info.email == res.data.data[i].email) {
-                            //console.log(info.email,res.data.data[i].email)
-                            $state.go("busSearch", {
-                                id: res.data.data[i]._id
-                            })
-                        }
-                        if (info.email.toString() == "Admin@admin") {
-                            $state.go("adminHome")
-                        }
+
+                    if (info.email.includes("Admin@admin")) {
+                        $state.go("adminHome");
+                        return;
+                    }
+
+                    var currentUser = res.data.data.find(function (userDetails) {
+                        return userDetails.email == info.email;
+                    });
+
+
+
+                    if (currentUser) {
+                        $state.go("busSearch", {
+                            id: currentUser._id
+                        })
                     }
                 }
                 else {
@@ -36,7 +41,7 @@
         this.usercheck = function (callback) {
 
             var request = {
-                url: "/user/",
+                url: "user/",
                 method: 'GET',
                 timeout: 2 * 60 * 1000,
                 headers: { 'Content-type': 'application/json' }
