@@ -10,7 +10,7 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "flatpickr": "^4.6.13",
-    "grunt": "^1.5.3",
+    "grunt": "^1.6.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "moment": "^2.29.4",
