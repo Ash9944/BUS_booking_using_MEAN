@@ -11,7 +11,7 @@
     "express": "~4.16.1",
     "flatpickr": "^4.6.13",
     "grunt": "^1.5.3",
-    "http-errors": "~1.6.3",
+    "http-errors": "~1.8.1",
     "jade": "~1.11.0",
     "moment": "^2.29.4",
     "mongodb": "^4.9.1",
